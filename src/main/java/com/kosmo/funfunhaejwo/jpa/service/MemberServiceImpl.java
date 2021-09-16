@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepo memberRepo;
@@ -34,6 +36,7 @@ public class MemberServiceImpl implements MemberService {
     public Member getMember(String email) {
         log.info("Member not found");
         return memberRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("회원을 찾을 수 없습니다."));
+//        return memberRepo.findByEmail(email).orElse(null);
     }
 
 }

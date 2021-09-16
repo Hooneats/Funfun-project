@@ -46,16 +46,16 @@ public class Init {
         List<Member> memberList = new ArrayList<>();
         List<ProfileImg> profileImgList = new ArrayList<>();
 
-        ProfileImg build1 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\1.jpg", null, null)).build();
-        ProfileImg build2 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\2.jpg", null, null)).build();
-        ProfileImg build3 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\3.jpg", null, null)).build();
-        ProfileImg build4 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\4.jpg", null, null)).build();
-        ProfileImg build5 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\5.jpg", null, null)).build();
+        ProfileImg build1 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\1.jpg", null)).build();
+        ProfileImg build2 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\2.jpg", null)).build();
+        ProfileImg build3 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\3.jpg", null)).build();
+        ProfileImg build4 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\4.jpg", null)).build();
+        ProfileImg build5 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\5.jpg", null)).build();
         Member member5 = Member.builder().email("kmh5@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토5").profile_img(build5).login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
-        Member member4 = Member.builder().email("kmh4@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토4").profile_img(build5).login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
-        Member member3 = Member.builder().email("kmh3@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토3").profile_img(build5).login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
-        Member member2 = Member.builder().email("kmh2@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토2").profile_img(build5).login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
-        Member member1 = Member.builder().email("kmh1@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토1").profile_img(build5).login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
+        Member member4 = Member.builder().email("kmh4@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토4").profile_img(build4).login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
+        Member member3 = Member.builder().email("kmh3@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토3").profile_img(build3).login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
+        Member member2 = Member.builder().email("kmh2@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토2").profile_img(build2).login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
+        Member member1 = Member.builder().email("kmh1@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토1").profile_img(build1).login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
 
         profileImgList.add(build1);
         profileImgList.add(build2);
@@ -89,14 +89,14 @@ public class Init {
         Product product4 = Product.builder().category(category4).product_brand("모두의프렌즈").product_detail("아주 사랑스러워요").product_like_count(900).product_name("상품4").product_price(1450000L).product_stock(182).build();
         Product product5 = Product.builder().category(category5).product_brand("모두의프렌즈").product_detail("아주 사랑스러워요").product_like_count(10200).product_name("상품5").product_price(13000L).product_stock(182).build();
 
-        ProductImg build1 = ProductImg.builder().img_code(ImgCode.BANNER).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\1.jpg", null, null)).build();
-        ProductImg build2 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\2.jpg", null, null)).build();
-        ProductImg build3 = ProductImg.builder().img_code(ImgCode.SUB).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\3.jpg", null, null)).build();
-        ProductImg build4 = ProductImg.builder().img_code(ImgCode.SUB).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\4.jpg", null, null)).build();
-        ProductImg build5 = ProductImg.builder().img_code(ImgCode.SUB).product(product2).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\2.jpg", null, null)).build();
-        ProductImg build6 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product3).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\3.jpg", null, null)).build();
-        ProductImg build7 = ProductImg.builder().img_code(ImgCode.SUB).product(product4).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\4.jpg", null, null)).build();
-        ProductImg build8 = ProductImg.builder().img_code(ImgCode.SUB).product(product5).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\5.jpg", null, null)).build();
+        ProductImg build1 = ProductImg.builder().img_code(ImgCode.BANNER).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\1.jpg", null)).build();
+        ProductImg build2 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\2.jpg", null)).build();
+        ProductImg build3 = ProductImg.builder().img_code(ImgCode.SUB).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\3.jpg", null)).build();
+        ProductImg build4 = ProductImg.builder().img_code(ImgCode.SUB).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\4.jpg", null)).build();
+        ProductImg build5 = ProductImg.builder().img_code(ImgCode.SUB).product(product2).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\2.jpg", null)).build();
+        ProductImg build6 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product3).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\3.jpg", null)).build();
+        ProductImg build7 = ProductImg.builder().img_code(ImgCode.SUB).product(product4).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\4.jpg", null)).build();
+        ProductImg build8 = ProductImg.builder().img_code(ImgCode.SUB).product(product5).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\5.jpg", null)).build();
 
         categoryList.add(category1);
         categoryList.add(category2);

@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.funfunhaejwo.jpa.domain.Member;
 import com.kosmo.funfunhaejwo.jpa.repository.MemberRepo;
+import com.kosmo.funfunhaejwo.security.config.dao.CrossHeader;
 import com.kosmo.funfunhaejwo.security.config.dao.JWTGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,14 +71,15 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 //        tokens.put("member_email", member.getEmail());
 //        tokens.put("member_nic_name", member.getNic_name());
 
+        response = CrossHeader.corsHeader(response);
 
-        response.setHeader("Access-Control-Allow-Origin", "*");     //허용할 Origin(요청 url) : "*" 의 경우 모두 허용
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");     //허용할 request http METHOD : POST, GET, DELETE, PUT
-        response.setHeader("Access-Control-Max-Age", "3600");     //브라우저 캐시 시간(단위: 초) : "3600" 이면 최소 1시간 안에는 서버로 재요청 되지 않음
-        response.setHeader("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");    //요청 허용 헤더(ajax : X-Requested-With)
-
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        // 사용자에게 전송
+//        response.setHeader("Access-Control-Allow-Origin", "*");     //허용할 Origin(요청 url) : "*" 의 경우 모두 허용
+//        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");     //허용할 request http METHOD : POST, GET, DELETE, PUT
+//        response.setHeader("Access-Control-Max-Age", "3600");     //브라우저 캐시 시간(단위: 초) : "3600" 이면 최소 1시간 안에는 서버로 재요청 되지 않음
+//        response.setHeader("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");    //요청 허용 헤더(ajax : X-Requested-With)
+//
+//        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+//        // 사용자에게 전송
         new ObjectMapper().writeValue(response.getOutputStream(),tokens);
     }
 }

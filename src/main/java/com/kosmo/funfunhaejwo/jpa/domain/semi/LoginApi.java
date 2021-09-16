@@ -2,6 +2,7 @@ package com.kosmo.funfunhaejwo.jpa.domain.semi;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Getter

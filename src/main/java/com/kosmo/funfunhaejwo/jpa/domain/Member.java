@@ -1,9 +1,6 @@
 package com.kosmo.funfunhaejwo.jpa.domain;
 
-import com.kosmo.funfunhaejwo.jpa.domain.semi.Address;
-import com.kosmo.funfunhaejwo.jpa.domain.semi.BaseTime;
-import com.kosmo.funfunhaejwo.jpa.domain.semi.LoginApi;
-import com.kosmo.funfunhaejwo.jpa.domain.semi.Role;
+import com.kosmo.funfunhaejwo.jpa.domain.semi.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -63,5 +60,17 @@ public class Member extends BaseTime {
     @OneToMany(mappedBy = "member")
     private List<Like> likes;
 
+    public Member setLoginApiSwitch(String login_api) {
+        if (login_api != null) {
+            if (login_api.equals("Kakao")) {
+                this.login_api = LoginApi.KAKAO;
+            } else if (login_api.equals("Naver")) {
+                this.login_api = LoginApi.NAVER;
+            } else if (login_api.equals("Google")) {
+                this.login_api = LoginApi.GOOGLE;
+            }
+        }
+        return this;
+    }
 
 }

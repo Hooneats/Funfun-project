@@ -5,4 +5,5 @@ import com.kosmo.funfunhaejwo.jpa.domain.ProfileImg;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProfileImgRepo  extends JpaRepository<ProfileImg, Long> {
+    ProfileImg findByMember(Member member);
 }
