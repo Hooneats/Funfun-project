@@ -1,18 +1,3 @@
--- SELECT 'DROP TABLE "' || TABLE_NAME || '" CASCADE CONSTRAINTS;' FROM user_tables; -->
-drop table member;
-drop table category;
-drop table delivery;
-drop table event;
-drop table event_img;
-drop table friend_list;
-drop table funding;
-drop table likes;
-drop table orders;
-drop table product;
-drop table product_img;
-drop table product_payment;
-drop table profile_img;
-
 
 create table member (
                         member_id number constraint member_pk primary key,
@@ -36,7 +21,6 @@ create table profile_img(
                             profile_img_id number constraint profile_img_pk primary key,
                             file_src varchar2(255 char),
                             file_name varchar2(255 char),
-                            file_size number,
                             member_id number
 );
 
@@ -44,7 +28,7 @@ ALTER TABLE profile_img ADD CONSTRAINT profile_img_fk FOREIGN KEY (member_id) RE
 
 
 create table friend_list(
-                            freind_list_id number constraint friend_list_pk primary key,
+                            friend_list_id number constraint friend_list_pk primary key,
                             member_id number,
                             friend_id number
 );
@@ -65,7 +49,6 @@ create table event_img(
                           event_id number,
                           file_src varchar2(255 char),
                           file_name varchar2(255 char),
-                          file_size number,
                           img_code varchar2(20 char)
 );
 
@@ -102,7 +85,6 @@ create table product_img(
                             product_img_id number constraint product_img_pk primary key,
                             file_src varchar2(255 char),
                             file_name varchar2(255 char),
-                            file_size number,
                             product_id number,
                             img_code varchar2(20 char)
 );

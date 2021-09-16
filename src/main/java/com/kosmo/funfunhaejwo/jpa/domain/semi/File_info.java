@@ -17,7 +17,6 @@ public class File_info {
     private String file_src;
     @Column(name = "file_name")
     private String file_name;
-    @Column(name = "file_size")
-    private Long file_size;
+
 
 }
