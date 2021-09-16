@@ -24,7 +24,7 @@ import java.util.List;
 public class FriendListTable {
 
     @Id
-    @Column(name = "freind_list_id")
+    @Column(name = "friend_list_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FRIEND_LIST_SEQ_GENERATOR")
     private Long id;
 
