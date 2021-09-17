@@ -24,7 +24,7 @@ public class EXMemberController {
 
     @GetMapping("/memberinfo")
     public ResponseEntity<EXMemberInfoDao> MemberInfo(@RequestParam String email) {
-        Member member = memberService.getMember(email);
+        Member member = memberService.getMemberByEmail(email);
         EXMemberInfoDao EXMemberInfoDao = new EXMemberInfoDao();
         EXMemberInfoDao returnMember = EXMemberInfoDao.builder()
                 .id(member.getId())

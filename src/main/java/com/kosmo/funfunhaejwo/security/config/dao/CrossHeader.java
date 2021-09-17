@@ -4,6 +4,8 @@ import org.springframework.http.MediaType;
 
 import javax.servlet.http.HttpServletResponse;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 public class CrossHeader {
 
     public static HttpServletResponse corsHeader(HttpServletResponse response) {
@@ -12,7 +14,7 @@ public class CrossHeader {
         response.setHeader("Access-Control-Max-Age", "3600");     //브라우저 캐시 시간(단위: 초) : "3600" 이면 최소 1시간 안에는 서버로 재요청 되지 않음
         response.setHeader("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");    //요청 허용 헤더(ajax : X-Requested-With)
 
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setContentType(APPLICATION_JSON_VALUE);
 
         return response;
     }

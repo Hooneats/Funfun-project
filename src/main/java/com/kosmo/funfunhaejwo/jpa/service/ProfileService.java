@@ -7,5 +7,5 @@ public interface ProfileService {
 
     ProfileImg saveProfile(ProfileImg profileImg);
 
-    ProfileImg getMember(Member member);
+    ProfileImg getProfileImgByMember(Member member);
 }

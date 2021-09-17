@@ -10,6 +10,6 @@ public interface MemberService {
 
     List<Member> saveAllMemberList(List<Member> memberList);
 
-    Member getMember(String email);
+    Member getMemberByEmail(String email);
 
 }

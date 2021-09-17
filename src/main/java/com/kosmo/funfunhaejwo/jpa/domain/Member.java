@@ -1,6 +1,7 @@
 package com.kosmo.funfunhaejwo.jpa.domain;
 
 import com.kosmo.funfunhaejwo.jpa.domain.semi.*;
+import com.kosmo.funfunhaejwo.jpa.exception.BadRequestLoginApiException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -53,12 +54,14 @@ public class Member extends BaseTime {
     @Embedded
     private Address address;
 
-    //좋아요랑 프렌드 리스트, 프로필이미지 는 조회할때 편하도록
-    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
-    private ProfileImg profile_img;
+//    //좋아요랑 프렌드 리스트, 프로필이미지 는 조회할때 편하도록
+//    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
+//    private ProfileImg profile_img;
 
     @OneToMany(mappedBy = "member")
     private List<Like> likes;
+
+
 
     public Member setLoginApiSwitch(String login_api) {
         if (login_api != null) {
@@ -68,9 +71,15 @@ public class Member extends BaseTime {
                 this.login_api = LoginApi.NAVER;
             } else if (login_api.equals("Google")) {
                 this.login_api = LoginApi.GOOGLE;
+            } else {
+                throw new BadRequestLoginApiException("잘못된 로그인 API 요청입니다.");
             }
         }
         return this;
     }
 
+
+    public void settingNic_name(String nic_name) {
+        this.nic_name = nic_name;
+    }
 }

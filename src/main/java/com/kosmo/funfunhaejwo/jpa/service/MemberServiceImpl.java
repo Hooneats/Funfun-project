@@ -33,8 +33,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member getMember(String email) {
-        log.info("Member not found");
+    public Member getMemberByEmail(String email) {
+        log.info("Will find Member email {}",email);
         return memberRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("회원을 찾을 수 없습니다."));
 //        return memberRepo.findByEmail(email).orElse(null);
     }

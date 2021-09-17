@@ -33,6 +33,16 @@ public class ProfileImg {
     @Embedded
     private File_info file_info;
 
+    public ProfileImg settingMember(Member member) {
+        this.member = member;
+        return this;
+    }
+
+    public ProfileImg modifyFileInfo(File_info file_info) {
+        this.file_info = file_info;
+        return this;
+    }
+
 //    @Enumerated(EnumType.STRING)
 //    @Column(name = "login_api")
 //    private LoginApi loginApi;

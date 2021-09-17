@@ -66,7 +66,6 @@ create table product(
                         product_id number constraint product_pk primary key,
                         product_name varchar2(255 char),
                         product_stock number,
-                        product_detail varchar2(255 char),
                         product_price number,
                         product_like_count number,
                         funding_count number,
