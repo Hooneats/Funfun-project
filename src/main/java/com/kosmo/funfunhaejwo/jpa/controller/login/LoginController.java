@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.funfunhaejwo.jpa.domain.Member;
@@ -36,6 +37,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
+
+
+/**
+ * Http Status Error code
+ * 양식에 맞지 않은 요청양식 : 401
+ * 요청 양식은 맞지만 찾을 수 없는 데이터인경우 : 402
+ * JWT 토큰관련 유효하지 않은 토큰 : 404
+ * */
+
 
 @Slf4j
 @RequiredArgsConstructor
@@ -74,23 +84,10 @@ public class LoginController {
                 }
             }
         } catch (EmailNullInputException en) {
-            log.error("Error log {}", en.getMessage());
-//            HttpServletResponse httpResponse = CrossHeader.corsHeader(response);
-            response.setHeader("error", en.getMessage());
-            response.setStatus(HttpStatus.BAD_REQUEST.value());
-
-            Map<String, String> error = new HashMap<>();
-            error.put("error_message", en.getMessage());
-            new ObjectMapper().writeValue(response.getOutputStream(), error);
+            ReturnExceptionResponse.exceptionReturn(en, response, 401);
         } catch (UsernameNotFoundException ue) {
-            log.error("Error log {}", ue.getMessage());
-//            HttpServletResponse httpResponse = CrossHeader.corsHeader(response);
-            response.setHeader("error", ue.getMessage());
-            response.setStatus(HttpStatus.BAD_REQUEST.value());
+            ReturnExceptionResponse.exceptionReturn(ue,response,402);
 
-            Map<String, String> error = new HashMap<>();
-            error.put("error_message", ue.getMessage());
-            new ObjectMapper().writeValue(response.getOutputStream(), error);
         }
 
     }
@@ -98,12 +95,12 @@ public class LoginController {
     @PostMapping("/oauth/get/tokens/refresh_token")
     public void getAccessTokenFromRefreshToken(@RequestParam(required = false) String email,
                                                HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try{
+        try {
             if (email == null) {
                 try {
                     throw new EmailNullInputException("양식에 맞지 않은 요청입니다.");
                 } catch (EmailNullInputException ee) {
-                    exceptionReturn(ee, response);
+                    ReturnExceptionResponse.exceptionReturn(ee, response, 401);
                 }
             }
             String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
@@ -135,26 +132,35 @@ public class LoginController {
             }
 
             if (authorizationHeader == null || authorizationHeader.equals("")) {
-                throw new NotVerifiedTokenException("양식에 맞지 않은 요청입니다. 토큰을 확인해주세요.");
+                try {
+                    throw new NotVerifiedTokenException("양식에 맞지 않은 요청입니다. 리프레시 토큰을 확인해주세요.");
+                } catch (NotVerifiedTokenException ne) {
+                    ReturnExceptionResponse.exceptionReturn(ne, response, 404);
+                }
             }
 
         } catch (SignatureVerificationException se) {
             try {
-                throw new NotVerifiedTokenException("유효하지 않은 토큰입니다.");
+                throw new NotVerifiedTokenException("유효하지 않은 리프레시 토큰입니다.");
             } catch (NotVerifiedTokenException ne) {
-                exceptionReturn(ne, response);
+                ReturnExceptionResponse.exceptionReturn(ne, response, 404);
             }
         } catch (JWTDecodeException je) {
             try {
-                throw new NotVerifiedTokenException("토큰을 확인해 주세요.");
+                throw new NotVerifiedTokenException("리프레시 토큰을 확인해 주세요.");
             } catch (NotVerifiedTokenException ne) {
-                exceptionReturn(ne, response);
+                ReturnExceptionResponse.exceptionReturn(ne, response, 404);
             }
-        } catch (NotVerifiedTokenException nv) {
-            exceptionReturn(nv, response);
+        } catch (TokenExpiredException te) {
+            try {
+                throw new NotVerifiedTokenException("리프레시 토큰의 유효기간이 지났습니다.");
+            } catch (NotVerifiedTokenException ne) {
+                ReturnExceptionResponse.exceptionReturn(ne, response, 404);
+            }
         } catch (NotEqualsMemberException ne) {
-            exceptionReturn(ne, response);
+            ReturnExceptionResponse.exceptionReturn(ne, response, 402);
         }
+
 
 
 
@@ -173,7 +179,7 @@ public class LoginController {
             try {
                 throw new EmailNullInputException("양식에 맞지 않은 요청입니다.");
             } catch (EmailNullInputException ee) {
-                exceptionReturn(ee, response);
+                ReturnExceptionResponse.exceptionReturn(ee, response,401);
                 return null;
             }
         }
@@ -187,7 +193,7 @@ public class LoginController {
             try {
                 member.setLoginApiSwitch(login_api);
             } catch (BadRequestLoginApiException be) {
-                exceptionReturn(be, response);
+                ReturnExceptionResponse.exceptionReturn(be, response,401);
                 return null;
             }
             memberService.saveMember(member);
@@ -198,7 +204,7 @@ public class LoginController {
         try {
             member.setLoginApiSwitch(login_api);
         } catch (BadRequestLoginApiException be) {
-            exceptionReturn(be, response);
+            ReturnExceptionResponse.exceptionReturn(be, response,401);
             return null;
         }
 
@@ -229,16 +235,7 @@ public class LoginController {
         return ResponseEntity.ok().body(returnMember);
     }
 
-    public void exceptionReturn(Throwable e, HttpServletResponse response) throws IOException {
-        log.error("Error log {}", e.getMessage());
-//        HttpServletResponse httpResponse = CrossHeader.corsHeader(response);
-        response.setHeader("error", e.getMessage());
-        response.setStatus(HttpStatus.BAD_REQUEST.value());
 
-        Map<String, String> error = new HashMap<>();
-        error.put("error_message", e.getMessage());
-        new ObjectMapper().writeValue(response.getOutputStream(), error);
-    }
 
 }
 
