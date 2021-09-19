@@ -83,11 +83,11 @@ public class Init {
         Category category4 = new Category(null, "신혜림프렌즈");
         Category category5 = new Category(null, "이지연프렌즈");
 
-        Product product1 = Product.builder().category(category1).product_brand("모두의프렌즈").product_detail("아주 사랑스러워요").product_like_count(10000).product_name("상품1").product_price(38000L).product_stock(182).build();
-        Product product2 = Product.builder().category(category2).product_brand("모두의프렌즈").product_detail("아주 사랑스러워요").product_like_count(8000).product_name("상품2").product_price(56000L).product_stock(182).build();
-        Product product3 = Product.builder().category(category3).product_brand("모두의프렌즈").product_detail("아주 사랑스러워요").product_like_count(50).product_name("상품3").product_price(1623000L).product_stock(182).build();
-        Product product4 = Product.builder().category(category4).product_brand("모두의프렌즈").product_detail("아주 사랑스러워요").product_like_count(900).product_name("상품4").product_price(1450000L).product_stock(182).build();
-        Product product5 = Product.builder().category(category5).product_brand("모두의프렌즈").product_detail("아주 사랑스러워요").product_like_count(10200).product_name("상품5").product_price(13000L).product_stock(182).build();
+        Product product1 = Product.builder().category(category1).product_brand("모두의프렌즈").product_like_count(10000).product_name("상품1").product_price(38000L).product_stock(182).build();
+        Product product2 = Product.builder().category(category2).product_brand("모두의프렌즈").product_like_count(8000).product_name("상품2").product_price(56000L).product_stock(182).build();
+        Product product3 = Product.builder().category(category3).product_brand("모두의프렌즈").product_like_count(50).product_name("상품3").product_price(1623000L).product_stock(182).build();
+        Product product4 = Product.builder().category(category4).product_brand("모두의프렌즈").product_like_count(900).product_name("상품4").product_price(1450000L).product_stock(182).build();
+        Product product5 = Product.builder().category(category5).product_brand("모두의프렌즈").product_like_count(10200).product_name("상품5").product_price(13000L).product_stock(182).build();
 
         ProductImg build1 = ProductImg.builder().img_code(ImgCode.BANNER).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\1.jpg", null)).build();
         ProductImg build2 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\2.jpg", null)).build();

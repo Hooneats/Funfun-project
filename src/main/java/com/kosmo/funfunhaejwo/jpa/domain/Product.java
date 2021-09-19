@@ -32,7 +32,7 @@ public class Product extends BaseTime {
     @JoinColumn(name = "category_id")
     private Category category;
     private int product_stock;
-    private String product_detail;
+
     private Long product_price;
 
     @OneToMany(mappedBy = "product")

@@ -15,23 +15,18 @@ import com.kosmo.funfunhaejwo.jpa.domain.semi.Role;
 import com.kosmo.funfunhaejwo.jpa.exception.*;
 import com.kosmo.funfunhaejwo.jpa.service.MemberService;
 import com.kosmo.funfunhaejwo.jpa.service.ProfileService;
+import com.kosmo.funfunhaejwo.security.config.dao.CrossHeader;
 import com.kosmo.funfunhaejwo.security.config.dao.JWTGenerator;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +38,7 @@ import java.util.*;
  * Http Status Error code
  * 양식에 맞지 않은 요청양식 : 401
  * 요청 양식은 맞지만 찾을 수 없는 데이터인경우 : 402
+ * URL 은 유효하지만 사용자의 요청을 이행 할 수 없음 : 403
  * JWT 토큰관련 유효하지 않은 토큰 : 404
  * */
 
@@ -51,7 +47,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/login")
-public class LoginController {
+class OauthLoginController {
 
     private final MemberService memberService;
     private final ProfileService profileService;
@@ -86,13 +82,14 @@ public class LoginController {
         } catch (EmailNullInputException en) {
             ReturnExceptionResponse.exceptionReturn(en, response, 401);
         } catch (UsernameNotFoundException ue) {
-            ReturnExceptionResponse.exceptionReturn(ue,response,402);
-
+            ReturnExceptionResponse.exceptionReturn(ue, response, 402);
+        } catch (Exception e) {
+            ReturnExceptionResponse.exceptionReturn(e, response, 403);
         }
 
     }
 
-    @PostMapping("/oauth/get/tokens/refresh_token")
+    @PostMapping("/oauth/get/tokens/refresh_token") // 리프레시 토큰으로 새로운 엑세스 토큰 요첟
     public void getAccessTokenFromRefreshToken(@RequestParam(required = false) String email,
                                                HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
@@ -159,6 +156,8 @@ public class LoginController {
             }
         } catch (NotEqualsMemberException ne) {
             ReturnExceptionResponse.exceptionReturn(ne, response, 402);
+        } catch (Exception e) {
+            ReturnExceptionResponse.exceptionReturn(e, response, 403);
         }
 
 
@@ -167,11 +166,11 @@ public class LoginController {
     }
 
     @PostMapping("/oauth/save/member") // oauth 로그인 시에 회원 저장 -> 먼저 찾아보고 있으면 업데이트 없으면 저장
-    public ResponseEntity<ReturnSaveApiMember> saveApiMember(@RequestParam(required = false) String email,
-                                                             @RequestParam(required = false) String nic_name,
-                                                             @RequestParam(required = false) String login_api,
-                                                             @RequestParam(required = false) String file_src,
-                                                             HttpServletResponse response) throws IOException {
+    public ResponseEntity<ReturnLoginMemberInfo> saveApiMember(@RequestParam(required = false) String email,
+                                                               @RequestParam(required = false) String nic_name,
+                                                               @RequestParam(required = false) String login_api,
+                                                               @RequestParam(required = false) String file_src,
+                                                               HttpServletResponse response) throws IOException {
         log.info("들어온 email 값 {}", email);
         Member member = new Member();
         ProfileImg profileImg = new ProfileImg();
@@ -221,7 +220,7 @@ public class LoginController {
         profileImg.modifyFileInfo(new File_info(file_src, login_api));
         ProfileImg savedProfileImg = profileService.saveProfile(profileImg);
 
-        ReturnSaveApiMember returnMember = ReturnSaveApiMember.builder().id(member.getId())
+        ReturnLoginMemberInfo returnMember = ReturnLoginMemberInfo.builder().id(member.getId())
                 .email(member.getEmail())
                 .nic_name(member.getNic_name())
                 .login_api(member.getLogin_api().getKey())
@@ -235,13 +234,76 @@ public class LoginController {
         return ResponseEntity.ok().body(returnMember);
     }
 
+}
 
+@Slf4j
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/api/fun")
+class FunMemberLoginController {
+    private final MemberService memberService;
+    private final ProfileService profileService;
+
+    @PostMapping("/get/memberInfo")
+    public ResponseEntity<ReturnLoginMemberInfo> getMemberInfoFromFun(@RequestParam(required = false) String email,
+                                                                      HttpServletRequest request,
+                                                                      HttpServletResponse response) throws IOException {
+
+        log.info("request 헤더 : {} ",request.getHeader(HttpHeaders.AUTHORIZATION));
+        log.info("멤버찾기 들어온 값 : {}", email);
+        Member findMember = new Member();
+        ProfileImg findProfile = new ProfileImg();
+        if (email == null || email.equals("")) {
+            try {
+                throw new EmailNullInputException("양식에 맞지않은 요청입니다.");
+            } catch (EmailNullInputException en) {
+                ReturnExceptionResponse.exceptionReturn(en, response, 401);
+                return null;
+            }
+        }
+
+        try {
+            findMember = memberService.getMemberByEmail(email);
+        }catch (UsernameNotFoundException ue) {
+            ReturnExceptionResponse.exceptionReturn(ue, response, 402);
+            return null;
+        }
+        try {
+            findProfile = profileService.getProfileImgByMember(findMember);
+        } catch (ProfileNotFoundException pn) {
+            /**
+             * 현재는 그냥 없는 경우도 처리하지만 실재로는 사진이 없는 유저는 기본이미지를 주어서 따로 안잡아줘도 되게끔하자
+             * */
+            ReturnLoginMemberInfo returnMemberInfo = ReturnLoginMemberInfo.builder().id(findMember.getId())
+                    .email(findMember.getEmail())
+                    .nic_name(findMember.getNic_name())
+                    .login_api(findMember.getLogin_api().getKey())
+                    .role(findMember.getRole().getKey())
+                    .build();
+            return ResponseEntity.ok().body(returnMemberInfo);
+        }
+
+        ReturnLoginMemberInfo returnMemberInfo = ReturnLoginMemberInfo.builder().id(findMember.getId())
+                .email(findMember.getEmail())
+                .nic_name(findMember.getNic_name())
+                .login_api(findMember.getLogin_api().getKey())
+                .role(findMember.getRole().getKey())
+                .profileImg(findProfile.getFile_info().getFile_src())
+                .build();
+
+        log.info(returnMemberInfo.toString());
+        return ResponseEntity.ok().body(returnMemberInfo);
+
+    }
 
 }
 
+
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
-class ReturnSaveApiMember {
+class ReturnLoginMemberInfo {
     private Long id;
     private String email;
     private String nic_name;

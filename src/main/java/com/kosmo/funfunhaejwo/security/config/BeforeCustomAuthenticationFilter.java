@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kosmo.funfunhaejwo.security.config.dao.CrossHeader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,12 +35,14 @@ public class BeforeCustomAuthenticationFilter extends OncePerRequestFilter {
                 request.getServletPath().equals("/api/login/oauth/get/tokens/refresh_token")) {
             filterChain.doFilter(request, response);
         } else {
-            // 로그인 되어있는지 검사
+            // 로그인 되어있는지 토큰 검사
+            CrossHeader.corsHeader(response);
             String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 try {
                     String token = authorizationHeader.substring("Bearer ".length());
-                    Algorithm algorithm = Algorithm.HMAC256("funfun".getBytes());
+                    log.info("헤더에 온 토큰은 : ",token);
+                    Algorithm algorithm = Algorithm.HMAC256("KosmoFunFunHaeJow".getBytes());
                     JWTVerifier verifier = JWT.require(algorithm).build();
                     DecodedJWT decodedJWT = verifier.verify(token);
                     String username = decodedJWT.getSubject();
