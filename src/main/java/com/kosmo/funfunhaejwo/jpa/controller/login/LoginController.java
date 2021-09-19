@@ -249,8 +249,6 @@ class FunMemberLoginController {
                                                                       HttpServletRequest request,
                                                                       HttpServletResponse response) throws IOException {
 
-        log.info("request 헤더 : {} ",request.getHeader(HttpHeaders.AUTHORIZATION));
-        log.info("멤버찾기 들어온 값 : {}", email);
         Member findMember = new Member();
         ProfileImg findProfile = new ProfileImg();
         if (email == null || email.equals("")) {

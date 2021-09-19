@@ -35,6 +35,7 @@ public class BeforeCustomAuthenticationFilter extends OncePerRequestFilter {
                 request.getServletPath().equals("/api/login/oauth/get/tokens/refresh_token")) {
             filterChain.doFilter(request, response);
         } else {
+            log.info("검사를 시행하겠습니다. {}",request.getHeader("Authorization"));
             // 로그인 되어있는지 토큰 검사
             CrossHeader.corsHeader(response);
             String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);

@@ -39,10 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/api/login/**",
-                "/api/token/refresh/**",
-                "/api/like/update",
-                "/api/fundingregist").permitAll();
+        http.authorizeRequests().antMatchers(
+                "/api/login/**",
+                "/api/like/update"
+        ).permitAll();
 //        http.authorizeRequests().antMatchers(HttpMethod.GET, "api/member/**").hasAnyAuthority("ROLE_USER");
 //        http.authorizeRequests().antMatchers(HttpMethod.POST, "api/member/save/**").hasAnyAuthority("ROLE_ADMIN");
 //        http.authorizeRequests().antMatchers("api/member/save/**").hasAnyAuthority("ROLE_ADMIN");
@@ -68,19 +68,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//
-//        configuration.addAllowedOrigin("http://localhost:8080");
-//        configuration.addAllowedHeader("*");
-//        configuration.addAllowedMethod("*");
-//        configuration.setAllowCredentials(true);
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
 
 }
