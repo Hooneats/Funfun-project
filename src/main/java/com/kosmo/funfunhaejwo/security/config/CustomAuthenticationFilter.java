@@ -5,7 +5,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.funfunhaejwo.jpa.domain.Member;
 import com.kosmo.funfunhaejwo.jpa.repository.MemberRepo;
-import com.kosmo.funfunhaejwo.security.config.dao.CrossHeader;
 import com.kosmo.funfunhaejwo.security.config.dao.JWTGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +70,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 //        tokens.put("member_email", member.getEmail());
 //        tokens.put("member_nic_name", member.getNic_name());
 
-        response = CrossHeader.corsHeader(response);
+//        response = CrossHeader.corsHeader(response);
 
 //        response.setHeader("Access-Control-Allow-Origin", "*");     //허용할 Origin(요청 url) : "*" 의 경우 모두 허용
 //        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");     //허용할 request http METHOD : POST, GET, DELETE, PUT

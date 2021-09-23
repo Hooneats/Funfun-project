@@ -15,7 +15,6 @@ import com.kosmo.funfunhaejwo.jpa.domain.semi.Role;
 import com.kosmo.funfunhaejwo.jpa.exception.*;
 import com.kosmo.funfunhaejwo.jpa.service.MemberService;
 import com.kosmo.funfunhaejwo.jpa.service.ProfileService;
-import com.kosmo.funfunhaejwo.security.config.dao.CrossHeader;
 import com.kosmo.funfunhaejwo.security.config.dao.JWTGenerator;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;

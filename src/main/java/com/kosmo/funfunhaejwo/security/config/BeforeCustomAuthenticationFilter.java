@@ -5,7 +5,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kosmo.funfunhaejwo.security.config.dao.CrossHeader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,8 +36,9 @@ public class BeforeCustomAuthenticationFilter extends OncePerRequestFilter {
         } else {
             log.info("검사를 시행하겠습니다. {}",request.getHeader("Authorization"));
             // 로그인 되어있는지 토큰 검사
-            CrossHeader.corsHeader(response);
+//            CrossHeader.corsHeader(response);
             String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+            log.info("헤더값 : ",authorizationHeader);
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 try {
                     String token = authorizationHeader.substring("Bearer ".length());
