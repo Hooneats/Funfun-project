@@ -124,4 +124,5 @@ public class Init {
         productImgRepo.saveAll(productImgList);
 
     }
+
 }
