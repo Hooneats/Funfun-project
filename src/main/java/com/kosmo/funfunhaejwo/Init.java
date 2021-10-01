@@ -29,15 +29,15 @@ public class Init {
 
     @PostConstruct
     void insertInitDB() {
-        profileImgRepo.deleteAll();
-        memberRepo.deleteAll();
-        productImgRepo.deleteAll();
-        productRepo.deleteAll();
-        categoryRepo.deleteAll();
+        //profileImgRepo.deleteAll();
+        //memberRepo.deleteAll();
+        //productImgRepo.deleteAll();
+        //productRepo.deleteAll();
+        //categoryRepo.deleteAll();
 
 
-        insertMember();
-        insertProduct();
+        //insertMember();
+        //insertProduct();
 
     }
 
