@@ -125,4 +125,8 @@ public class Init {
 
     }
 
+    void insertFriendList() {
+
+    }
+
 }
