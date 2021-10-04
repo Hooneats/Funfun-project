@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(
                 "/api/message/phone/verify",
                 "/api/login/**",
+                "/api/join/**",
                 "/api/like/update"
         ).permitAll();
 //        http.authorizeRequests().antMatchers(HttpMethod.GET, "api/member/**").hasAnyAuthority("ROLE_USER");

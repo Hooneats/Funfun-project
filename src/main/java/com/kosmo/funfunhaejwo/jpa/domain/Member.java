@@ -61,7 +61,10 @@ public class Member extends BaseTime {
     @OneToMany(mappedBy = "member")
     private List<Like> likes;
 
-
+    public Member setPasswordEncoding(String password) {
+        this.password = password;
+        return this;
+    }
 
     public Member setLoginApiSwitch(String login_api) {
         if (login_api != null) {

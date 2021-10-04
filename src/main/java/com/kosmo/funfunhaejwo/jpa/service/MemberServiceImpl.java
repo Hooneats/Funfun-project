@@ -5,6 +5,7 @@ import com.kosmo.funfunhaejwo.jpa.repository.MemberRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +19,15 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepo memberRepo;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Member saveMember(Member member) {
         log.info("Save Member, Member nic_name is {}", member.getNic_name());
+        if (member.getPassword() != null) {
+            String encodePassword = passwordEncoder.encode(member.getPassword());
+            member.setPasswordEncoding(encodePassword);
+        }
         return memberRepo.save(member);
     }
 
