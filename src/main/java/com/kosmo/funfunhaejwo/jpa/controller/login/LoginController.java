@@ -395,6 +395,37 @@ class JoinController {
 
 }
 
+@Slf4j
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("api/find")
+class FindController {
+
+    private final MemberService memberService;
+
+    @PostMapping("/id")
+    public ResponseEntity<?> findIdFromPhone(@RequestParam(required = false) String phone,
+                                             HttpServletResponse response) throws IOException {
+        List<String> findEmail = new ArrayList<>();
+        if (phone == null) {
+            try {
+                throw new EmailNullInputException("양식에 맞지 않는 요청입니다.");
+            } catch (EmailNullInputException en) {
+                ReturnExceptionResponse.exceptionReturn(en,response,401);
+                return null;
+            }
+        }
+        try {
+            findEmail = memberService.findAllbyPhone(phone);
+        } catch (UsernameNotFoundException ue) {
+            ReturnExceptionResponse.exceptionReturn(ue, response, 402);
+            return null;
+        }
+        return ResponseEntity.ok().body(findEmail);
+    }
+
+}
+
 
 
 @Builder

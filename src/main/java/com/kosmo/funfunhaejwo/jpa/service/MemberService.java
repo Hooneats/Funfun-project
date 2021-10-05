@@ -12,4 +12,6 @@ public interface MemberService {
 
     Member getMemberByEmail(String email);
 
+    List<String > findAllbyPhone(String phone);
+
 }

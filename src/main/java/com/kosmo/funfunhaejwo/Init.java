@@ -55,7 +55,7 @@ public class Init {
         Member member4 = Member.builder().email("kmh4@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토4").login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
         Member member3 = Member.builder().email("kmh3@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토3").login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
         Member member2 = Member.builder().email("kmh2@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토2").login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
-        Member member1 = Member.builder().email("kmh1@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토1").login_api(LoginApi.EMAIL).role(Role.USER).phone_number("0107777777").build();
+        Member member1 = Member.builder().email("kmh1@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토1").login_api(LoginApi.EMAIL).role(Role.ADMIN).phone_number("0107777777").build();
 
         profileImgList.add(build1);
         profileImgList.add(build2);

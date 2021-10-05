@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -43,6 +45,17 @@ public class MemberServiceImpl implements MemberService {
         log.info("Will find Member email {}",email);
         return memberRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("회원을 찾을 수 없습니다."));
 //        return memberRepo.findByEmail(email).orElse(null);
+    }
+
+    @Override
+    public List<String> findAllbyPhone(String phone) {
+        List<Member> list = new ArrayList<>();
+        list = memberRepo.findByPhone_number(phone);
+        if (list.isEmpty()) {
+            throw new UsernameNotFoundException("찾을 수 있는 회원 아이디가 없습니다.");
+        }
+        List<String> memberEmailList = list.stream().map(Member::getEmail).collect(Collectors.toList());
+        return memberEmailList;
     }
 
 }
