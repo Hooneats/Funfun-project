@@ -11,6 +11,6 @@ public class Main_mainSearchVo {
     private long fundingId;
     private String fundingTitle;
     private String funndingBrand;
-    private String funndingTargetMoney;
+    private long funndingTargetMoney;
     private String fundingUrl;
 }

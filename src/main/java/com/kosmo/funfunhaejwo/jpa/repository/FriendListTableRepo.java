@@ -11,10 +11,12 @@ import java.util.List;
 public interface FriendListTableRepo extends JpaRepository<FriendListTable, Long> {
     List<FriendListTable> findByMember_id(@Param(value="member_id") Long member_id);
 
-    @Query(value="select f.id, m, m2 " +
-            "from FriendListTable f, Member m, Member m2 " +
-            "where f.member.id=m.id and f.friend.id=m2.id " +
-            "and f.member.id=:member_id and m2.nic_name like concat(concat('%',:searchName),'%')"
-            ,nativeQuery = false)
-    List<FriendListTable> friendSearch(@Param("member_id") Long member_id, @Param("searchName") String searchName);
+    @Query(value="select * " +
+            "from (select pi.file_src, m2.nic_name, m2.member_id " +
+                  "from Friend_List f, Member m, Member m2, Profile_Img pi " +
+                  "where f.member_id=m.member_id and f.friend_id=m2.member_id and m2.member_id=pi.member_id " +
+                  "and f.member_id=:member_id and m2.nic_name like concat(concat('%',:searchName),'%')) " +
+            "where rownum<=5"
+            ,nativeQuery = true)
+    List<Object[]> friendSearch(@Param("member_id") Long member_id, @Param("searchName") String searchName);
 }
