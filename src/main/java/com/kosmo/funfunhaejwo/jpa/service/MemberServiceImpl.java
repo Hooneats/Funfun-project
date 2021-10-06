@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class MemberServiceImpl implements MemberService {
         log.info("Save Member, Member nic_name is {}", member.getNic_name());
         if (member.getPassword() != null) {
             String encodePassword = passwordEncoder.encode(member.getPassword());
-            member.setPasswordEncoding(encodePassword);
+            member.setPasswordEncoded(encodePassword);
         }
         return memberRepo.save(member);
     }
@@ -43,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member getMemberByEmail(String email) {
         log.info("Will find Member email {}",email);
-        return memberRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("회원을 찾을 수 없습니다."));
+        return memberRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("이메일로 회원을 찾을 수 없습니다."));
 //        return memberRepo.findByEmail(email).orElse(null);
     }
 
@@ -52,7 +51,7 @@ public class MemberServiceImpl implements MemberService {
         List<Member> list = new ArrayList<>();
         list = memberRepo.findByPhone_number(phone);
         if (list.isEmpty()) {
-            throw new UsernameNotFoundException("찾을 수 있는 회원 아이디가 없습니다.");
+            throw new UsernameNotFoundException("전화번호로 찾을 수 있는 회원 아이디가 없습니다.");
         }
         List<String> memberEmailList = list.stream().map(Member::getEmail).collect(Collectors.toList());
         return memberEmailList;

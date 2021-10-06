@@ -43,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers(
                 "/api/message/phone/verify",
+                "/api/message/email/send",
+                "/api/message/verify/code",
                 "/api/login/**",
                 "/api/join/**",
                 "/api/find/**",
