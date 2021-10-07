@@ -1,10 +1,8 @@
-package com.kosmo.funfunhaejwo.security.config.dao;
+package com.kosmo.funfunhaejwo.security.config.vo;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Date;
