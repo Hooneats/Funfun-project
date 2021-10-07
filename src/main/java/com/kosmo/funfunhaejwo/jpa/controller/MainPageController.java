@@ -22,12 +22,12 @@ import java.util.List;
 public class MainPageController {
     private final MainService mainservice;
 
-    @GetMapping("/test/{member}/{searchName}")
-    List<Main_FriendVo> test(@PathVariable("member") long member_id, @PathVariable("searchName") String searchName){
-        System.out.println("#여기까진 싱행됨 member_id:" + member_id);
-        List<Main_FriendVo> list = mainservice.getFriendList(member_id,searchName);
-        return list;
-    }
+//    @GetMapping("/test/{member}/{searchName}")
+//    List<Main_FriendVo> test(@PathVariable("member") long member_id, @PathVariable("searchName") String searchName){
+//        System.out.println("#여기까진 싱행됨 member_id:" + member_id);
+//        List<Main_FriendVo> list = mainservice.getFriendList(member_id,searchName);
+//        return list;
+//    }
 
     @GetMapping("/{member}/{searchName}")
     List<Main_FriendVo> getFriendList(@PathVariable("member") long member_id, @PathVariable("searchName") String searchName){

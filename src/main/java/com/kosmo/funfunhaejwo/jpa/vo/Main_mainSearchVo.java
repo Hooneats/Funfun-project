@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Main_mainSearchVo {
     private long fundingId;
     private String fundingTitle;
-    private String funndingBrand;
-    private long funndingTargetMoney;
+    private String fundingBrand;
+    private long fundingTargetMoney;
     private String fundingUrl;
 }

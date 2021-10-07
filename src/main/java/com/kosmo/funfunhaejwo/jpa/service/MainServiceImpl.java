@@ -5,6 +5,7 @@ import com.kosmo.funfunhaejwo.jpa.domain.FriendListTable;
 import com.kosmo.funfunhaejwo.jpa.domain.Funding;
 import com.kosmo.funfunhaejwo.jpa.domain.Member;
 import com.kosmo.funfunhaejwo.jpa.domain.Order;
+import com.kosmo.funfunhaejwo.jpa.fileset.FilePath;
 import com.kosmo.funfunhaejwo.jpa.repository.*;
 import com.kosmo.funfunhaejwo.jpa.vo.Main_FriendVo;
 import com.kosmo.funfunhaejwo.jpa.vo.Main_mainDeadlineVo;
@@ -60,7 +61,7 @@ public class MainServiceImpl implements MainService{
 
         List<Object[]> objList =  friendListTableRepo.friendSearch(member_id,searchName);
         for(Object[] item: objList){
-            Main_FriendVo main_fv = new Main_FriendVo((String)item[0],(String)item[1],Long.parseLong(String.valueOf(item[2])));
+            Main_FriendVo main_fv = new Main_FriendVo(FilePath.BASIC_FILE_PATH+(String)item[0],(String)item[1],Long.parseLong(String.valueOf(item[2])));
             list.add(main_fv);
         }
 
@@ -73,7 +74,7 @@ public class MainServiceImpl implements MainService{
 
         List<Funding> fundingList = fundingRepo.findByMember_id(member_id);
         for(Funding item: fundingList){
-            String pthumb = productImgRepo.findThumbByProduct_id(item.getProduct().getId());
+            String pthumb = FilePath.BASIC_FILE_PATH + productImgRepo.findThumbByProduct_id(item.getProduct().getId());
             Main_mainSearchVo msv = new Main_mainSearchVo(item.getId(), item.getFunding_title(),item.getProduct().getProduct_brand(),item.getFunding_target_money(),pthumb);
             list.add(msv);
             if(list.size()>=10)
@@ -109,7 +110,7 @@ public class MainServiceImpl implements MainService{
         System.out.println("#시간: fromDate,toDate -> "+fromDate+" , "+toDate);
         List<Object[]> deadlineFundingList = fundingRepo.findDeadline(fromDate,toDate);
         for(Object[] item: deadlineFundingList){
-            String preFundingImgUrl = productImgRepo.findThumbByProduct_id(Long.parseLong(String.valueOf(item[1])));
+            String preFundingImgUrl = FilePath.BASIC_FILE_PATH + productImgRepo.findThumbByProduct_id(Long.parseLong(String.valueOf(item[1])));
             String fundingTitle = String.valueOf(item[2]);
             long cMoney = Long.parseLong(String.valueOf(item[4]));
             long tMoney = Long.parseLong(String.valueOf(item[5]));
@@ -136,7 +137,7 @@ public class MainServiceImpl implements MainService{
         List<Order> orderList = orderRepo.findByMember_id(member_id);
         for(Order order: orderList){
             Funding f = order.getFunding();
-            String preFundingImgUrl = productImgRepo.findThumbByProduct_id(f.getProduct().getId());
+            String preFundingImgUrl = FilePath.BASIC_FILE_PATH + productImgRepo.findThumbByProduct_id(f.getProduct().getId());
             String fundingTitle = f.getFunding_title();
             int progressBarPercent = (int)((double)f.getFunding_collected_money()/(double)f.getFunding_target_money() * 100.0);
             String fundingname = f.getMember().getNic_name();
