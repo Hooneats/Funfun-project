@@ -71,6 +71,16 @@ public class Member extends BaseTime {
         return this;
     }
 
+    public Member setPhoneSave(String phone) {
+        this.phone_number = phone;
+        return this;
+    }
+
+    public Member setAddressSave(Address address) {
+        this.address = address;
+        return this;
+    }
+
     public Member setLoginApiSwitch(String login_api) {
         if (login_api != null) {
             if (login_api.equals("Kakao")) {
