@@ -50,12 +50,12 @@ public class FundingController {
 
         LocalDateTime funding_created_time = findFunding.getFunding_create_time();
         LocalDateTime funding_expired_time = findFunding.getFunding_expired_time();
-        Long beetweenTime=0L;
+        Long betweenTime=0L;
 
         if(Duration.between(LocalDateTime.now(),funding_created_time).toDays()<0){
-            beetweenTime = Duration.between(LocalDateTime.now(),funding_expired_time).toDays();
+            betweenTime = Duration.between(LocalDateTime.now(),funding_expired_time).toDays();
         }else{
-            beetweenTime = Duration.between(funding_created_time,funding_expired_time).toDays();
+            betweenTime = Duration.between(funding_created_time,funding_expired_time).toDays();
         }
         Long beforeStartFunding = 0L;
         Boolean isStart = true;
@@ -77,7 +77,7 @@ public class FundingController {
                 .funding_people_count(findFunding.getFunding_people_count())
                 .funding_collected_money(findFunding.getFunding_collected_money())
                 .funding_product_brand(findFunding.getProduct().getProduct_brand())
-                .funding_beetweenTime(beetweenTime)
+                .funding_beetweenTime(betweenTime)
                 .funding_isStart(isStart)
                 .funding_beforeStartDays(beforeStartFunding)
                 .build();

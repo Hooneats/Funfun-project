@@ -105,15 +105,23 @@ public class Init {
         ProductImg build3 = ProductImg.builder().img_code(ImgCode.SUB).product(product1).file_info(new File_info("/product/1/sub1.jpg", "sub1.jpg")).build();
         ProductImg build4 = ProductImg.builder().img_code(ImgCode.SUB).product(product1).file_info(new File_info("/product/1/sub2.jpg", "sub2.jpg")).build();
         ProductImg build5 = ProductImg.builder().img_code(ImgCode.MAIN).product(product1).file_info(new File_info("/product/1/main1.jpg", "main1.jpg")).build();
-        ProductImg build6 = ProductImg.builder().img_code(ImgCode.SUB).product(product2).file_info(new File_info("/product/2/sub1.jpg", "sub1.jpg")).build();
-        ProductImg build7 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product3).file_info(new File_info("/product/3/thumbnail1.png", "thumbnai1.png")).build();
-        ProductImg build8 = ProductImg.builder().img_code(ImgCode.SUB).product(product4).file_info(new File_info("/product/4/sub1.jpg", "sub1.jpg")).build();
-        ProductImg build9 = ProductImg.builder().img_code(ImgCode.SUB).product(product5).file_info(new File_info("/product/5/sub1.jpg", "sub1.jpg")).build();
-        ProductImg build10 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product111).file_info(new File_info("/product/111/thumbnail1.jpg", "thumbnail1.jpg")).build();
-        ProductImg build11 = ProductImg.builder().img_code(ImgCode.SUB).product(product111).file_info(new File_info("/product/111/sub1.jpg", "sub1.jpg")).build();
-        ProductImg build12 = ProductImg.builder().img_code(ImgCode.SUB).product(product111).file_info(new File_info("/product/111/sub2.jpg", "sub2.jpg")).build();
-        ProductImg build13 = ProductImg.builder().img_code(ImgCode.MAIN).product(product111).file_info(new File_info("/product/111/main1.jpg", "main1.jpg")).build();
-        ProductImg build14 = ProductImg.builder().img_code(ImgCode.MAIN).product(product111).file_info(new File_info("/product/111/main2.jpg", "main2.jpg")).build();
+        ProductImg build6 = ProductImg.builder().img_code(ImgCode.SUB).product(product2).file_info(new File_info("/product/2/thumbnail1.jpg", "sub1.jpg")).build();
+        ProductImg build7 = ProductImg.builder().img_code(ImgCode.MAIN).product(product2).file_info(new File_info("/product/2/sub1.jpg", "sub1.jpg")).build();
+        ProductImg build8 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product2).file_info(new File_info("/product/2/sub1.jpg", "sub1.jpg")).build();
+        ProductImg build9 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product3).file_info(new File_info("/product/3/thumbnail1.png", "thumbnai1.png")).build();
+        ProductImg build10 = ProductImg.builder().img_code(ImgCode.SUB).product(product3).file_info(new File_info("/product/3/thumbnail1.png", "thumbnai1.png")).build();
+        ProductImg build11 = ProductImg.builder().img_code(ImgCode.MAIN).product(product3).file_info(new File_info("/product/3/thumbnail1.png", "thumbnai1.png")).build();
+        ProductImg build12 = ProductImg.builder().img_code(ImgCode.SUB).product(product4).file_info(new File_info("/product/4/thumbnail1.jpg", "sub1.jpg")).build();
+        ProductImg build13 = ProductImg.builder().img_code(ImgCode.MAIN).product(product4).file_info(new File_info("/product/4/sub1.jpg", "sub1.jpg")).build();
+        ProductImg build14 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product4).file_info(new File_info("/product/4/sub1.jpg", "sub1.jpg")).build();
+        ProductImg build15 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product5).file_info(new File_info("/product/5/sub1.jpg", "sub1.jpg")).build();
+        ProductImg build16 = ProductImg.builder().img_code(ImgCode.MAIN).product(product5).file_info(new File_info("/product/5/sub1.jpg", "sub1.jpg")).build();
+        ProductImg build17 = ProductImg.builder().img_code(ImgCode.SUB).product(product5).file_info(new File_info("/product/5/thumbnail1.jpg", "sub1.jpg")).build();
+        ProductImg build18 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product111).file_info(new File_info("/product/111/thumbnail1.jpg", "thumbnail1.jpg")).build();
+        ProductImg build19 = ProductImg.builder().img_code(ImgCode.SUB).product(product111).file_info(new File_info("/product/111/sub1.jpg", "sub1.jpg")).build();
+        ProductImg build20 = ProductImg.builder().img_code(ImgCode.SUB).product(product111).file_info(new File_info("/product/111/sub2.jpg", "sub2.jpg")).build();
+        ProductImg build21 = ProductImg.builder().img_code(ImgCode.MAIN).product(product111).file_info(new File_info("/product/111/main1.jpg", "main1.jpg")).build();
+        ProductImg build22 = ProductImg.builder().img_code(ImgCode.MAIN).product(product111).file_info(new File_info("/product/111/main2.jpg", "main2.jpg")).build();
 
         categoryList.add(category1);
         categoryList.add(category2);
@@ -142,6 +150,14 @@ public class Init {
         productImgList.add(build12);
         productImgList.add(build13);
         productImgList.add(build14);
+        productImgList.add(build15);
+        productImgList.add(build16);
+        productImgList.add(build17);
+        productImgList.add(build18);
+        productImgList.add(build19);
+        productImgList.add(build20);
+        productImgList.add(build21);
+        productImgList.add(build22);
 
         categoryRepo.saveAll(categoryList);
         productRepo.saveAll(productList);
@@ -152,9 +168,9 @@ public class Init {
     void insertFunding() {
         List<Funding> fundingList = new ArrayList<>();
 
-        Funding funding1 = Funding.builder().funding_target_money(productList.get(1).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_title("내생일선물").funding_type(FundingType.FUNDING).funding_people_count(10).member(memberList.get(1)).product(productList.get(1)).build();
-        Funding funding2 = Funding.builder().funding_target_money(productList.get(2).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_title("그냥 갖고싶어서").funding_type(FundingType.FUNDING).funding_people_count(3).member(memberList.get(0)).product(productList.get(2)).build();
-        Funding funding3 = Funding.builder().funding_target_money(productList.get(3).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_title("후원합니다").funding_type(FundingType.SUPPORT).funding_people_count(22).member(memberList.get(3)).product(productList.get(3)).build();
+        Funding funding1 = Funding.builder().funding_target_money(productList.get(1).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2022,01,28,00,00)).funding_title("내생일선물").funding_type(FundingType.FUNDING).funding_people_count(10).member(memberList.get(1)).product(productList.get(1)).build();
+        Funding funding2 = Funding.builder().funding_target_money(productList.get(2).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2022,03,28,00,00)).funding_title("그냥 갖고싶어서").funding_type(FundingType.FUNDING).funding_people_count(3).member(memberList.get(0)).product(productList.get(2)).build();
+        Funding funding3 = Funding.builder().funding_target_money(productList.get(3).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,11,28,00,00)).funding_title("후원합니다").funding_type(FundingType.SUPPORT).funding_people_count(22).member(memberList.get(3)).product(productList.get(3)).build();
 
         fundingList.add(funding1);
         fundingList.add(funding2);

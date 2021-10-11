@@ -145,6 +145,7 @@ create table product_payment(
                                 w_product varchar2(10 char),
                                 account varchar2(30 char),
                                 phone_number varchar2(30 char),
+                                name varchar2(30 char),
                                 city varchar2(50 char),
                                 street varchar2(50 char),
                                 zipcode varchar2(30 char)
