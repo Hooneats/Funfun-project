@@ -125,7 +125,7 @@ create table orders(
                        funding_id number,
                        total_payment number,
                        order_date timestamp,
-                       memo varchar2(255 char),
+                       merchant_uid varchar2(255 char),
                        i_port_id varchar2(50 char),
                        pg_id varchar2(50 char),
                        status varchar2(30 char)

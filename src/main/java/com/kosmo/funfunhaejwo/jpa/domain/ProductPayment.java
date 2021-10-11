@@ -44,6 +44,8 @@ public class ProductPayment {
 
     private String account;
     private String phone_number;
+    // 회원 이름 추가, sql 테이블도 변경요망
+    private String name;
 
     @Embedded
     private Address address;

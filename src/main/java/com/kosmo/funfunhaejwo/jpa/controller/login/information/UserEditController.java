@@ -1,4 +1,4 @@
-package com.kosmo.funfunhaejwo.jpa.controller.login;
+package com.kosmo.funfunhaejwo.jpa.controller.login.information;
 
 import com.kosmo.funfunhaejwo.jpa.controller.login.vo.ReturnLoginMemberEditInfo;
 import com.kosmo.funfunhaejwo.jpa.exception.EmailNullInputException;
