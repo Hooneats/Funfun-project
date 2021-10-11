@@ -1,10 +1,7 @@
 package com.kosmo.funfunhaejwo.jpa.domain;
 
 import com.kosmo.funfunhaejwo.jpa.domain.semi.BaseTime;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -50,6 +47,16 @@ public class Product extends BaseTime {
     @JoinColumn(name = "event_ID")
     private Event event;
 
+    @OneToMany(mappedBy = "product")
+    private List<Like> LikeList = new ArrayList<>();
 
+    public Product likeControl(Boolean select) {
+        if (select) {
+            this.product_like_count++;
+        } else {
+            this.product_like_count--;
+        }
+        return this;
+    }
 
 }

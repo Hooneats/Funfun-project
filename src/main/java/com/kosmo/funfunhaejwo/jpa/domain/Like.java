@@ -35,4 +35,5 @@ public class Like {
     @JoinColumn(name = "product_id")
     private Product product;
 
+
 }

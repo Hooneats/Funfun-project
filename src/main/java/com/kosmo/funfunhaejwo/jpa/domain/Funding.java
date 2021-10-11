@@ -1,16 +1,15 @@
 package com.kosmo.funfunhaejwo.jpa.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kosmo.funfunhaejwo.jpa.domain.semi.FundingType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -40,7 +39,11 @@ public class Funding {
     private Long funding_target_money;
     @Enumerated(EnumType.STRING)
     private FundingType funding_type;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime funding_create_time;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime funding_expired_time;
 
 

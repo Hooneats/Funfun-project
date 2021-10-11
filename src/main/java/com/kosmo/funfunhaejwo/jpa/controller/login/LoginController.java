@@ -67,8 +67,8 @@ class OauthLoginController {
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                             new UsernamePasswordAuthenticationToken(member.getEmail(), null, authorities);
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                    String access_jwt = JWTGenerator.create_access_JWT(member.getEmail(), request.getRequestURL().toString(), authorities, 10);
-                    String refresh_jwt = JWTGenerator.create_refresh_JWT(member.getEmail(), request.getRequestURL().toString(), 30);
+                    String access_jwt = JWTGenerator.create_access_JWT(member.getEmail(), request.getRequestURL().toString(), authorities, 1);
+                    String refresh_jwt = JWTGenerator.create_refresh_JWT(member.getEmail(), request.getRequestURL().toString(), 2);
 
                     Map<String, String> tokens = new HashMap<>();
                     tokens.put("access_token", access_jwt);
@@ -119,7 +119,7 @@ class OauthLoginController {
 
                 Collection<GrantedAuthority> authorities = new ArrayList<>();
                 authorities.add(new SimpleGrantedAuthority(memberByEmail.getRole().getKey()));
-                String access_jwt = JWTGenerator.create_access_JWT(username, request.getRequestURL().toString(), authorities, 10);
+                String access_jwt = JWTGenerator.create_access_JWT(username, request.getRequestURL().toString(), authorities, 1);
 
                 Map<String, String> tokens = new HashMap<>();
                 tokens.put("access_token", access_jwt);
@@ -156,6 +156,8 @@ class OauthLoginController {
         } catch (NotEqualsMemberException ne) {
             ReturnExceptionResponse.exceptionReturn(ne, response, 402);
         } catch (Exception e) {
+            System.out.println("e = " + e);
+            log.info(e.getMessage());
             ReturnExceptionResponse.exceptionReturn(e, response, 403);
         }
 

@@ -55,8 +55,8 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         User user = (User) authentication.getPrincipal();
 //        Algorithm algorithm = Algorithm.HMAC256("funfun".getBytes());
 
-        String access_token = JWTGenerator.create_access_JWT(user.getUsername(), request.getRequestURL().toString(), user.getAuthorities(), 10);
-        String refresh_token = JWTGenerator.create_refresh_JWT(user.getUsername(), request.getRequestURL().toString(), 30);
+        String access_token = JWTGenerator.create_access_JWT(user.getUsername(), request.getRequestURL().toString(), user.getAuthorities(), 1);
+        String refresh_token = JWTGenerator.create_refresh_JWT(user.getUsername(), request.getRequestURL().toString(), 2);
 
 //        log.info("# 유저 이메일 : "+user.getUsername());
 //        Member member = memberRepo.findByEmail(user.getUsername()).orElseThrow(()->new UsernameNotFoundException("유저가 없습니다."));
