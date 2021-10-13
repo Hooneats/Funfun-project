@@ -33,7 +33,7 @@ public class Init {
 
     @PostConstruct
     void insertInitDB() {
-//        modifyPassword();
+        modifyPassword();
 
 
 //        likeRepo.deleteAll();
