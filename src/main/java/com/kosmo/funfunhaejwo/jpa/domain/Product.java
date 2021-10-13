@@ -50,6 +50,9 @@ public class Product extends BaseTime {
     @JoinColumn(name = "event_ID")
     private Event event;
 
+    private LocalDateTime created;
+
+    private LocalDateTime updated;
 
 
 }
