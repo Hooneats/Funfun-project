@@ -34,6 +34,11 @@ public class Init {
     @PostConstruct
     void insertInitDB() {
         modifyPassword();
+        //profileImgRepo.deleteAll();
+        //memberRepo.deleteAll();
+        //productImgRepo.deleteAll();
+        //productRepo.deleteAll();
+        //categoryRepo.deleteAll();
 
 
 //        likeRepo.deleteAll();
@@ -50,6 +55,8 @@ public class Init {
 //        insertProduct();
 //        insertFunding();
 //        insertLike();
+        //insertMember();
+        //insertProduct();
 
     }
 
@@ -94,6 +101,7 @@ public class Init {
         memberList.add(member5);
         memberRepo.saveAll(memberList);
     }
+
     void insertProduct() {
         List<ProductImg> productImgList = new ArrayList<>();
         List<Category> categoryList = new ArrayList<>();
@@ -134,6 +142,14 @@ public class Init {
         ProductImg build20 = ProductImg.builder().img_code(ImgCode.SUB).product(product111).file_info(new File_info("/product/111/sub2.jpg", "sub2.jpg")).build();
         ProductImg build21 = ProductImg.builder().img_code(ImgCode.MAIN).product(product111).file_info(new File_info("/product/111/main1.jpg", "main1.jpg")).build();
         ProductImg build22 = ProductImg.builder().img_code(ImgCode.MAIN).product(product111).file_info(new File_info("/product/111/main2.jpg", "main2.jpg")).build();
+//        ProductImg build1 = ProductImg.builder().img_code(ImgCode.BANNER).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\1.jpg", null)).build();
+//        ProductImg build2 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\2.jpg", null)).build();
+//        ProductImg build3 = ProductImg.builder().img_code(ImgCode.SUB).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\3.jpg", null)).build();
+//        ProductImg build4 = ProductImg.builder().img_code(ImgCode.SUB).product(product1).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\4.jpg", null)).build();
+//        ProductImg build5 = ProductImg.builder().img_code(ImgCode.SUB).product(product2).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\2.jpg", null)).build();
+//        ProductImg build6 = ProductImg.builder().img_code(ImgCode.THUMBNAIL).product(product3).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\3.jpg", null)).build();
+//        ProductImg build7 = ProductImg.builder().img_code(ImgCode.SUB).product(product4).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\4.jpg", null)).build();
+//        ProductImg build8 = ProductImg.builder().img_code(ImgCode.SUB).product(product5).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\5.jpg", null)).build();
 
         categoryList.add(category1);
         categoryList.add(category2);
@@ -148,6 +164,14 @@ public class Init {
         productList.add(product5);
         productList.add(product111);
 
+//        productImgList.add(build1);
+//        productImgList.add(build2);
+//        productImgList.add(build3);
+//        productImgList.add(build4);
+//        productImgList.add(build5);
+//        productImgList.add(build6);
+//        productImgList.add(build7);
+//        productImgList.add(build8);
 //        productImgList.add(build1);
         productImgList.add(build2);
         productImgList.add(build3);

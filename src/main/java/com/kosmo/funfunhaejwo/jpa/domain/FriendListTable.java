@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JoinColumnOrFormula;
+import org.hibernate.annotations.JoinColumnsOrFormulas;
+import org.hibernate.annotations.JoinFormula;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,8 +36,9 @@ public class FriendListTable {
     private Member member;
 
     //이건 관계맺기가.... 연관관계 맺기 안하고 그냥 컬럼 만들었기에 주의하자
-    @Column(name = "friend_id")
-    private Long friend_id;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "friend_id")
+    private Member friend;
 
 
 }
