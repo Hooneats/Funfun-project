@@ -39,16 +39,14 @@ public class ProductPayment {
     private ProductPaymentStatus productPaymentStatus;
 
     private int excess_cost;//초과금액
-
     private String w_product;//상품지급여부
-
     private String account;
     private String phone_number;
-    // 회원 이름 추가, sql 테이블도 변경요망
-    private String name;
-
     @Embedded
     private Address address;
+    @Column(name = "real_name")
+    private String real_name;
+
 
 
 

@@ -27,12 +27,14 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member saveMember(Member member) {
         log.info("Save Member, Member nic_name is {}", member.getNic_name());
-        if (member.getPassword() != null) {
-            String encodePassword = passwordEncoder.encode(member.getPassword());
-            member.setPasswordEncoded(encodePassword);
-        }
+//        if (member.getPassword() != null) {
+//            String encodePassword = passwordEncoder.encode(member.getPassword());
+//            member.setPasswordEncoded(encodePassword);
+//        }
         return memberRepo.save(member);
     }
+
+
 
     @Override
     public List<Member> saveAllMemberList(List<Member> memberList) {
@@ -107,6 +109,13 @@ public class MemberServiceImpl implements MemberService {
         }
         memberRepo.save(findMember);
         return true;
+    }
+
+    @Override
+    public Member saveAndPasswordEncode(String email, String password) {
+        Member findMember = getMemberByEmail(email);
+        findMember.setPasswordEncoded(passwordEncoder.encode(password));
+        return memberRepo.save(findMember);
     }
 
 }

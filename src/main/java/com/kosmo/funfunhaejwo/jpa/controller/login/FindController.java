@@ -116,13 +116,11 @@ public class FindController {
             }
         }
         try {
-            findMember = memberService.getMemberByEmail(email);
+            memberService.saveAndPasswordEncode(email, password);
         } catch (UsernameNotFoundException ue) {
             ReturnExceptionResponse.exceptionReturn(ue, response, 402);
             return null;
         }
-        Member modifiedMember = findMember.setPassword(password);
-        memberService.saveMember(modifiedMember);
         return ResponseEntity.ok().body("변경되었습니다.");
     }
 }

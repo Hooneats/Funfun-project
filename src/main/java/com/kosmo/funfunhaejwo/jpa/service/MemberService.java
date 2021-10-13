@@ -19,4 +19,6 @@ public interface MemberService {
 
     Boolean editSave(ReturnLoginMemberEditInfo submitEditMember);
 
+    Member saveAndPasswordEncode(String email, String password);
+
 }

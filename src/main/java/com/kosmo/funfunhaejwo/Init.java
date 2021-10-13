@@ -7,6 +7,7 @@ import com.kosmo.funfunhaejwo.jpa.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
@@ -32,24 +33,37 @@ public class Init {
 
     @PostConstruct
     void insertInitDB() {
-        likeRepo.deleteAll();
-        profileImgRepo.deleteAll();
-        memberRepo.deleteAll();
-        productImgRepo.deleteAll();
-        productRepo.deleteAll();
-        categoryRepo.deleteAll();
-
-        fundingRepo.deleteAll();
+//        modifyPassword();
 
 
-
-        insertMember();
-        insertProduct();
-        insertFunding();
-        insertLike();
+//        likeRepo.deleteAll();
+//        profileImgRepo.deleteAll();
+//        memberRepo.deleteAll();
+//        productImgRepo.deleteAll();
+//        productRepo.deleteAll();
+//        categoryRepo.deleteAll();
+//        fundingRepo.deleteAll();
+//
+//
+//
+//        insertMember();
+//        insertProduct();
+//        insertFunding();
+//        insertLike();
 
     }
 
+    @Transactional(readOnly = false)
+    void modifyPassword() {
+        List<Member> allMember = memberRepo.findAll();
+        allMember.forEach(res -> {
+            System.out.println("res = " + res.getPassword());
+            if (res.getPassword().equals("1234")) {
+                res.setPasswordEncoded(passwordEncoder.encode(res.getPassword()));
+            }
+            memberRepo.saveAll(allMember);
+        });
+    }
 
     void insertMember() {
 //        List<Member> memberList = new ArrayList<>();
@@ -80,8 +94,6 @@ public class Init {
         memberList.add(member5);
         memberRepo.saveAll(memberList);
     }
-
-
     void insertProduct() {
         List<ProductImg> productImgList = new ArrayList<>();
         List<Category> categoryList = new ArrayList<>();
@@ -164,7 +176,6 @@ public class Init {
         productImgRepo.saveAll(productImgList);
 
     }
-
     void insertFunding() {
         List<Funding> fundingList = new ArrayList<>();
 
