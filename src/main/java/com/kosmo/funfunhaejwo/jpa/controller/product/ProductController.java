@@ -115,9 +115,4 @@ public class ProductController {
         List<ProductListVo>  list = productService.getByLow4(category_id);
         return list;
     }
-    @GetMapping("/search/{product_name}")
-    public List<ProductListVo> getSearch(@PathVariable("product_name") String product_name){
-        List<ProductListVo> list = productService.getSearchList(product_name);
-        return list;
-    }
 }

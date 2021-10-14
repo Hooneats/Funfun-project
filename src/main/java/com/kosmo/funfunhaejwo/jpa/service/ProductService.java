@@ -47,7 +47,4 @@ public interface ProductService {
      List<ProductListVo> getByLow4(long category_id);
 
 
-
-     List<ProductListVo> getSearchList(String product_name);
-
 }
