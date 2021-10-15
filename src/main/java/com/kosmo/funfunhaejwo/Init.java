@@ -24,6 +24,7 @@ public class Init {
     private final CategoryRepo categoryRepo;
     private final ProductRepo productRepo;
     private final ProductImgRepo productImgRepo;
+    private final EventRepo eventRepo;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -34,6 +35,7 @@ public class Init {
         productImgRepo.deleteAll();
         productRepo.deleteAll();
         categoryRepo.deleteAll();
+        eventRepo.deleteAll();
 
 
         insertMember();
@@ -76,6 +78,7 @@ public class Init {
         List<ProductImg> productImgList = new ArrayList<>();
         List<Category> categoryList = new ArrayList<>();
         List<Product> productList = new ArrayList<>();
+        List<Event> eventList = new ArrayList<>();
 
         Category category1 = new Category(1L, "김규민프렌즈");
         Category category2 = new Category(2L, "김동원프렌즈");
@@ -83,11 +86,16 @@ public class Init {
         Category category4 = new Category(4L, "신혜림프렌즈");
         Category category5 = new Category(5L, "이지연프렌즈");
 
-        Product product1 = Product.builder().id(1L).category(category1).product_brand("모두의프렌즈").funding_count(610).product_like_count(10000).product_name("테스트가").product_price(38000L).product_stock(182).build();
-        Product product2 = Product.builder().id(2L).category(category2).product_brand("모두의프렌즈").funding_count(520).product_like_count(8000).product_name("테스트나").product_price(56000L).product_stock(182).build();
-        Product product3 = Product.builder().id(3L).category(category3).product_brand("모두의프렌즈").funding_count(430).product_like_count(50).product_name("테스트다").product_price(1623000L).product_stock(182).build();
-        Product product4 = Product.builder().id(4L).category(category4).product_brand("모두의프렌즈").funding_count(340).product_like_count(900).product_name("테스트라").product_price(1450000L).product_stock(182).build();
-        Product product5 = Product.builder().id(5L).category(category5).product_brand("모두의프렌즈").funding_count(250).product_like_count(14000).product_name("테스트마").product_price(63000L).product_stock(182).build();
+        Event event1 = new Event(1L, "테스트1");
+        Event event2 = new Event(2L, "테스트2");
+        Event event3 = new Event(3L, "테스트3");
+        Event event4 = new Event(4L, "테스트4");
+
+        Product product1 = Product.builder().id(1L).event(event1).category(category1).product_brand("모두의프렌즈").funding_count(610).product_like_count(10000).product_name("테스트가").product_price(38000L).product_stock(182).build();
+        Product product2 = Product.builder().id(2L).event(event1).category(category2).product_brand("모두의프렌즈").funding_count(520).product_like_count(8000).product_name("테스트나").product_price(56000L).product_stock(182).build();
+        Product product3 = Product.builder().id(3L).event(event2).category(category3).product_brand("모두의프렌즈").funding_count(430).product_like_count(50).product_name("테스트다").product_price(1623000L).product_stock(182).build();
+        Product product4 = Product.builder().id(4L).event(event2).category(category4).product_brand("모두의프렌즈").funding_count(340).product_like_count(900).product_name("테스트라").product_price(1450000L).product_stock(182).build();
+        Product product5 = Product.builder().id(5L).event(event3).category(category5).product_brand("모두의프렌즈").funding_count(250).product_like_count(14000).product_name("테스트마").product_price(63000L).product_stock(182).build();
         Product product6 = Product.builder().id(6L).category(category1).product_brand("모두의프렌즈").funding_count(160).product_like_count(16200).product_name("테스트바").product_price(73000L).product_stock(182).build();
         Product product7 = Product.builder().id(7L).category(category1).product_brand("모두의프렌즈").funding_count(70).product_like_count(17200).product_name("테스트사").product_price(83000L).product_stock(182).build();
         Product product8 = Product.builder().id(8L).category(category2).product_brand("모두의프렌즈").funding_count(80).product_like_count(18200).product_name("테스트아").product_price(93000L).product_stock(182).build();
@@ -103,6 +111,10 @@ public class Init {
         ProductImg build8 = ProductImg.builder().img_code(ImgCode.SUB).product(product5).file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\5.jpg", null)).build();
 
 
+        eventList.add(event1);
+        eventList.add(event2);
+        eventList.add(event3);
+        eventList.add(event4);
 
         categoryList.add(category1);
         categoryList.add(category2);
@@ -129,6 +141,7 @@ public class Init {
         productImgList.add(build7);
         productImgList.add(build8);
 
+        eventRepo.saveAll(eventList);
         categoryRepo.saveAll(categoryList);
         productRepo.saveAll(productList);
         productImgRepo.saveAll(productImgList);

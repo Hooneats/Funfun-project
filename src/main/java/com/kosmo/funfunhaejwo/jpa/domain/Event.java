@@ -27,7 +27,4 @@ public class Event {
     private Long id;
 
     private String event_title;
-
-    @OneToMany(mappedBy = "event")
-    private List<Product> products = new ArrayList<>();
 }
