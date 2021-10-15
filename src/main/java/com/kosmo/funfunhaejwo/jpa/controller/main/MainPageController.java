@@ -37,6 +37,7 @@ public class MainPageController {
 
     @GetMapping("/friend/{member}")
     List<Main_mainSearchVo> getMainSearch(@PathVariable("member") long member_id){
+        System.out.println("#member_id = " + member_id);
         List<Main_mainSearchVo> list = mainservice.getMainSearchList(member_id);
         return list;
     }

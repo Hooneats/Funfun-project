@@ -4,6 +4,7 @@ import com.kosmo.funfunhaejwo.jpa.controller.product.ProductListVo;
 import com.kosmo.funfunhaejwo.jpa.domain.Product;
 import com.kosmo.funfunhaejwo.jpa.domain.ProductImg;
 import com.kosmo.funfunhaejwo.jpa.domain.semi.ImgCode;
+import com.kosmo.funfunhaejwo.jpa.fileset.FilePath;
 import com.kosmo.funfunhaejwo.jpa.repository.ProductSearchRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,8 +38,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -62,8 +63,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -87,8 +88,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -112,8 +113,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -137,8 +138,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -162,8 +163,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -187,8 +188,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -212,8 +213,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -237,8 +238,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -262,8 +263,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -287,8 +288,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -312,8 +313,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -337,8 +338,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -362,8 +363,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -387,8 +388,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -412,8 +413,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -437,8 +438,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -462,8 +463,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -487,8 +488,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);
@@ -512,8 +513,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     .brand(product.getProduct_brand())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
-                if (productImg.getImg_code().name().equals(ImgCode.SUB.name())) {
-                    productVo.setSrc(productImg.getFile_info().getFile_src());
+                if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
+                    productVo.setSrc(FilePath.BASIC_FILE_PATH +productImg.getFile_info().getFile_src());
                 }
             }
             productListVo.add(productVo);

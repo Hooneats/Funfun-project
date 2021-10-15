@@ -21,4 +21,6 @@ public interface MemberService {
 
     Member saveAndPasswordEncode(String email, String password);
 
+
+
 }

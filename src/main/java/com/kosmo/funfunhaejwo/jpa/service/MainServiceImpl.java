@@ -72,11 +72,11 @@ public class MainServiceImpl implements MainService{
 
         List<Funding> fundingList = fundingRepo.findByMember_id(member_id);
         for(Funding item: fundingList){
+            System.out.println("item = " + item.getId());
             String pthumb = FilePath.BASIC_FILE_PATH + productImgRepo.findThumbByProduct_id(item.getProduct().getId());
             Main_mainSearchVo msv = new Main_mainSearchVo(item.getId(), item.getFunding_title(),item.getProduct().getProduct_brand(),item.getFunding_target_money(),pthumb);
             list.add(msv);
-            if(list.size()>=10)
-                break;
+            if(list.size()>=10) break;
         }
 
 

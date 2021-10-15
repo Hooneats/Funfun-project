@@ -42,7 +42,7 @@ public class FundingController {
         List<ProductImg> productImgList = new ArrayList<>();
         productImgList = productImgService.getProductImgByProduct(findFunding.getProduct());
         List<String> productImgStringList = productImgList.stream().map(productImg -> {
-            String imgUrl="http://127.0.0.1:8887";
+            String imgUrl="http://127.0.0.1:8887/";
             String imgUrlDetail=productImg.getFile_info().getFile_src();
             return imgUrl+imgUrlDetail;
 
