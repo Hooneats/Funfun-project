@@ -1,4 +1,4 @@
-package com.kosmo.funfunhaejwo.jpa.controller;
+package com.kosmo.funfunhaejwo.jpa.controller.main;
 
 import com.kosmo.funfunhaejwo.jpa.domain.FriendListTable;
 import com.kosmo.funfunhaejwo.jpa.service.MainService;
@@ -44,6 +44,7 @@ public class MainPageController {
     @GetMapping("/Deadline")
     List<Main_mainDeadlineVo> getDeadline(){
         List<Main_mainDeadlineVo> list = mainservice.getDeadlineList();
+        System.out.println("list = " + list);
         return list;
     }
 

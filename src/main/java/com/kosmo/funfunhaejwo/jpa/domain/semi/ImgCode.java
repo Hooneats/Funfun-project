@@ -4,9 +4,9 @@ import lombok.Getter;
 
 public enum ImgCode {
 
-    thumbnail,
-    main,
-    sub,
-    banner
+    THUMBNAIL,
+    MAIN,
+    SUB,
+    BANNER
 
 }

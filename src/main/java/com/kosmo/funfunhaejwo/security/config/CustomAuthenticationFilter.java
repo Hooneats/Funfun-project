@@ -43,8 +43,8 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
 
-        String access_token = JWTGenerator.create_access_JWT(user.getUsername(), request.getRequestURL().toString(), user.getAuthorities(), 1);
-        String refresh_token = JWTGenerator.create_refresh_JWT(user.getUsername(), request.getRequestURL().toString(), 2);
+        String access_token = JWTGenerator.create_access_JWT(user.getUsername(), request.getRequestURL().toString(), user.getAuthorities(), 10);
+        String refresh_token = JWTGenerator.create_refresh_JWT(user.getUsername(), request.getRequestURL().toString(), 30);
 
 
         Map<String, String> tokens = new HashMap<>();

@@ -24,6 +24,7 @@ public class Init {
     private final ProductRepo productRepo;
     private final ProductImgRepo productImgRepo;
     private final LikeRepo likeRepo;
+    private final OrderRepo orderRepo;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -34,6 +35,10 @@ public class Init {
     @PostConstruct
     void insertInitDB() {
         modifyPassword();
+        madeFunding();
+        orderRepo.deleteAll();
+        madeOrders();
+
         //profileImgRepo.deleteAll();
         //memberRepo.deleteAll();
         //productImgRepo.deleteAll();
@@ -70,6 +75,144 @@ public class Init {
             }
             memberRepo.saveAll(allMember);
         });
+        if (memberRepo.findByEmail("hooneats@naver.com").orElse(null) == null) {
+            Member hoo = Member.builder()
+                    .role(Role.ADMIN)
+                    .login_api(LoginApi.EMAIL)
+                    .email("hooneats@naver.com")
+                    .password(passwordEncoder.encode("123456789asd!"))
+                    .nic_name("후니츠")
+                    .phone_number("01077712027")
+                    .build();
+            memberRepo.save(hoo);
+        }
+    }
+    void madeFunding() {
+        Member member1 = memberRepo.findById(1L).orElse(null);
+        Member member2 = memberRepo.findById(2L).orElse(null);
+        Member member3 = memberRepo.findById(3L).orElse(null);
+        Product product1 = productRepo.findById(1L).orElse(null);
+        Product product2 = productRepo.findById(2L).orElse(null);
+        Product product3 = productRepo.findById(3L).orElse(null);
+        Funding funding1 = Funding.builder()
+                .id(1L)
+                .member(member1)
+                .product(product1)
+                .funding_title("난 돈도좋아")
+                .funding_type(FundingType.FUNDING)
+                .funding_people_count(0)
+                .funding_target_money(30000L)
+                .funding_collected_money(0L)
+                .funding_create_time(LocalDateTime.now())
+                .funding_expired_time(LocalDateTime.of(2021, 10, 20, 00, 00))
+                .build();
+        Funding funding2 = Funding.builder()
+                .id(2L)
+                .member(member2)
+                .product(product2)
+                .funding_title("천원씩만 내주라")
+                .funding_type(FundingType.FUNDING)
+                .funding_people_count(0)
+                .funding_target_money(20000L)
+                .funding_collected_money(0L)
+                .funding_create_time(LocalDateTime.now())
+                .funding_expired_time(LocalDateTime.of(2021, 10, 21, 00, 00))
+                .build();
+        Funding funding3 = Funding.builder()
+                .id(3L)
+                .member(member3)
+                .product(product3)
+                .funding_title("요즘 목이안좋아서")
+                .funding_type(FundingType.FUNDING)
+                .funding_people_count(0)
+                .funding_target_money(50000L)
+                .funding_collected_money(0L)
+                .funding_create_time(LocalDateTime.now())
+                .funding_expired_time(LocalDateTime.of(2021, 10, 22, 00, 00))
+                .build();
+        fundingRepo.save(funding1);
+        fundingRepo.save(funding2);
+        fundingRepo.save(funding3);
+        Member hoo = memberRepo.findByEmail("hooneats@naver.com").orElse(null);
+        Funding funding4 = Funding.builder()
+                .id(4L)
+                .member(hoo)
+                .product(product3)
+                .funding_title("가즈아~!")
+                .funding_type(FundingType.FUNDING)
+                .funding_people_count(0)
+                .funding_target_money(50000L)
+                .funding_collected_money(0L)
+                .funding_create_time(LocalDateTime.now())
+                .funding_expired_time(LocalDateTime.of(2021, 11, 18, 00, 00))
+                .build();
+        Funding funding5 = Funding.builder()
+                .id(5L)
+                .member(hoo)
+                .product(product2)
+                .funding_title("선물줘")
+                .funding_type(FundingType.FUNDING)
+                .funding_people_count(0)
+                .funding_target_money(50000L)
+                .funding_collected_money(0L)
+                .funding_create_time(LocalDateTime.now())
+                .funding_expired_time(LocalDateTime.of(2021, 11, 20, 00, 00))
+                .build();
+        Funding funding6 = Funding.builder()
+                .id(6L)
+                .member(hoo)
+                .product(product1)
+                .funding_title("이거하나만")
+                .funding_type(FundingType.FUNDING)
+                .funding_people_count(0)
+                .funding_target_money(50000L)
+                .funding_collected_money(0L)
+                .funding_create_time(LocalDateTime.now())
+                .funding_expired_time(LocalDateTime.of(2021, 11, 19, 00, 00))
+                .build();
+        fundingRepo.save(funding4);
+        fundingRepo.save(funding5);
+        fundingRepo.save(funding6);
+    }
+    void madeOrders() {
+        Member hoo = memberRepo.findByEmail("hooneats@naver.com").orElse(null);
+        Product product1 = productRepo.findById(1L).orElse(null);
+        Product product2 = productRepo.findById(2L).orElse(null);
+        Product product3 = productRepo.findById(3L).orElse(null);
+        Funding funding1 = fundingRepo.findById(1L).orElse(null);
+        Funding funding5 = fundingRepo.findById(5L).orElse(null);
+        Funding funding6 = fundingRepo.findById(6L).orElse(null);
+
+        Order build1 = Order.builder()
+                .id(4L)
+                .member(hoo)
+                .funding(funding1)
+                .product(product1)
+                .total_payment(50000L)
+                .orderDate(LocalDateTime.now())
+                .orderStatus(OrderStatus.SUCCESS)
+                .build();
+        Order build2 = Order.builder()
+                .id(5L)
+                .member(hoo)
+                .funding(funding6)
+                .product(product2)
+                .total_payment(50000L)
+                .orderDate(LocalDateTime.now())
+                .orderStatus(OrderStatus.SUCCESS)
+                .build();
+        Order build3 = Order.builder()
+                .id(6L)
+                .member(hoo)
+                .funding(funding5)
+                .product(product3)
+                .total_payment(50000L)
+                .orderDate(LocalDateTime.now())
+                .orderStatus(OrderStatus.SUCCESS)
+                .build();
+        orderRepo.save(build1);
+        orderRepo.save(build2);
+        orderRepo.save(build3);
     }
 
     void insertMember() {
@@ -101,7 +244,6 @@ public class Init {
         memberList.add(member5);
         memberRepo.saveAll(memberList);
     }
-
     void insertProduct() {
         List<ProductImg> productImgList = new ArrayList<>();
         List<Category> categoryList = new ArrayList<>();

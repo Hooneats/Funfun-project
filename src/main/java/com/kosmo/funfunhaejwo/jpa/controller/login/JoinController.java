@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +30,7 @@ import java.util.Map;
 public class JoinController {
 
     private final MemberService memberService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/email/check")
     public ResponseEntity<?> joinEmailCheck(@RequestParam(required = false) String email,
@@ -76,7 +78,7 @@ public class JoinController {
         Member member = Member.builder()
                 .email(email)
                 .nic_name(nicname)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .phone_number(phone)
                 .login_api(LoginApi.EMAIL)
                 .role(Role.USER)

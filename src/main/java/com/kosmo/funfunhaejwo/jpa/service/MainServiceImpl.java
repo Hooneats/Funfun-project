@@ -57,12 +57,9 @@ public class MainServiceImpl implements MainService{
     public List<Main_FriendVo> getFriendList(long member_id, String searchName) {
         List<Main_FriendVo> list = new ArrayList<Main_FriendVo>();
 
-//        List<FriendListTable> friendIdList = null;
-
-        List<Object[]> objList =  friendListTableRepo.friendSearch(member_id,searchName);
-        for(Object[] item: objList){
-            Main_FriendVo main_fv = new Main_FriendVo(FilePath.BASIC_FILE_PATH+(String)item[0],(String)item[1],Long.parseLong(String.valueOf(item[2])));
-            list.add(main_fv);
+        List<Object[]> objList =  friendListTableRepo.Search(searchName);
+        for (Object[] item : objList) {
+            list.add(new Main_FriendVo(FilePath.BASIC_FILE_PATH+(String) item[0],(String) item[1],(String) item[2],Long.parseLong(String.valueOf(item[3]))));
         }
 
         return list;
@@ -71,6 +68,7 @@ public class MainServiceImpl implements MainService{
     @Override
     public List<Main_mainSearchVo> getMainSearchList(long member_id) {
         List<Main_mainSearchVo> list = new ArrayList<>();
+
 
         List<Funding> fundingList = fundingRepo.findByMember_id(member_id);
         for(Funding item: fundingList){

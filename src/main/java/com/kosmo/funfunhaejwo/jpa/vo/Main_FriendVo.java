@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class Main_FriendVo {
     private String profileImg;
     private String username;
-    private long friendId;
+    private String email;
+    private long memberid;
 }
