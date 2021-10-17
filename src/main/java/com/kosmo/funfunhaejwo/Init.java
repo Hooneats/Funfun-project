@@ -38,6 +38,8 @@ public class Init {
         madeFunding();
         orderRepo.deleteAll();
         madeOrders();
+        likeRepo.deleteAll();
+
 
         //profileImgRepo.deleteAll();
         //memberRepo.deleteAll();
@@ -352,7 +354,7 @@ public class Init {
     }
     void insertLike(){
         List<Like> likeList = new ArrayList<>();
-//        Like like1 = Like.builder().member_id(memberList.get(1).getId()).product_id(productList.get(1).getId()).build();
+//        Like like1 = Like.builder().member_id.(memberList.get(1).getId()).product_id(productList.get(1).getId()).build();
         Like like1 = Like.builder().member(memberList.get(0)).product(productList.get(0)).build();
         Like like2 = Like.builder().member(memberList.get(0)).product(productList.get(2)).build();
         Like like3 = Like.builder().member(memberList.get(0)).product(productList.get(5)).build();
@@ -369,5 +371,4 @@ public class Init {
 
         likeRepo.saveAll(likeList);
     }
-
 }
