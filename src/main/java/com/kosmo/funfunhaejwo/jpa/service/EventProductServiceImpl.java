@@ -1,13 +1,14 @@
 package com.kosmo.funfunhaejwo.jpa.service;
 
 import com.kosmo.funfunhaejwo.jpa.controller.product.ProductListVo;
+import com.kosmo.funfunhaejwo.jpa.domain.Event;
 import com.kosmo.funfunhaejwo.jpa.domain.Product;
 import com.kosmo.funfunhaejwo.jpa.domain.ProductImg;
 import com.kosmo.funfunhaejwo.jpa.domain.semi.ImgCode;
 import com.kosmo.funfunhaejwo.jpa.fileset.FilePath;
-import com.kosmo.funfunhaejwo.jpa.repository.OrderListRepo;
+import com.kosmo.funfunhaejwo.jpa.repository.EventRepo;
+import com.kosmo.funfunhaejwo.jpa.repository.ProductRepo;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,16 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 @Transactional
-public class OrderListServiceImpl implements OrderListService{
-    private final OrderListRepo orderListRepo;
+public class EventProductServiceImpl implements EventProductService{
+    private final ProductRepo productRepo;
+    private final EventRepo eventRepo;
 
     @Override
-    public List<ProductListVo> getOrderList(Long member_id) {
+    public List<ProductListVo> getByEvent(long event_id) {
         List<ProductListVo> productListVo = new ArrayList<>();
-        List<Product> productList = orderListRepo.findByOrder(member_id);
+        Event event = eventRepo.findById(event_id).orElseThrow(() -> new IllegalArgumentException("이벤트 아이디를 확인해 주세요"));
+        List<Product> productList = productRepo.findByEvent(event);
         for (Product product : productList) {
             ProductListVo productVo = ProductListVo
                     .builder()
@@ -35,6 +37,7 @@ public class OrderListServiceImpl implements OrderListService{
                     .price(product.getProduct_price())
                     .fundingCount(product.getFunding_count())
                     .brand(product.getProduct_brand())
+                    .categoryId(product.getCategory().getId())
                     .build();
             for (ProductImg productImg : product.getProductImgs()) {
                 if (productImg.getImg_code().name().equals(ImgCode.sub.name())) {
