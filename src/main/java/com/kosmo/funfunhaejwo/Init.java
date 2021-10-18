@@ -102,9 +102,9 @@ public class Init {
                 .funding_type(FundingType.FUNDING)
                 .funding_people_count(0)
                 .funding_target_money(30000L)
-                .funding_collected_money(0L)
+                .funding_collected_money(10000L)
                 .funding_create_time(LocalDateTime.now())
-                .funding_expired_time(LocalDateTime.of(2021, 10, 20, 00, 00))
+                .funding_expired_time(LocalDateTime.of(2021, 10, 27, 00, 00))
                 .build();
         Funding funding2 = Funding.builder()
                 .id(2L)
@@ -114,9 +114,9 @@ public class Init {
                 .funding_type(FundingType.FUNDING)
                 .funding_people_count(0)
                 .funding_target_money(20000L)
-                .funding_collected_money(0L)
+                .funding_collected_money(18000L)
                 .funding_create_time(LocalDateTime.now())
-                .funding_expired_time(LocalDateTime.of(2021, 10, 21, 00, 00))
+                .funding_expired_time(LocalDateTime.of(2021, 10, 26, 00, 00))
                 .build();
         Funding funding3 = Funding.builder()
                 .id(3L)
@@ -126,9 +126,9 @@ public class Init {
                 .funding_type(FundingType.FUNDING)
                 .funding_people_count(0)
                 .funding_target_money(50000L)
-                .funding_collected_money(0L)
+                .funding_collected_money(30000L)
                 .funding_create_time(LocalDateTime.now())
-                .funding_expired_time(LocalDateTime.of(2021, 10, 22, 00, 00))
+                .funding_expired_time(LocalDateTime.of(2021, 10, 25, 00, 00))
                 .build();
         fundingRepo.save(funding1);
         fundingRepo.save(funding2);
@@ -142,7 +142,7 @@ public class Init {
                 .funding_type(FundingType.FUNDING)
                 .funding_people_count(0)
                 .funding_target_money(50000L)
-                .funding_collected_money(0L)
+                .funding_collected_money(15000L)
                 .funding_create_time(LocalDateTime.now())
                 .funding_expired_time(LocalDateTime.of(2021, 11, 18, 00, 00))
                 .build();
@@ -153,8 +153,8 @@ public class Init {
                 .funding_title("선물줘")
                 .funding_type(FundingType.FUNDING)
                 .funding_people_count(0)
-                .funding_target_money(50000L)
-                .funding_collected_money(0L)
+                .funding_target_money(25000L)
+                .funding_collected_money(3000L)
                 .funding_create_time(LocalDateTime.now())
                 .funding_expired_time(LocalDateTime.of(2021, 11, 20, 00, 00))
                 .build();
@@ -165,8 +165,8 @@ public class Init {
                 .funding_title("이거하나만")
                 .funding_type(FundingType.FUNDING)
                 .funding_people_count(0)
-                .funding_target_money(50000L)
-                .funding_collected_money(0L)
+                .funding_target_money(30000L)
+                .funding_collected_money(10000L)
                 .funding_create_time(LocalDateTime.now())
                 .funding_expired_time(LocalDateTime.of(2021, 11, 19, 00, 00))
                 .build();
