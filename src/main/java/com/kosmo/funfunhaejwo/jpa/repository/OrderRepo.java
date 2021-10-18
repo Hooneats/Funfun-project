@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface OrderRepo extends JpaRepository<Order, Long> {
     List<Order> findByMember_id(long member_id);
+
+    Order findByMerchantUid(String merchant_uid);
 }
