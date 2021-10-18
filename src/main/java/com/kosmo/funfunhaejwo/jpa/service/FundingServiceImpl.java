@@ -25,14 +25,6 @@ public class FundingServiceImpl implements FundingService{
     public Funding createFunding(Funding funding){
         log.info("Create Funding, Funding title is {}",funding.getFunding_title());
 
-        /*Funding funding1 = new Funding();
-        funding1.setId(funding.getId());
-        funding1.setFunding_title(funding.getFunding_title());
-
-        funding1 = fundingRepo.save(funding);
-
-        funding.setId(funding1.getId());
-        funding.setFunding_title(funding1.getFunding_title());*/
 
         return fundingRepo.save(funding);
     }

@@ -83,9 +83,6 @@ class ProductDetailController {
         log.info("# LikeCount from front2: {}", product_id);
 
         productDetailService.likeCountUp(product_id,member_id,likeUp);
-        if(likeUp == false){
-
-        }
 
         return new ResponseEntity<> (HttpStatus.OK);
     }

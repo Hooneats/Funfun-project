@@ -100,25 +100,5 @@ public class FundingController {
 
 
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-class ReturnFundingInfo{
-    private Long funding_id;
-    private String funding_title;
-    private LocalDateTime funding_create_time;
-    private LocalDateTime funding_expired_time;
-    private Long member_id;
-    private Long product_id;
-    private Long funding_target_money;
-    private List<String> fundingImg;
-    private int funding_people_count;
-    private Long funding_collected_money;
-    private String funding_product_brand;
-    private Long funding_beetweenTime;
-    private Boolean funding_isStart;
-    private Long funding_beforeStartDays;
 
-}
 

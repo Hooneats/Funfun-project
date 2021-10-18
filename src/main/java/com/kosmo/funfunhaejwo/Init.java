@@ -34,7 +34,7 @@ public class Init {
 
     @PostConstruct
     void insertInitDB() {
-        modifyPassword();
+//        modifyPassword();
         madeFunding();
         orderRepo.deleteAll();
         madeOrders();
@@ -196,7 +196,7 @@ public class Init {
                 .id(5L)
                 .member(hoo)
                 .funding(funding6)
-                .product(product2)
+                .product(product1)
                 .total_payment(50000L)
                 .orderDate(LocalDateTime.now())
                 .orderStatus(OrderStatus.SUCCESS)
@@ -205,7 +205,7 @@ public class Init {
                 .id(6L)
                 .member(hoo)
                 .funding(funding5)
-                .product(product3)
+                .product(product2)
                 .total_payment(50000L)
                 .orderDate(LocalDateTime.now())
                 .orderStatus(OrderStatus.SUCCESS)
