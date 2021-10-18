@@ -37,7 +37,6 @@ public class ProductDetailServiceImpl implements ProductDetailService{
         Product product = productRepo.findById(product_id).orElseThrow(() -> new IllegalArgumentException("찾으시는 상품이 없습니다."));
         product.likeControl(select);
 
-
         Like likeBuild = Like.builder().product(product)
                 .member(member)
                 .build();

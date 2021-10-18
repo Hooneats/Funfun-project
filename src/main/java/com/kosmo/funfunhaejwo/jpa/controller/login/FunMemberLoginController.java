@@ -6,6 +6,7 @@ import com.kosmo.funfunhaejwo.jpa.domain.ProfileImg;
 import com.kosmo.funfunhaejwo.jpa.exception.EmailNullInputException;
 import com.kosmo.funfunhaejwo.jpa.exception.ProfileNotFoundException;
 import com.kosmo.funfunhaejwo.jpa.exception.ReturnExceptionResponse;
+import com.kosmo.funfunhaejwo.jpa.fileset.FilePath;
 import com.kosmo.funfunhaejwo.jpa.service.MemberService;
 import com.kosmo.funfunhaejwo.jpa.service.ProfileService;
 import lombok.RequiredArgsConstructor;
@@ -71,7 +72,7 @@ public class FunMemberLoginController {
                 .nic_name(findMember.getNic_name())
                 .login_api(findMember.getLogin_api().getKey())
                 .role(findMember.getRole().getKey())
-                .profileImg(findProfile.getFile_info().getFile_src())
+                .profileImg(FilePath.BASIC_FILE_PATH +findProfile.getFile_info().getFile_src())
                 .build();
 
         log.info(returnMemberInfo.toString());

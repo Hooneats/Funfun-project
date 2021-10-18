@@ -1,5 +1,6 @@
 package com.kosmo.funfunhaejwo.jpa.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kosmo.funfunhaejwo.jpa.domain.semi.BaseTime;
 import lombok.*;
 

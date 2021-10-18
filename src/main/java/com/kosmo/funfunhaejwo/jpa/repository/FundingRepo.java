@@ -26,8 +26,16 @@ public interface FundingRepo extends JpaRepository<Funding, Long> {
                        "f.funding_expired_time between :fromDate and :toDate) " +
                  "where rownum<=10"
     ,nativeQuery = true)
+
     List<Object[]> findDeadline(LocalDateTime fromDate, LocalDateTime toDate);
 
 
     Optional<Funding> findFundingById(Long funding_id);
+
+    List<Funding> findFundingByMember(Long member_id);
+
+
+
+
+
 }
