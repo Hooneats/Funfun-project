@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 @Component
 @RequiredArgsConstructor
 public class Init {
@@ -35,20 +36,15 @@ public class Init {
     @PostConstruct
     void insertInitDB() {
 //        modifyPassword();
-        madeFunding();
-        orderRepo.deleteAll();
-        madeOrders();
-        likeRepo.deleteAll();
 
-
-        //profileImgRepo.deleteAll();
-        //memberRepo.deleteAll();
-        //productImgRepo.deleteAll();
-        //productRepo.deleteAll();
-        //categoryRepo.deleteAll();
-
-
+//        orderRepo.deleteAll();
 //        likeRepo.deleteAll();
+//        profileImgRepo.deleteAll();
+//        memberRepo.deleteAll();
+//        productImgRepo.deleteAll();
+//        productRepo.deleteAll();
+//        categoryRepo.deleteAll();
+        likeRepo.deleteAll();
 //        profileImgRepo.deleteAll();
 //        memberRepo.deleteAll();
 //        productImgRepo.deleteAll();
@@ -58,16 +54,16 @@ public class Init {
 //
 //
 //
+
+
 //        insertMember();
-//        insertProduct();
-//        insertFunding();
-//        insertLike();
-        //insertMember();
-        //insertProduct();
+        madeProductLike();
+        madeFunding();
+        madeOrders();
+//        completedFunding();
 
     }
 
-    @Transactional(readOnly = false)
     void modifyPassword() {
         List<Member> allMember = memberRepo.findAll();
         allMember.forEach(res -> {
@@ -216,34 +212,80 @@ public class Init {
         orderRepo.save(build2);
         orderRepo.save(build3);
     }
+    void madeProductLike() {
+        List<Product> productList = new ArrayList<>();
+        List<Like> likeList = new ArrayList<>();
+        Member hooneats = memberRepo.findById(25L).orElse(null);
+        for (long i = 1L; i < 11L; i++) {
+            Product product = productRepo.findById(i).orElse(null);
+            product.likeControl(true);
+            Like buildLike = Like.builder()
+                    .product(product)
+                    .member(hooneats)
+                    .build();
+            System.out.println("product_like_count = " + product.getProduct_like_count());
+            likeList.add(buildLike);
+            productList.add(product);
+        }
+        likeRepo.saveAll(likeList);
+        productRepo.saveAll(productList);
+        System.out.println("likeList = " + likeList);
+        System.out.println("productList = " + productList);
+    }
+
+    // 펀딩 완료된 펀딩은 버튼이 보일것이다.
+    void completedFunding() {
+        Product product = productRepo.findById(1L).orElse(null);
+        Member member = memberRepo.findById(25L).orElse(null);
+        Funding buildFunding1 = Funding.builder()
+                .funding_expired_time(LocalDateTime.of(2021, 10, 17, 00, 00))
+                .funding_target_money(50000L)
+                .funding_title("여러분 완료되었어요1!!!")
+                .funding_create_time(LocalDateTime.of(2021, 10, 5, 00, 00))
+                .funding_people_count(50)
+                .funding_collected_money(45000L)
+                .funding_type(FundingType.FUNDING)
+                .product(product)
+                .member(member)
+                .build();
+        Funding buildFunding2 = Funding.builder()
+                .funding_expired_time(LocalDateTime.of(2021, 10, 17, 00, 00))
+                .funding_target_money(50000L)
+                .funding_title("여러분 완료되었어요2!!!")
+                .funding_create_time(LocalDateTime.of(2021, 10, 5, 00, 00))
+                .funding_people_count(50)
+                .funding_collected_money(50000L)
+                .funding_type(FundingType.FUNDING)
+                .product(product)
+                .member(member)
+                .build();
+        Funding buildFunding3 = Funding.builder()
+                .funding_expired_time(LocalDateTime.of(2021, 10, 17, 00, 00))
+                .funding_target_money(50000L)
+                .funding_title("여러분 완료되었어요3!!!")
+                .funding_create_time(LocalDateTime.of(2021, 10, 5, 00, 00))
+                .funding_people_count(50)
+                .funding_collected_money(80000L)
+                .funding_type(FundingType.FUNDING)
+                .product(product)
+                .member(member)
+                .build();
+        fundingRepo.save(buildFunding1);
+        fundingRepo.save(buildFunding2);
+        fundingRepo.save(buildFunding3);
+    }
 
     void insertMember() {
 //        List<Member> memberList = new ArrayList<>();
         List<ProfileImg> profileImgList = new ArrayList<>();
 
-        ProfileImg build1 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\1.jpg", null)).build();
-        ProfileImg build2 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\2.jpg", null)).build();
-        ProfileImg build3 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\3.jpg", null)).build();
-        ProfileImg build4 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\4.jpg", null)).build();
-        ProfileImg build5 = ProfileImg.builder().file_info(new File_info("C:\\Users\\MyDev\\Desktop\\KosMo\\final\\funfunhaejwo\\img\\5.jpg", null)).build();
-        Member member5 = Member.builder().email("kmh5@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토5").login_api(LoginApi.EMAIL).role(Role.USER).phone_number("01077712027").build();
-        Member member4 = Member.builder().email("kmh4@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토4").login_api(LoginApi.EMAIL).role(Role.USER).phone_number("01077712027").build();
-        Member member3 = Member.builder().email("kmh3@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토3").login_api(LoginApi.EMAIL).role(Role.USER).phone_number("01077712027").build();
-        Member member2 = Member.builder().email("kmh2@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토2").login_api(LoginApi.EMAIL).role(Role.USER).phone_number("01077712027").build();
-        Member member1 = Member.builder().email("kmh1@naver.com").password(passwordEncoder.encode("1234")).nic_name("나루토1").login_api(LoginApi.EMAIL).role(Role.ADMIN).phone_number("01077712027").build();
+        ProfileImg build1 = ProfileImg.builder().file_info(new File_info("profile/profile.jpg", "profile.jpg")).build();
+        Member member1 = Member.builder().email("hooneats@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("후니츠").login_api(LoginApi.EMAIL).role(Role.ADMIN).phone_number("01077712027").build();
 
         profileImgList.add(build1);
-        profileImgList.add(build2);
-        profileImgList.add(build3);
-        profileImgList.add(build4);
-        profileImgList.add(build5);
         profileImgRepo.saveAll(profileImgList);
 
         memberList.add(member1);
-        memberList.add(member2);
-        memberList.add(member3);
-        memberList.add(member4);
-        memberList.add(member5);
         memberRepo.saveAll(memberList);
     }
 //    void insertProduct() {

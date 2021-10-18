@@ -138,6 +138,7 @@ public class MainServiceImpl implements MainService{
             String preFundingImgUrl = FilePath.BASIC_FILE_PATH + productImgRepo.findThumbByProduct_id(f.getProduct().getId());
             String fundingTitle = f.getFunding_title();
             int progressBarPercent = (int)((double)f.getFunding_collected_money()/(double)f.getFunding_target_money() * 100.0);
+            System.out.println("###progressBarPercent = " + progressBarPercent);
             String fundingname = f.getMember().getNic_name();
             long fundingMoney = f.getFunding_collected_money();
             long fundingId = f.getId();

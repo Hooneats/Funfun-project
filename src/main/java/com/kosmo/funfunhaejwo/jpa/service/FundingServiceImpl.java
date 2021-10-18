@@ -37,6 +37,7 @@ public class FundingServiceImpl implements FundingService{
     public Long fundingSave(BringFundingFromClient funding) {
         Member findMember = memberRepo.findById(funding.getMember_id()).orElseThrow(() -> new UsernameNotFoundException("회원을 찾을 수 없습니다."));
         Product findProduct = productRepo.findById(funding.getProduct_id()).orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
+        findProduct.fundingControl(true);
         FundingType fundingType = null;
         if (funding.getFunding_type().equals("BUY")) {
             fundingType = FundingType.BUY;

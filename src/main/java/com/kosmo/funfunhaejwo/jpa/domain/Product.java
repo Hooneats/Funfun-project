@@ -60,4 +60,14 @@ public class Product extends BaseTime {
         return this;
     }
 
+    public Product fundingControl(Boolean select) {
+        if (select) {
+            this.funding_count++;
+        } else {
+            this.funding_count--;
+        }
+        return this;
+    }
+
+
 }
