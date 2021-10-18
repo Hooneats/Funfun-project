@@ -1,6 +1,7 @@
 package com.kosmo.funfunhaejwo.jpa.repository;
 
 import com.kosmo.funfunhaejwo.jpa.domain.Category;
+import com.kosmo.funfunhaejwo.jpa.domain.Event;
 import com.kosmo.funfunhaejwo.jpa.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -72,5 +73,8 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
     @Query("select p from Product p where p.category=:category and p.product_price>100000 order by p.product_price asc")
     List<Product> findByLow4(Category category);
+
+    @Query("select p from Product p where p.event=:event order by p.product_price asc")
+    List<Product> findByEvent(Event event);
 
 }
