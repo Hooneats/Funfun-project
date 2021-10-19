@@ -208,6 +208,22 @@ public class Init {
         fundingList.add(funding38);
         fundingList.add(funding39);
 
+
+        //완료된 펀딩
+        Funding funding40 = Funding.builder().id(40L).funding_collected_money(55000L).funding_target_money(productList.get(170).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,18,00,00)).funding_title("인생 뭐 있어?! 질뤄줘어~!").funding_type(FundingType.SUPPORT).funding_people_count(15).member(memberList.get(3)).product(productList.get(170)).build();
+        Funding funding41 = Funding.builder().id(41L).funding_collected_money(54000L).funding_target_money(productList.get(171).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,18,00,00)).funding_title("가즈아! 내품에~").funding_type(FundingType.SUPPORT).funding_people_count(12).member(memberList.get(3)).product(productList.get(171)).build();
+        Funding funding42 = Funding.builder().id(42L).funding_collected_money(53000L).funding_target_money(productList.get(172).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,18,00,00)).funding_title("사조사조사조사조사조참치").funding_type(FundingType.SUPPORT).funding_people_count(55).member(memberList.get(3)).product(productList.get(172)).build();
+        Funding funding43 = Funding.builder().id(43L).funding_collected_money(2000L).funding_target_money(productList.get(173).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,18,00,00)).funding_title("4조4조4조4조4조4조").funding_type(FundingType.SUPPORT).funding_people_count(2).member(memberList.get(3)).product(productList.get(173)).build();
+        Funding funding44 = Funding.builder().id(44L).funding_collected_money(4000L).funding_target_money(productList.get(174).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,18,00,00)).funding_title("ㅋㅋㅋㅋ알지?고마워~").funding_type(FundingType.SUPPORT).funding_people_count(1).member(memberList.get(3)).product(productList.get(174)).build();
+        Funding funding45 = Funding.builder().id(45L).funding_collected_money(55000L).funding_target_money(productList.get(175).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,18,00,00)).funding_title("사주면 불닭볶음면").funding_type(FundingType.SUPPORT).funding_people_count(1).member(memberList.get(3)).product(productList.get(175)).build();
+
+        fundingList.add(funding40);
+        fundingList.add(funding41);
+        fundingList.add(funding42);
+        fundingList.add(funding43);
+        fundingList.add(funding44);
+        fundingList.add(funding45);
+
         fundingRepo.saveAll(fundingList);
     }
     void insertOrder() {
