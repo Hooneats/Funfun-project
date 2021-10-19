@@ -1,9 +1,13 @@
 package com.kosmo.funfunhaejwo.jpa.service;
 
 import com.kosmo.funfunhaejwo.jpa.controller.login.vo.ReturnLoginMemberEditInfo;
+import com.kosmo.funfunhaejwo.jpa.controller.login.vo.ReturnLoginMemberInfo;
 import com.kosmo.funfunhaejwo.jpa.domain.Member;
+import com.kosmo.funfunhaejwo.jpa.domain.ProfileImg;
 import com.kosmo.funfunhaejwo.jpa.domain.semi.Address;
+import com.kosmo.funfunhaejwo.jpa.fileset.FilePath;
 import com.kosmo.funfunhaejwo.jpa.repository.MemberRepo;
+import com.kosmo.funfunhaejwo.jpa.repository.ProfileImgRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +27,7 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepo memberRepo;
     private final PasswordEncoder passwordEncoder;
+    private final ProfileImgRepo profileImgRepo;
 
     @Override
     public Member saveMember(Member member) {
@@ -68,24 +73,18 @@ public class MemberServiceImpl implements MemberService {
         String address3 = "";
         String phone = "";
 
-        if (member.getAddress() == null) {
-            address1 = "주소를 입력해 주세요.";
-            address2 = "상세주소를 입력해 주세요.";
-            address3 = "우편번호를 입력해 주세요.";
-        } else {
+        if (member.getAddress() != null) {
             address1 = member.getAddress().getCity();
             address2 = member.getAddress().getStreet();
             address3 = member.getAddress().getZipcode();
         }
-        if (member.getPhone_number() == null) {
-            phone = "저장되어있는 번호가 없습니다.";
-        } else {
+        if (member.getPhone_number() != null) {
             phone = member.getPhone_number();
         }
         return ReturnLoginMemberEditInfo.builder()
                 .nic_name(member.getNic_name())
                 .email(member.getEmail())
-                .phone_number(member.getPhone_number())
+                .phone_number(phone)
                 .city(address1)
                 .street(address2)
                 .zipcode(address3)
@@ -93,10 +92,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Boolean editSave(ReturnLoginMemberEditInfo submitEditMember) {
+    public ReturnLoginMemberInfo editSave(ReturnLoginMemberEditInfo submitEditMember) {
         Member findMember = memberRepo.findById(submitEditMember.getId()).orElseThrow(() -> new IllegalArgumentException("찾으시는 회원이 없습니다."));
         String phone = "";
         Address address = new Address();
+        findMember.settingNic_name(submitEditMember.getNic_name());
         if (submitEditMember.getPhone_number() != null) {
             phone = submitEditMember.getPhone_number();
             findMember.setPhoneSave(phone);
@@ -107,8 +107,17 @@ public class MemberServiceImpl implements MemberService {
             address.setZipcode(submitEditMember.getZipcode());
             findMember.setAddressSave(address);
         }
-        memberRepo.save(findMember);
-        return true;
+        Member savedMember = memberRepo.save(findMember);
+        ProfileImg profileImg = profileImgRepo.findByMember(savedMember).orElse(null);
+        ReturnLoginMemberInfo returnSavedMemberInfo = ReturnLoginMemberInfo.builder()
+                .id(savedMember.getId())
+                .login_api(savedMember.getLogin_api().getKey())
+                .email(savedMember.getEmail())
+                .nic_name(savedMember.getNic_name())
+                .profileImg(FilePath.BASIC_FILE_PATH + profileImg.getFile_info().getFile_src())
+                .role(savedMember.getRole().getKey())
+                .build();
+        return returnSavedMemberInfo;
     }
 
     @Override

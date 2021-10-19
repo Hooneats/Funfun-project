@@ -1,6 +1,7 @@
 package com.kosmo.funfunhaejwo.jpa.controller.login.information;
 
 import com.kosmo.funfunhaejwo.jpa.controller.login.vo.ReturnLoginMemberEditInfo;
+import com.kosmo.funfunhaejwo.jpa.controller.login.vo.ReturnLoginMemberInfo;
 import com.kosmo.funfunhaejwo.jpa.exception.EmailNullInputException;
 import com.kosmo.funfunhaejwo.jpa.exception.ReturnExceptionResponse;
 import com.kosmo.funfunhaejwo.jpa.service.MemberService;
@@ -37,8 +38,8 @@ public class UserEditController {
     }
 
     @PostMapping("/edit/save")
-    public ResponseEntity<?> editPageSave(@RequestBody ReturnLoginMemberEditInfo submitEditMember) {
-        Boolean isSaved = memberService.editSave(submitEditMember);
+    public ResponseEntity<ReturnLoginMemberInfo> editPageSave(@RequestBody ReturnLoginMemberEditInfo submitEditMember) {
+        ReturnLoginMemberInfo isSaved = memberService.editSave(submitEditMember);
         return ResponseEntity.ok().body(isSaved);
     }
 }

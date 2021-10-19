@@ -107,7 +107,11 @@ public class MainServiceImpl implements MainService{
 //        }
         System.out.println("#시간: fromDate,toDate -> "+fromDate+" , "+toDate);
         List<Object[]> deadlineFundingList = fundingRepo.findDeadline(fromDate,toDate);
+        int i = 0;
         for(Object[] item: deadlineFundingList){
+            if (i == 6) {
+                break;
+            }
             String preFundingImgUrl = FilePath.BASIC_FILE_PATH + productImgRepo.findThumbByProduct_id(Long.parseLong(String.valueOf(item[1])));
             String fundingTitle = String.valueOf(item[2]);
             long cMoney = Long.parseLong(String.valueOf(item[4]));
@@ -122,7 +126,7 @@ public class MainServiceImpl implements MainService{
 //            LocalDateTime expireDate = LocalDateTime.parse(String.valueOf(item[3]),dtf);
             LocalDateTime expireDate = ((Timestamp)item[3]).toLocalDateTime();
             Main_mainDeadlineVo mdv = new Main_mainDeadlineVo(preFundingImgUrl,fundingTitle,progressBarPercent,fundingname,fundingMoney,fundingId,expireDate);
-
+            i++;
             list.add(mdv);
         }
 
@@ -133,7 +137,11 @@ public class MainServiceImpl implements MainService{
     public List<Main_mainJoinVo> getJoinList(long member_id) {
         List<Main_mainJoinVo> list = new ArrayList<>();
         List<Order> orderList = orderRepo.findByMember_id(member_id);
+        int i = 0;
         for(Order order: orderList){
+            if (i == 6) {
+                break;
+            }
             Funding f = order.getFunding();
             String preFundingImgUrl = FilePath.BASIC_FILE_PATH + productImgRepo.findThumbByProduct_id(f.getProduct().getId());
             String fundingTitle = f.getFunding_title();
@@ -146,6 +154,7 @@ public class MainServiceImpl implements MainService{
 
             Main_mainJoinVo mjv = new Main_mainJoinVo(preFundingImgUrl,fundingTitle,progressBarPercent,fundingname,fundingMoney,fundingId,expireDate);
 
+            i++;
             list.add(mjv);
         }
         return list;

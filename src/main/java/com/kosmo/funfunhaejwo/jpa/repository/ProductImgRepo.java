@@ -1,7 +1,9 @@
 package com.kosmo.funfunhaejwo.jpa.repository;
 
+import com.kosmo.funfunhaejwo.jpa.domain.Member;
 import com.kosmo.funfunhaejwo.jpa.domain.Product;
 import com.kosmo.funfunhaejwo.jpa.domain.ProductImg;
+import com.kosmo.funfunhaejwo.jpa.domain.ProfileImg;
 import com.kosmo.funfunhaejwo.jpa.domain.semi.ImgCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,4 +27,5 @@ public interface ProductImgRepo extends JpaRepository<ProductImg, Long> {
             "from ProductImg pi " +
             "where pi.product.id=:product_id and pi.img_code='thumbnail'")
     String findThumbByProduct_id(@Param("product_id") long product_id);
+
 }

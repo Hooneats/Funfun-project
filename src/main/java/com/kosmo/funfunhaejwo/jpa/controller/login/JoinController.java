@@ -2,11 +2,16 @@ package com.kosmo.funfunhaejwo.jpa.controller.login;
 
 import com.kosmo.funfunhaejwo.jpa.controller.login.vo.ReturnLoginMemberInfo;
 import com.kosmo.funfunhaejwo.jpa.domain.Member;
+import com.kosmo.funfunhaejwo.jpa.domain.ProfileImg;
+import com.kosmo.funfunhaejwo.jpa.domain.semi.File_info;
 import com.kosmo.funfunhaejwo.jpa.domain.semi.LoginApi;
 import com.kosmo.funfunhaejwo.jpa.domain.semi.Role;
 import com.kosmo.funfunhaejwo.jpa.exception.EmailNullInputException;
 import com.kosmo.funfunhaejwo.jpa.exception.ReturnExceptionResponse;
+import com.kosmo.funfunhaejwo.jpa.fileset.FilePath;
+import com.kosmo.funfunhaejwo.jpa.repository.ProfileImgRepo;
 import com.kosmo.funfunhaejwo.jpa.service.MemberService;
+import com.kosmo.funfunhaejwo.jpa.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -31,6 +36,7 @@ public class JoinController {
 
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final ProfileService profileService;
 
     @PostMapping("/email/check")
     public ResponseEntity<?> joinEmailCheck(@RequestParam(required = false) String email,
@@ -75,6 +81,7 @@ public class JoinController {
             }
         }
 
+
         Member member = Member.builder()
                 .email(email)
                 .nic_name(nicname)
@@ -84,7 +91,10 @@ public class JoinController {
                 .role(Role.USER)
                 .build();
 
+
         Member savedMember = new Member();
+
+
         try {
             savedMember = memberService.saveMember(member);
         } catch (DataIntegrityViolationException de) {
@@ -95,6 +105,12 @@ public class JoinController {
                 return null;
             }
         }
+        File_info file_info = new File_info("profile/profile.jpg", "profile.jpg");
+        ProfileImg buildProfileImg = ProfileImg.builder()
+                .member(savedMember)
+                .file_info(file_info)
+                .build();
+        ProfileImg savedProfileImg = profileService.saveProfile(buildProfileImg);
 
         ReturnLoginMemberInfo returnMember = ReturnLoginMemberInfo.builder()
                 .id(savedMember.getId())
@@ -102,7 +118,7 @@ public class JoinController {
                 .nic_name(savedMember.getNic_name())
                 .login_api(savedMember.getLogin_api().getKey())
                 .role(savedMember.getRole().getKey())
-                .profileImg(null)
+                .profileImg(FilePath.BASIC_FILE_PATH +savedProfileImg.getFile_info().getFile_src())
                 .build();
 
         return ResponseEntity.ok().body(returnMember);

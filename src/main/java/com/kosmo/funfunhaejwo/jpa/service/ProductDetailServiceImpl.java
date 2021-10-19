@@ -35,19 +35,17 @@ public class ProductDetailServiceImpl implements ProductDetailService{
     public void likeCountUp(Long product_id, Long member_id, Boolean select){
         Member member = memberRepo.findById(member_id).orElseThrow(() -> new IllegalArgumentException("가입되어있는 회원이 아닙니다."));
         Product product = productRepo.findById(product_id).orElseThrow(() -> new IllegalArgumentException("찾으시는 상품이 없습니다."));
+        product.likeControl(select);
         Like findLike = likeRepo.findByMemberAndProduct(member, product);
         if (findLike != null) {
+            likeRepo.deleteByMemberAndProduct(member,product);
             return;
         }
-        product.likeControl(select);
-
         Like likeBuild = Like.builder().product(product)
                 .member(member)
                 .build();
         if(select){
             likeRepo.save(likeBuild);
-        }else {
-            likeRepo.deleteByMemberAndProduct(member,product);
         }
     }
 
