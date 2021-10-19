@@ -57,7 +57,7 @@ public class Init {
 
 
 //        insertMember();
-        madeProductLike();
+//        madeProductLike();
         madeFunding();
         madeOrders();
 //        completedFunding();

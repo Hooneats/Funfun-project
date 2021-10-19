@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers(
 //                "/**",
+                "/EventProduct/**",
                 "/ProductListPage/**",
                 "/resources/**",
                 "/mainPage/**",
