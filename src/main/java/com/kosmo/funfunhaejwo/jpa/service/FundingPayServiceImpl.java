@@ -32,9 +32,10 @@ public class FundingPayServiceImpl implements FundingPayService{
     private final MemberRepo memberRepo;
 
     @Override
-    public FPay_fundingInfoVo getFuningS(long fundingId) {
+    public FPay_fundingInfoVo getFuningS(long fundingId, long memberId) {
         FPay_fundingInfoVo fundinginfo = new FPay_fundingInfoVo();
         Funding funding = fundingRepo.getById(fundingId);
+        Member member = memberRepo.getById(memberId);
         List<ProductImg> piList = funding.getProduct().getProductImgs();
         for(ProductImg item: piList) {
             String fsrc = item.getFile_info().getFile_src();
@@ -44,7 +45,7 @@ public class FundingPayServiceImpl implements FundingPayService{
         fundinginfo.setFTitle(funding.getFunding_title());
         fundinginfo.setFcMoney(funding.getFunding_collected_money());
         fundinginfo.setFtMoney(funding.getFunding_target_money());
-        fundinginfo.setBtel(funding.getMember().getPhone_number());
+        fundinginfo.setBtel(member.getPhone_number());
 
         return fundinginfo;
     }

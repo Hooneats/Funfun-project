@@ -5,7 +5,7 @@ import com.kosmo.funfunhaejwo.jpa.vo.FPay_setPayInfoVo;
 
 public interface FundingPayService {
     //결제할 펀딩 정보
-    FPay_fundingInfoVo getFuningS(long fundingId);
+    FPay_fundingInfoVo getFuningS(long fundingId, long memberId);
     //Orders에 셋팅 + merchant_uid 생성
     FPay_setPayInfoVo setPayS(long fundingId, long memberId);
     //Orders에 success update
