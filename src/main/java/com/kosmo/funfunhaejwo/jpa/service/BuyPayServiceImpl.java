@@ -98,7 +98,9 @@ public class BuyPayServiceImpl implements BuyPayService{
                     .funding_people_count(1).funding_collected_money(amount).funding_target_money(amount)
                     .funding_type(FundingType.BUY).build();
             saveFunding = fundingRepo.save(saveFunding);
-            //product funding수 +1 추가할 것
+
+            product.fundingControl(true);
+            productRepo.save(product);
 
             Order order = Order.builder().id(orderId).member(curOrder.getMember()).product(curOrder.getProduct()).funding(saveFunding)
                     .total_payment(amount).orderDate(curOrder.getOrderDate()).merchantUid(curOrder.getMerchantUid())

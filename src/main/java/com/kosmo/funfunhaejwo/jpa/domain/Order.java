@@ -43,7 +43,7 @@ public class Order {
 
     private Long total_payment;
 
-    @Column(name = "merchant_uid")
+    @Column(name = "merchant_uid",unique = true)
     private String merchantUid;
 
     @Column(name = "i_port_id", length = 50)
