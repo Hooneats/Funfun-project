@@ -11,6 +11,8 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import java.util.Optional;
+
 public interface FundingRepo extends JpaRepository<Funding, Long> {
     List<Funding> findByMember_id(@Param(value="member_id") Long member_id);
 
@@ -24,7 +26,16 @@ public interface FundingRepo extends JpaRepository<Funding, Long> {
                        "f.funding_expired_time between :fromDate and :toDate) " +
                  "where rownum<=10"
     ,nativeQuery = true)
+
     List<Object[]> findDeadline(LocalDateTime fromDate, LocalDateTime toDate);
+
+
+    Optional<Funding> findFundingById(Long funding_id);
+
+    List<Funding> findFundingByMember(Long member_id);
+
+
+
 
 
 }

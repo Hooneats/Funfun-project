@@ -28,6 +28,6 @@ public class Event {
 
     private String event_title;
 
-    @OneToMany(mappedBy = "event")
-    private List<Product> products = new ArrayList<>();
+//    @OneToMany(mappedBy = "event")
+//    private List<Product> products = new ArrayList<>();
 }

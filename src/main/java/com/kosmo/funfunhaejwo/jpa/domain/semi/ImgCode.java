@@ -4,6 +4,10 @@ import lombok.Getter;
 
 public enum ImgCode {
 
+//    THUMBNAIL,
+//    MAIN,
+//    SUB,
+//    BANNER
     thumbnail,
     main,
     sub,

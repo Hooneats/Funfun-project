@@ -1,6 +1,7 @@
-package com.kosmo.funfunhaejwo.jpa.controller;
+package com.kosmo.funfunhaejwo.jpa.controller.main;
 
 import com.kosmo.funfunhaejwo.jpa.domain.FriendListTable;
+import com.kosmo.funfunhaejwo.jpa.exception.ReturnExceptionResponse;
 import com.kosmo.funfunhaejwo.jpa.service.MainService;
 import com.kosmo.funfunhaejwo.jpa.vo.Main_FriendVo;
 import com.kosmo.funfunhaejwo.jpa.vo.Main_mainDeadlineVo;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +40,7 @@ public class MainPageController {
 
     @GetMapping("/friend/{member}")
     List<Main_mainSearchVo> getMainSearch(@PathVariable("member") long member_id){
+        System.out.println("#member_id = " + member_id);
         List<Main_mainSearchVo> list = mainservice.getMainSearchList(member_id);
         return list;
     }
@@ -44,12 +48,21 @@ public class MainPageController {
     @GetMapping("/Deadline")
     List<Main_mainDeadlineVo> getDeadline(){
         List<Main_mainDeadlineVo> list = mainservice.getDeadlineList();
+        System.out.println("list = " + list);
         return list;
     }
 
     @GetMapping("/mainJoin/{member}")
-    List<Main_mainJoinVo> getMainJoin(@PathVariable("member") long member_id){
-        List<Main_mainJoinVo> list = mainservice.getJoinList(member_id);
+    List<Main_mainJoinVo> getMainJoin(@PathVariable("member") long member_id, HttpServletResponse response) throws IOException {
+        List<Main_mainJoinVo> list = new ArrayList<>();
+        System.out.println("list = " + list);
+        try {
+            list = mainservice.getJoinList(member_id);
+            System.out.println("list = " + list);
+        } catch (NullPointerException ne) {
+            ReturnExceptionResponse.exceptionReturn(ne,response, 402);
+            return null;
+        }
         return list;
     }
 }

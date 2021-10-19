@@ -62,6 +62,21 @@ public class Member extends BaseTime {
     private List<Like> likes;
 
 
+    //인코딩된 패스워드를 넣어줘야 한다.
+    public Member setPasswordEncoded(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public Member setPhoneSave(String phone) {
+        this.phone_number = phone;
+        return this;
+    }
+
+    public Member setAddressSave(Address address) {
+        this.address = address;
+        return this;
+    }
 
     public Member setLoginApiSwitch(String login_api) {
         if (login_api != null) {

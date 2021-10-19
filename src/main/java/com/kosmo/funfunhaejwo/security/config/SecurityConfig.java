@@ -42,11 +42,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers(
-                "/**",
+//                "/**",
+                "/ProductListPage/**",
                 "/resources/**",
+                "/mainPage/**",
                 "/api/message/phone/verify",
+                "/api/message/email/send",
+                "/api/message/verify/code",
                 "/api/login/**",
-                "/api/like/update"
+                "/api/join/**",
+                "/api/find/**",
+                "/api/like/update",
+                "/detail-page/**",
+                "/product/productDetail",
+                "/funding-detail-page/**",
+                "/funding/fundingDetail"
+                //규민님 메인전부 풀어도되나요
+//                "/mainPage/**"
         ).permitAll();
 //        http.authorizeRequests().antMatchers(HttpMethod.GET, "api/member/**").hasAnyAuthority("ROLE_USER");
 //        http.authorizeRequests().antMatchers(HttpMethod.POST, "api/member/save/**").hasAnyAuthority("ROLE_ADMIN");

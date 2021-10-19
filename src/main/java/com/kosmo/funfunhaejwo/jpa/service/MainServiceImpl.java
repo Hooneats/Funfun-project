@@ -57,12 +57,9 @@ public class MainServiceImpl implements MainService{
     public List<Main_FriendVo> getFriendList(long member_id, String searchName) {
         List<Main_FriendVo> list = new ArrayList<Main_FriendVo>();
 
-//        List<FriendListTable> friendIdList = null;
-
-        List<Object[]> objList =  friendListTableRepo.friendSearch(member_id,searchName);
-        for(Object[] item: objList){
-            Main_FriendVo main_fv = new Main_FriendVo(FilePath.BASIC_FILE_PATH+(String)item[0],(String)item[1],Long.parseLong(String.valueOf(item[2])));
-            list.add(main_fv);
+        List<Object[]> objList =  friendListTableRepo.Search(searchName);
+        for (Object[] item : objList) {
+            list.add(new Main_FriendVo(FilePath.BASIC_FILE_PATH+(String) item[0],(String) item[1],(String) item[2],Long.parseLong(String.valueOf(item[3]))));
         }
 
         return list;
@@ -72,13 +69,14 @@ public class MainServiceImpl implements MainService{
     public List<Main_mainSearchVo> getMainSearchList(long member_id) {
         List<Main_mainSearchVo> list = new ArrayList<>();
 
+
         List<Funding> fundingList = fundingRepo.findByMember_id(member_id);
         for(Funding item: fundingList){
+            System.out.println("item = " + item.getId());
             String pthumb = FilePath.BASIC_FILE_PATH + productImgRepo.findThumbByProduct_id(item.getProduct().getId());
             Main_mainSearchVo msv = new Main_mainSearchVo(item.getId(), item.getFunding_title(),item.getProduct().getProduct_brand(),item.getFunding_target_money(),pthumb);
             list.add(msv);
-            if(list.size()>=10)
-                break;
+            if(list.size()>=10) break;
         }
 
 
@@ -109,7 +107,11 @@ public class MainServiceImpl implements MainService{
 //        }
         System.out.println("#시간: fromDate,toDate -> "+fromDate+" , "+toDate);
         List<Object[]> deadlineFundingList = fundingRepo.findDeadline(fromDate,toDate);
+        int i = 0;
         for(Object[] item: deadlineFundingList){
+            if (i == 6) {
+                break;
+            }
             String preFundingImgUrl = FilePath.BASIC_FILE_PATH + productImgRepo.findThumbByProduct_id(Long.parseLong(String.valueOf(item[1])));
             String fundingTitle = String.valueOf(item[2]);
             long cMoney = Long.parseLong(String.valueOf(item[4]));
@@ -124,7 +126,7 @@ public class MainServiceImpl implements MainService{
 //            LocalDateTime expireDate = LocalDateTime.parse(String.valueOf(item[3]),dtf);
             LocalDateTime expireDate = ((Timestamp)item[3]).toLocalDateTime();
             Main_mainDeadlineVo mdv = new Main_mainDeadlineVo(preFundingImgUrl,fundingTitle,progressBarPercent,fundingname,fundingMoney,fundingId,expireDate);
-
+            i++;
             list.add(mdv);
         }
 
@@ -135,11 +137,16 @@ public class MainServiceImpl implements MainService{
     public List<Main_mainJoinVo> getJoinList(long member_id) {
         List<Main_mainJoinVo> list = new ArrayList<>();
         List<Order> orderList = orderRepo.findByMember_id(member_id);
+        int i = 0;
         for(Order order: orderList){
+            if (i == 6) {
+                break;
+            }
             Funding f = order.getFunding();
             String preFundingImgUrl = FilePath.BASIC_FILE_PATH + productImgRepo.findThumbByProduct_id(f.getProduct().getId());
             String fundingTitle = f.getFunding_title();
             int progressBarPercent = (int)((double)f.getFunding_collected_money()/(double)f.getFunding_target_money() * 100.0);
+            System.out.println("###progressBarPercent = " + progressBarPercent);
             String fundingname = f.getMember().getNic_name();
             long fundingMoney = f.getFunding_collected_money();
             long fundingId = f.getId();
@@ -147,6 +154,7 @@ public class MainServiceImpl implements MainService{
 
             Main_mainJoinVo mjv = new Main_mainJoinVo(preFundingImgUrl,fundingTitle,progressBarPercent,fundingname,fundingMoney,fundingId,expireDate);
 
+            i++;
             list.add(mjv);
         }
         return list;

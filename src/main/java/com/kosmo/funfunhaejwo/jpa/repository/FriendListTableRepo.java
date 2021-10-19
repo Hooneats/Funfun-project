@@ -1,6 +1,7 @@
 package com.kosmo.funfunhaejwo.jpa.repository;
 
 import com.kosmo.funfunhaejwo.jpa.domain.FriendListTable;
+import com.kosmo.funfunhaejwo.jpa.vo.Main_FriendVo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,7 @@ public interface FriendListTableRepo extends JpaRepository<FriendListTable, Long
             "where rownum<=5"
             ,nativeQuery = true)
     List<Object[]> friendSearch(@Param("member_id") Long member_id, @Param("searchName") String searchName);
+
+    @Query("select distinct fi.file_info.file_src, m.nic_name, m.email, m.id from Member m, ProfileImg fi where m.nic_name like %:searchName%")
+    List<Object[]> Search(String searchName);
 }
