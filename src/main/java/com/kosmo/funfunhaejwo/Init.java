@@ -29,14 +29,13 @@ public class Init {
     private final LikeRepo likeRepo;
     private final OrderRepo orderRepo;
     private final FriendListTableRepo friendListTableRepo;
-
+    private final ProductPaymentRepo productPaymentRepo;
     private final PasswordEncoder passwordEncoder;
 
     private final FundingRepo fundingRepo;
 
     @PostConstruct
     void insertInitDB() {
-
         insertMember();
         insetFriend();
         insertFunding();

@@ -11,6 +11,7 @@ package com.kosmo.funfunhaejwo.jpa.controller.login;
  * 유효코드 메시지 전송에 실패 : 405
  * 일치하지 않는 인증 코드 : 406
  * 인증코드 시간이 만료된 경우 : 407
+ * 펀딩 지급이 이미 진행중인 경우 : 408
  * */
 
 

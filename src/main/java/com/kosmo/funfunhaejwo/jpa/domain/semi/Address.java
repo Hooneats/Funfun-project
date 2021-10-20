@@ -1,11 +1,13 @@
 package com.kosmo.funfunhaejwo.jpa.domain.semi;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
+@Builder
 @Embeddable
 @Data
 @AllArgsConstructor
