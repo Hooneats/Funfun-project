@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,6 +61,9 @@ public class Member extends BaseTime {
 
     @OneToMany(mappedBy = "member")
     private List<Like> likes;
+
+    @OneToMany(mappedBy = "member")
+    private List<Funding> fundingList = new ArrayList<>();
 
     public Member setPassword(String password) {
         this.password = password;

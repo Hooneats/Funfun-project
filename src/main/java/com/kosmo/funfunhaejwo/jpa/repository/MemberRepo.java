@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public interface MemberRepo extends JpaRepository<Member, Long> {
 
+
     Optional<Member> findByEmail(String email);
 
     @Query("select m from Member m where m.phone_number=:phone")
