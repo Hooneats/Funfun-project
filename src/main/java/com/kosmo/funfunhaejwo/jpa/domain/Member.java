@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +62,13 @@ public class Member extends BaseTime {
     @OneToMany(mappedBy = "member")
     private List<Like> likes;
 
+    @OneToMany(mappedBy = "member")
+    private List<Funding> fundingList = new ArrayList<>();
 
+    public Member setPassword(String password) {
+        this.password = password;
+        return this;
+    }
     //인코딩된 패스워드를 넣어줘야 한다.
     public Member setPasswordEncoded(String password) {
         this.password = password;
