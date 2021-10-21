@@ -459,4 +459,8 @@ public class Init {
 
         likeRepo.saveAll(likeList);
     }
+
+    void insertProductPayment() {
+
+    }
 }

@@ -32,10 +32,9 @@ public class MainPageController {
 //        return list;
 //    }
 
-    @GetMapping("/{member}/{searchName}")
-    List<Main_FriendVo> getFriendList(@PathVariable("member") long member_id, @PathVariable("searchName") String searchName){
-        List<Main_FriendVo> list = mainservice.getFriendList(member_id,searchName);
-
+    @GetMapping("/{searchName}")
+    List<Main_FriendVo> getFriendList(@PathVariable("searchName") String searchName){
+        List<Main_FriendVo> list = mainservice.getFriendList(searchName);
         return list;
     }
 

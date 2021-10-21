@@ -13,7 +13,7 @@ public interface MainService {
     //test
     List<FriendListTable> getTest(long member_id, String searchName);
     //멤버id,searchName->친구리스트
-    List<Main_FriendVo> getFriendList(long member_id, String searchName);
+    List<Main_FriendVo> getFriendList(String searchName);
     //멤버id(친구꺼) -> 펀딩리스트
     List<Main_mainSearchVo> getMainSearchList(long member_id);
     //void -> 마감예정인 펀딩리스트

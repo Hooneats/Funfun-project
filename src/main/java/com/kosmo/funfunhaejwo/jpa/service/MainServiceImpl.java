@@ -54,7 +54,7 @@ public class MainServiceImpl implements MainService{
     }
 
     @Override
-    public List<Main_FriendVo> getFriendList(long member_id, String searchName) {
+    public List<Main_FriendVo> getFriendList(String searchName) {
         List<Main_FriendVo> list = new ArrayList<Main_FriendVo>();
 
         List<Object[]> objList =  friendListTableRepo.Search(searchName);
