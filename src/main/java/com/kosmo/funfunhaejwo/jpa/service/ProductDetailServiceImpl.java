@@ -42,8 +42,10 @@ public class ProductDetailServiceImpl implements ProductDetailService{
                 .build();
         if(select){
             likeRepo.save(likeBuild);
+            log.info("라이크성공");
         }else {
             likeRepo.deleteByMemberAndProduct(member,product);
+            log.info("라이크실패");
         }
 
     }

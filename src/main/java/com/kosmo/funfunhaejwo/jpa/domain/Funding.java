@@ -37,6 +37,7 @@ public class Funding {
     private int funding_people_count;
     private Long funding_collected_money;
     private Long funding_target_money;
+
     @Enumerated(EnumType.STRING)
     private FundingType funding_type;
 

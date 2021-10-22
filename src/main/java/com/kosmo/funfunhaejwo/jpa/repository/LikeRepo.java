@@ -17,6 +17,8 @@ public interface LikeRepo extends JpaRepository<Like, Long> {
 
     List<Like> findByProduct(Product product);
 
+
+
     @Transactional
     Long deleteByMemberAndProduct( Member member, Product product);
 
