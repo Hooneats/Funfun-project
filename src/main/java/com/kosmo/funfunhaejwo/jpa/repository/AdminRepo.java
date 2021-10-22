@@ -18,4 +18,5 @@ public interface AdminRepo extends JpaRepository<Member, Long> {
     List<Member> findByNicname(String nic_name);
 
 
+
 }

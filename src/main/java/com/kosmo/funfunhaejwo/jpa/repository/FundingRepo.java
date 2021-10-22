@@ -1,17 +1,12 @@
 package com.kosmo.funfunhaejwo.jpa.repository;
 
 import com.kosmo.funfunhaejwo.jpa.domain.Funding;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import java.util.Optional;
 
 import java.util.Optional;
 
@@ -34,7 +29,15 @@ public interface FundingRepo extends JpaRepository<Funding, Long> {
 
     Optional<Funding> findFundingById(Long funding_id);
 
-    List<Funding> findFundingByMember(Long member_id);
+    @Query("select f.id, f.funding_title, m.email, f.funding_people_count, f.funding_create_time, f.funding_expired_time" +
+            ",pi.file_info.file_src from Funding f, Member m, ProductImg pi where m.id=f.member.id and f.product.id = pi.product.id " +
+            "and pi.img_code='thumbnail' order by f.id asc")
+    List<Object[]> findFunding();
+
+    @Query("select f.id, f.funding_title, m.email, f.funding_people_count, f.funding_create_time, f.funding_expired_time" +
+            ",pi.file_info.file_src from Funding f, Member m, ProductImg pi where m.id=f.member.id and f.product.id = pi.product.id " +
+            "and pi.img_code='thumbnail' and f.funding_title like %:funding_name% order by f.id asc")
+    List<Object[]> searchFunding(@Param("funding_name") String funding_name);
 
 
 
