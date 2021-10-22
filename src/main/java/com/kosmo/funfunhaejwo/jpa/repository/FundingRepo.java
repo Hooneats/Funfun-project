@@ -1,6 +1,7 @@
 package com.kosmo.funfunhaejwo.jpa.repository;
 
 import com.kosmo.funfunhaejwo.jpa.domain.Funding;
+import com.kosmo.funfunhaejwo.jpa.domain.semi.FundingType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -35,6 +36,8 @@ public interface FundingRepo extends JpaRepository<Funding, Long> {
     Optional<Funding> findFundingById(Long funding_id);
 
     List<Funding> findFundingByMember(Long member_id);
+
+//    List<Funding> findFundingByFunding_type(@Param(value="funding_type")String funding_type);
 
 
 

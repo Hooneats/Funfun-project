@@ -1,5 +1,6 @@
 package com.kosmo.funfunhaejwo.jpa.controller.funding;
 
+import com.kosmo.funfunhaejwo.jpa.domain.semi.ProductPaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,5 +29,7 @@ public class ReturnFundingInfo{
     private Boolean funding_isStart;
     private Long funding_beforeStartDays;
     private String member_nicname;
+    private String  funding_status;
+    private int delivery_num;
 
 }
