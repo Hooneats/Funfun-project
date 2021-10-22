@@ -3,6 +3,7 @@ package com.kosmo.funfunhaejwo.jpa.controller.login;
 import com.kosmo.funfunhaejwo.jpa.controller.login.vo.ReturnLoginMemberInfo;
 import com.kosmo.funfunhaejwo.jpa.domain.Member;
 import com.kosmo.funfunhaejwo.jpa.domain.ProfileImg;
+import com.kosmo.funfunhaejwo.jpa.domain.semi.LoginApi;
 import com.kosmo.funfunhaejwo.jpa.exception.EmailNullInputException;
 import com.kosmo.funfunhaejwo.jpa.exception.ProfileNotFoundException;
 import com.kosmo.funfunhaejwo.jpa.exception.ReturnExceptionResponse;
@@ -67,12 +68,19 @@ public class FunMemberLoginController {
             return ResponseEntity.ok().body(returnMemberInfo);
         }
 
+        String src = "";
+        if (findMember.getLogin_api() == LoginApi.EMAIL) {
+            src = FilePath.BASIC_FILE_PATH + findProfile.getFile_info().getFile_src();
+        } else {
+            src = findProfile.getFile_info().getFile_src();
+        }
+
         ReturnLoginMemberInfo returnMemberInfo = ReturnLoginMemberInfo.builder().id(findMember.getId())
                 .email(findMember.getEmail())
                 .nic_name(findMember.getNic_name())
                 .login_api(findMember.getLogin_api().getKey())
                 .role(findMember.getRole().getKey())
-                .profileImg(FilePath.BASIC_FILE_PATH+findProfile.getFile_info().getFile_src())
+                .profileImg(src)
                 .build();
 
         log.info(returnMemberInfo.toString());
