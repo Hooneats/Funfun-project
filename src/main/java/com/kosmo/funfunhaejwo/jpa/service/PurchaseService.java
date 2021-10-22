@@ -12,5 +12,5 @@ public interface PurchaseService {
 
     ResponseEntity<List<ReturnFundingInfo>> getFundingTypeBuy(Long member_id);
 
-    ResponseEntity<List<ReturnFundingInfo>> getFundingTypeFunding(Long member_id);
+    ResponseEntity<?> getFundingTypeFunding(Long member_id);
 }

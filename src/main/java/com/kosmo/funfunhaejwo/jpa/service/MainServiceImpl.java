@@ -60,6 +60,9 @@ public class MainServiceImpl implements MainService{
 
         List<Object[]> objList =  friendListTableRepo.Search(searchName);
         for (Object[] item : objList) {
+            if (String.valueOf(item[3]).equals("7")) {
+                continue;
+            }
             stringBuffer.append(String.valueOf(item[4]));
             System.out.println("stringBuffer = " + stringBuffer);
             if (String.valueOf(stringBuffer).equals("EMAIL")) {
@@ -67,6 +70,7 @@ public class MainServiceImpl implements MainService{
             } else {
                 list.add(new Main_FriendVo((String) item[0], (String) item[1], (String) item[2], Long.parseLong(String.valueOf(item[3]))));
             }
+            stringBuffer.delete(0, stringBuffer.length());
         }
         return list;
     }

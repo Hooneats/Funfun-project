@@ -25,9 +25,9 @@ public class ReturnFundingInfo{
     private int funding_people_count;
     private Long funding_collected_money;
     private String funding_product_brand;
-    private Long funding_beetweenTime;
-    private Boolean funding_isStart;
-    private Long funding_beforeStartDays;
+    private long funding_beetweenTime;
+    private boolean funding_isStart;
+    private long funding_beforeStartDays;
     private String member_nicname;
     private String  funding_status;
     private int delivery_num;

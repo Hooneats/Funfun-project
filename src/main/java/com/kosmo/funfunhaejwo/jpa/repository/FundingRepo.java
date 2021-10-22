@@ -37,6 +37,8 @@ public interface FundingRepo extends JpaRepository<Funding, Long> {
 
     List<Funding> findFundingByMember(Long member_id);
 
+    @Query("select f from Funding f order by f.id asc")
+    List<Funding> findAllOrderByFundingId();
 //    List<Funding> findFundingByFunding_type(@Param(value="funding_type")String funding_type);
 
 

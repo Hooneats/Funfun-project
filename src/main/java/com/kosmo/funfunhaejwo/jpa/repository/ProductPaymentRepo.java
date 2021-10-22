@@ -16,4 +16,7 @@ public interface ProductPaymentRepo extends JpaRepository<ProductPayment, Long> 
 
     @Query("select distinct p from ProductPayment p where p.funding.id = :funding_id")
     Optional<ProductPayment> getProductPaymentByFunding(Long funding_id);
+
+    @Query("select p from ProductPayment p order by p.id asc")
+    List<ProductPayment> findAllOrderByProductPayment();
 }

@@ -31,7 +31,7 @@ public class Init {
     private final FriendListTableRepo friendListTableRepo;
     private final ProductPaymentRepo productPaymentRepo;
     private final PasswordEncoder passwordEncoder;
-
+    private final DeliveryRepo deliveryRepo;
     private final FundingRepo fundingRepo;
 
     @PostConstruct
@@ -42,7 +42,7 @@ public class Init {
         insertOrder();
         insertLike();
         insertProductPayment();
-
+        insertDelivery();
     }
 
 
@@ -56,7 +56,7 @@ public class Init {
         Member member4 = Member.builder().id(4L).email("hooneats@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("hooneats").login_api(LoginApi.EMAIL).role(Role.ADMIN).phone_number("01077712027").build();
         Member member5 = Member.builder().id(5L).email("sdh@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("sdh").login_api(LoginApi.EMAIL).role(Role.USER).build();
         Member member6 = Member.builder().id(6L).email("hyelim@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("hyelim").login_api(LoginApi.EMAIL).role(Role.USER).build();
-        Member member7 = Member.builder().id(7L).email("kosmo@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("kosmo").login_api(LoginApi.EMAIL).role(Role.USER).build();
+        Member member7 = Member.builder().id(7L).email("kosmo@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("kosmo").login_api(LoginApi.EMAIL).role(Role.ADMIN).build();
         Member member8 = Member.builder().id(8L).email("kosmoJava@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("kosmoJava").login_api(LoginApi.EMAIL).role(Role.USER).build();
 //        Member savedMember = memberRepo.save(member1);
         memberList.add(member1);
@@ -126,8 +126,8 @@ public class Init {
     }
     void insertFunding() {
         List<Funding> fundingList = new ArrayList<>();
-        List<Member> memberList = memberRepo.findAll();
-        List<Product> productList = productRepo.findAll();
+        List<Member> memberList = memberRepo.findAllOrderByMemberIdForInit();
+        List<Product> productList = productRepo.findAllOrderByProductId();
         Funding funding1 = Funding.builder().id(1L).funding_collected_money(5000L).funding_target_money(productList.get(1).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,27,00,00)).funding_title("내생일선물").funding_type(FundingType.FUNDING).funding_people_count(20).member(memberList.get(1)).product(productList.get(1)).build();productList.get(1).fundingControl(true);
         Funding funding2 = Funding.builder().id(2L).funding_collected_money(50000L).funding_target_money(productList.get(2).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,28,00,00)).funding_title("그냥 갖고싶어서").funding_type(FundingType.FUNDING).funding_people_count(16).member(memberList.get(0)).product(productList.get(2)).build();productList.get(2).fundingControl(true);
         Funding funding3 = Funding.builder().id(3L).funding_collected_money(25000L).funding_target_money(productList.get(3).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,29,00,00)).funding_title("참여해주는 그대 사랑해").funding_type(FundingType.FUNDING).funding_people_count(22).member(memberList.get(3)).product(productList.get(3)).build();productList.get(3).fundingControl(true);
@@ -228,16 +228,16 @@ public class Init {
         fundingList.add(funding45);
 
         //BUY 인 펀딩
-        Funding funding46 = Funding.builder().id(46L).funding_collected_money(productList.get(300).getProduct_price()).funding_target_money(productList.get(300).getProduct_price()).funding_create_time(LocalDateTime.of(2021,8,10,00,00)).funding_expired_time(LocalDateTime.of(2021,8,10,00,00)).funding_title(productList.get(300).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(300)).build();productList.get(300).fundingControl(true);
-        Funding funding47 = Funding.builder().id(47L).funding_collected_money(productList.get(301).getProduct_price()).funding_target_money(productList.get(301).getProduct_price()).funding_create_time(LocalDateTime.of(2021,7,10,00,00)).funding_expired_time(LocalDateTime.of(2021,7,10,00,00)).funding_title(productList.get(301).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(301)).build();productList.get(301).fundingControl(true);
-        Funding funding48 = Funding.builder().id(48L).funding_collected_money(productList.get(302).getProduct_price()).funding_target_money(productList.get(302).getProduct_price()).funding_create_time(LocalDateTime.of(2021,6,10,00,00)).funding_expired_time(LocalDateTime.of(2021,6,10,00,00)).funding_title(productList.get(302).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(302)).build();productList.get(302).fundingControl(true);
-        Funding funding49 = Funding.builder().id(49L).funding_collected_money(productList.get(303).getProduct_price()).funding_target_money(productList.get(303).getProduct_price()).funding_create_time(LocalDateTime.of(2021,5,10,00,00)).funding_expired_time(LocalDateTime.of(2021,5,10,00,00)).funding_title(productList.get(303).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(303)).build();productList.get(303).fundingControl(true);
-        Funding funding50 = Funding.builder().id(50L).funding_collected_money(productList.get(304).getProduct_price()).funding_target_money(productList.get(304).getProduct_price()).funding_create_time(LocalDateTime.of(2021,4,10,00,00)).funding_expired_time(LocalDateTime.of(2021,4,10,00,00)).funding_title(productList.get(304).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(304)).build();productList.get(304).fundingControl(true);
-        Funding funding51 = Funding.builder().id(51L).funding_collected_money(productList.get(305).getProduct_price()).funding_target_money(productList.get(305).getProduct_price()).funding_create_time(LocalDateTime.of(2021,3,10,00,00)).funding_expired_time(LocalDateTime.of(2021,3,10,00,00)).funding_title(productList.get(305).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(305)).build();productList.get(305).fundingControl(true);
-        Funding funding52 = Funding.builder().id(52L).funding_collected_money(productList.get(306).getProduct_price()).funding_target_money(productList.get(306).getProduct_price()).funding_create_time(LocalDateTime.of(2021,2,10,00,00)).funding_expired_time(LocalDateTime.of(2021,2,10,00,00)).funding_title(productList.get(306).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(306)).build();productList.get(306).fundingControl(true);
-        Funding funding53 = Funding.builder().id(53L).funding_collected_money(productList.get(307).getProduct_price()).funding_target_money(productList.get(307).getProduct_price()).funding_create_time(LocalDateTime.of(2021,1,10,00,00)).funding_expired_time(LocalDateTime.of(2021,1,10,00,00)).funding_title(productList.get(307).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(307)).build();productList.get(307).fundingControl(true);
-        Funding funding54 = Funding.builder().id(54L).funding_collected_money(productList.get(308).getProduct_price()).funding_target_money(productList.get(308).getProduct_price()).funding_create_time(LocalDateTime.of(2021,9,10,00,00)).funding_expired_time(LocalDateTime.of(2021,9,10,00,00)).funding_title(productList.get(308).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(308)).build();productList.get(308).fundingControl(true);
-        Funding funding55 = Funding.builder().id(55L).funding_collected_money(productList.get(309).getProduct_price()).funding_target_money(productList.get(309).getProduct_price()).funding_create_time(LocalDateTime.of(2021,10,10,00,00)).funding_expired_time(LocalDateTime.of(2021,10,10,00,00)).funding_title(productList.get(309).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(309)).build();productList.get(309).fundingControl(true);
+        Funding funding46 = Funding.builder().id(46L).funding_collected_money(productList.get(100).getProduct_price()).funding_target_money(productList.get(100).getProduct_price()).funding_create_time(LocalDateTime.of(2021,8,10,00,00)).funding_expired_time(LocalDateTime.of(2021,8,10,00,00)).funding_title(productList.get(100).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(100)).build();productList.get(100).fundingControl(true);
+        Funding funding47 = Funding.builder().id(47L).funding_collected_money(productList.get(101).getProduct_price()).funding_target_money(productList.get(101).getProduct_price()).funding_create_time(LocalDateTime.of(2021,7,10,00,00)).funding_expired_time(LocalDateTime.of(2021,7,10,00,00)).funding_title(productList.get(101).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(101)).build();productList.get(101).fundingControl(true);
+        Funding funding48 = Funding.builder().id(48L).funding_collected_money(productList.get(102).getProduct_price()).funding_target_money(productList.get(102).getProduct_price()).funding_create_time(LocalDateTime.of(2021,6,10,00,00)).funding_expired_time(LocalDateTime.of(2021,6,10,00,00)).funding_title(productList.get(102).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(102)).build();productList.get(102).fundingControl(true);
+        Funding funding49 = Funding.builder().id(49L).funding_collected_money(productList.get(103).getProduct_price()).funding_target_money(productList.get(103).getProduct_price()).funding_create_time(LocalDateTime.of(2021,5,10,00,00)).funding_expired_time(LocalDateTime.of(2021,5,10,00,00)).funding_title(productList.get(103).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(103)).build();productList.get(103).fundingControl(true);
+        Funding funding50 = Funding.builder().id(50L).funding_collected_money(productList.get(104).getProduct_price()).funding_target_money(productList.get(104).getProduct_price()).funding_create_time(LocalDateTime.of(2021,4,10,00,00)).funding_expired_time(LocalDateTime.of(2021,4,10,00,00)).funding_title(productList.get(104).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(104)).build();productList.get(104).fundingControl(true);
+        Funding funding51 = Funding.builder().id(51L).funding_collected_money(productList.get(205).getProduct_price()).funding_target_money(productList.get(205).getProduct_price()).funding_create_time(LocalDateTime.of(2021,3,10,00,00)).funding_expired_time(LocalDateTime.of(2021,3,10,00,00)).funding_title(productList.get(205).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(205)).build();productList.get(205).fundingControl(true);
+        Funding funding52 = Funding.builder().id(52L).funding_collected_money(productList.get(206).getProduct_price()).funding_target_money(productList.get(206).getProduct_price()).funding_create_time(LocalDateTime.of(2021,2,10,00,00)).funding_expired_time(LocalDateTime.of(2021,2,10,00,00)).funding_title(productList.get(206).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(206)).build();productList.get(206).fundingControl(true);
+        Funding funding53 = Funding.builder().id(53L).funding_collected_money(productList.get(207).getProduct_price()).funding_target_money(productList.get(207).getProduct_price()).funding_create_time(LocalDateTime.of(2021,1,10,00,00)).funding_expired_time(LocalDateTime.of(2021,1,10,00,00)).funding_title(productList.get(207).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(207)).build();productList.get(207).fundingControl(true);
+        Funding funding54 = Funding.builder().id(54L).funding_collected_money(productList.get(208).getProduct_price()).funding_target_money(productList.get(208).getProduct_price()).funding_create_time(LocalDateTime.of(2021,9,10,00,00)).funding_expired_time(LocalDateTime.of(2021,9,10,00,00)).funding_title(productList.get(208).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(208)).build();productList.get(208).fundingControl(true);
+        Funding funding55 = Funding.builder().id(55L).funding_collected_money(productList.get(209).getProduct_price()).funding_target_money(productList.get(209).getProduct_price()).funding_create_time(LocalDateTime.of(2021,10,10,00,00)).funding_expired_time(LocalDateTime.of(2021,10,10,00,00)).funding_title(productList.get(209).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(209)).build();productList.get(209).fundingControl(true);
 
         fundingList.add(funding46);
         fundingList.add(funding47);
@@ -263,13 +263,19 @@ public class Init {
         fundingList.add(funding59);
         fundingList.add(funding60);
 
+        // 기부 펀딩
+        Product product = productRepo.findById(301L).orElse(null);
+        Funding funding61 = Funding.builder().id(61L).funding_collected_money(265000L).funding_target_money(product.getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,12,30,00,00)).funding_title("치킨으로, 손이에게 따뜻함을 선물해주세요.").funding_type(FundingType.FUNDING).funding_people_count(86).member(memberList.get(6)).product(product).build();product.fundingControl(true);
+        fundingList.add(funding61);
+
+
         productRepo.saveAll(productList);
         fundingRepo.saveAll(fundingList);
     }
     void insertOrder() {
-        List<Funding> allFind = fundingRepo.findAll();
-        List<Member> allMember = memberRepo.findAll();
-        List<Order> orderList = orderRepo.findAll();
+        List<Funding> allFind = fundingRepo.findAllOrderByFundingId();
+        List<Member> allMember = memberRepo.findAllOrderByMemberIdForInit();
+        List<Order> orderList = new ArrayList<>();
 
         Order order1 = Order.builder().id(1L).funding(allFind.get(0)).member(allMember.get(1)).product(allFind.get(0).getProduct()).total_payment(10000L).merchantUid(UUID.randomUUID().toString()).i_port_id(UUID.randomUUID().toString().replaceAll("-", "")).pg_id(String.valueOf((int) Math.random() * 100)).orderDate(LocalDateTime.now()).orderStatus(OrderStatus.SUCCESS).build();
         Order order2 = Order.builder().id(2L).funding(allFind.get(1)).member(allMember.get(2)).product(allFind.get(1).getProduct()).total_payment(20000L).merchantUid(UUID.randomUUID().toString()).i_port_id(UUID.randomUUID().toString().replaceAll("-", "")).pg_id(String.valueOf((int) Math.random() * 100)).orderDate(LocalDateTime.now()).orderStatus(OrderStatus.SUCCESS).build();
@@ -336,9 +342,9 @@ public class Init {
         orderRepo.saveAll(orderList);
     }
     void insertLike() {
-        List<Member> memberList = memberRepo.findAll();
+        List<Member> memberList = memberRepo.findAllOrderByMemberIdForInit();
         List<Like> likeList = new ArrayList<>();
-        List<Product> productList = productRepo.findAll();
+        List<Product> productList = productRepo.findAllOrderByProductId();
 //        Like like1 = Like.builder().member_id.(memberList.get(1).getId()).product_id(productList.get(1).getId()).build();
         Like like1 = Like.builder().id(1L).member(memberList.get(0)).product(productList.get(0)).build();
         Like like2 = Like.builder().id(2L).member(memberList.get(0)).product(productList.get(2)).build();
@@ -810,11 +816,33 @@ public class Init {
         Funding funding9 = fundingRepo.findFundingById(43L).orElse(null);
         Funding funding10 = fundingRepo.findFundingById(44L).orElse(null);
 
+        Funding funding11 = fundingRepo.findFundingById(46L).orElse(null);
+        Funding funding12 = fundingRepo.findFundingById(47L).orElse(null);
+        Funding funding13 = fundingRepo.findFundingById(48L).orElse(null);
+        Funding funding14 = fundingRepo.findFundingById(49L).orElse(null);
+        Funding funding15 = fundingRepo.findFundingById(50L).orElse(null);
+        Funding funding16 = fundingRepo.findFundingById(51L).orElse(null);
+        Funding funding17 = fundingRepo.findFundingById(52L).orElse(null);
+        Funding funding18 = fundingRepo.findFundingById(53L).orElse(null);
+        Funding funding19 = fundingRepo.findFundingById(54L).orElse(null);
+        Funding funding20 = fundingRepo.findFundingById(55L).orElse(null);
+
+
         ProductPayment productPayment6 = ProductPayment.builder().id(6L).funding(funding6).product(funding6.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("987654321").phone_number("01055569999").address(buildAddress).real_name("나미").build();
         ProductPayment productPayment7 = ProductPayment.builder().id(7L).funding(funding7).product(funding7.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("258369147").phone_number("01056569999").address(buildAddress).real_name("학수님").build();
         ProductPayment productPayment8 = ProductPayment.builder().id(8L).funding(funding8).product(funding8.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("159753654").phone_number("01023659878").address(buildAddress).real_name("동현님").build();
         ProductPayment productPayment9 = ProductPayment.builder().id(9L).funding(funding9).product(funding9.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("753951654").phone_number("01023654876").address(buildAddress).real_name("정구님").build();
-        ProductPayment productPayment10 = ProductPayment.builder().id(10L).funding(funding10).product(funding10.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("준석님").build();
+        ProductPayment productPayment10 = ProductPayment.builder().id(10L).funding(funding10).product(funding10.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("259996951").phone_number("01088889999").address(buildAddress).real_name("준석님").build();
+        ProductPayment productPayment11 = ProductPayment.builder().id(11L).funding(funding11).product(funding11.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment12 = ProductPayment.builder().id(12L).funding(funding12).product(funding12.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment13 = ProductPayment.builder().id(13L).funding(funding13).product(funding13.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment14 = ProductPayment.builder().id(14L).funding(funding14).product(funding14.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment15 = ProductPayment.builder().id(15L).funding(funding15).product(funding15.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment16 = ProductPayment.builder().id(16L).funding(funding16).product(funding16.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment17 = ProductPayment.builder().id(17L).funding(funding17).product(funding17.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment18 = ProductPayment.builder().id(18L).funding(funding18).product(funding18.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment19 = ProductPayment.builder().id(19L).funding(funding19).product(funding19.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment20 = ProductPayment.builder().id(20L).funding(funding20).product(funding20.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
 
 
         Funding funding1 = fundingRepo.findFundingById(56L).orElse(null);
@@ -840,8 +868,61 @@ public class Init {
         productPaymentList.add(productPayment8);
         productPaymentList.add(productPayment9);
         productPaymentList.add(productPayment10);
+        productPaymentList.add(productPayment11);
+        productPaymentList.add(productPayment12);
+        productPaymentList.add(productPayment13);
+        productPaymentList.add(productPayment14);
+        productPaymentList.add(productPayment15);
+        productPaymentList.add(productPayment16);
+        productPaymentList.add(productPayment17);
+        productPaymentList.add(productPayment18);
+        productPaymentList.add(productPayment19);
+        productPaymentList.add(productPayment20);
 
         productPaymentRepo.saveAll(productPaymentList);
+
+    }
+
+    void insertDelivery() {
+        List<Member> memberList = memberRepo.findAllOrderByMemberIdForInit();
+        List<ProductPayment> productPayment = productPaymentRepo.findAllOrderByProductPayment();
+        Address address = Address.builder().city("서울시").street("마포구").zipcode("1234").build();
+        List<Delivery> delivery = new ArrayList<>();
+
+        Delivery buildDelivery1 = Delivery.builder().id(1L).member(memberList.get(3)).productPayment(productPayment.get(5)).delivery_number(123456798).delivery_company("대한통운").phone_number("01055569999").address(address).status(DeliveryStatus.SHIPPING).build();
+        Delivery buildDelivery2 = Delivery.builder().id(2L).member(memberList.get(3)).productPayment(productPayment.get(6)).delivery_number(132645698).delivery_company("대한통운").phone_number("01056569999").address(address).status(DeliveryStatus.SHIPPING).build();
+        Delivery buildDelivery3 = Delivery.builder().id(3L).member(memberList.get(3)).productPayment(productPayment.get(7)).delivery_number(153326594).delivery_company("대한통운").phone_number("01023659878").address(address).status(DeliveryStatus.SHIPPING).build();
+        Delivery buildDelivery4 = Delivery.builder().id(4L).member(memberList.get(3)).productPayment(productPayment.get(8)).delivery_number(234657888).delivery_company("대한통운").phone_number("01023654876").address(address).status(DeliveryStatus.SHIPPING).build();
+        Delivery buildDelivery5 = Delivery.builder().id(5L).member(memberList.get(3)).productPayment(productPayment.get(9)).delivery_number(223564658).delivery_company("대한통운").phone_number("01088889999").address(address).status(DeliveryStatus.SHIPPING).build();
+
+        Delivery buildDelivery6 = Delivery.builder().id(6L).member(memberList.get(3)).productPayment(productPayment.get(10)).delivery_number(562165487).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery7 = Delivery.builder().id(7L).member(memberList.get(3)).productPayment(productPayment.get(11)).delivery_number(959626233).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery8 = Delivery.builder().id(8L).member(memberList.get(3)).productPayment(productPayment.get(12)).delivery_number(213213565).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery9 = Delivery.builder().id(9L).member(memberList.get(3)).productPayment(productPayment.get(13)).delivery_number(546512355).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery10 = Delivery.builder().id(10L).member(memberList.get(3)).productPayment(productPayment.get(14)).delivery_number(224455665).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery11 = Delivery.builder().id(11L).member(memberList.get(3)).productPayment(productPayment.get(15)).delivery_number(665623232).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery12 = Delivery.builder().id(12L).member(memberList.get(3)).productPayment(productPayment.get(16)).delivery_number(335556444).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery13 = Delivery.builder().id(13L).member(memberList.get(3)).productPayment(productPayment.get(17)).delivery_number(559556665).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery14 = Delivery.builder().id(14L).member(memberList.get(3)).productPayment(productPayment.get(18)).delivery_number(112223265).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery15 = Delivery.builder().id(15L).member(memberList.get(3)).productPayment(productPayment.get(19)).delivery_number(999898888).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+
+        delivery.add(buildDelivery1);
+        delivery.add(buildDelivery2);
+        delivery.add(buildDelivery3);
+        delivery.add(buildDelivery4);
+        delivery.add(buildDelivery5);
+        delivery.add(buildDelivery6);
+        delivery.add(buildDelivery7);
+        delivery.add(buildDelivery8);
+        delivery.add(buildDelivery9);
+        delivery.add(buildDelivery10);
+        delivery.add(buildDelivery11);
+        delivery.add(buildDelivery12);
+        delivery.add(buildDelivery13);
+        delivery.add(buildDelivery14);
+        delivery.add(buildDelivery15);
+
+        deliveryRepo.saveAll(delivery);
 
     }
 }

@@ -16,5 +16,7 @@ public interface MemberRepo extends JpaRepository<Member, Long> {
     @Query("select m from Member m where m.phone_number=:phone")
     List<Member> findByPhone_number(String phone);
 
+    @Query("select m from Member m order by m.id asc")
+    List<Member> findAllOrderByMemberIdForInit();
 
 }
