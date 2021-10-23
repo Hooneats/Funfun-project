@@ -1,11 +1,15 @@
 package com.kosmo.funfunhaejwo.jpa.repository;
 
+import com.kosmo.funfunhaejwo.jpa.controller.admin.vo.AdminExpiredFundingVo;
 import com.kosmo.funfunhaejwo.jpa.domain.Funding;
+import com.kosmo.funfunhaejwo.jpa.domain.ProductPayment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -48,8 +52,9 @@ public interface FundingRepo extends JpaRepository<Funding, Long> {
     List<Funding> findAllOrderByFundingId();
 //    List<Funding> findFundingByFunding_type(@Param(value="funding_type")String funding_type);
 
-
-
-
+    @Query("select f.id, f.funding_title, f.member.email, f.product.id, f.funding_collected_money, f.funding_expired_time," +
+            "pp.productPaymentStatus, pi.file_info.file_src from Funding f, ProductImg pi, Member m, ProductPayment pp where " +
+            "pp.funding.id=f.id and f.product.id = pi.product.id and f.member.id=m.id and pi.img_code='thumbnail' and f.funding_expired_time < current_timestamp order by f.id asc")
+    List<Object[]> findExpired();
 
 }

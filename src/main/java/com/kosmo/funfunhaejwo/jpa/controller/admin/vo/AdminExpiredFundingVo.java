@@ -12,15 +12,14 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdminFundingListVo {
+public class AdminExpiredFundingVo {
     private long data1;
     private String data2;
     private String data3;
-    private int data4;
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDateTime data5;
+    private long data4;
+    private long data5;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDateTime data6;
+    private String data7;
     private String data9;
-
 }

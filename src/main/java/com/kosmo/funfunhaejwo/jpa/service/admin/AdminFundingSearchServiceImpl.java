@@ -24,7 +24,7 @@ public class AdminFundingSearchServiceImpl implements AdminFundingSearchService{
         List<AdminFundingListVo> adminFundingListVoList = new ArrayList<>();
         List<Object[]> fundingList = fundingRepo.searchFunding(funding_name);
         for(Object[] item: fundingList){
-            adminFundingListVoList.add(new AdminFundingListVo(Long.parseLong(String.valueOf(item[0])),(String)item[1],(String)item[2],Integer.parseInt(String.valueOf(item[3])), LocalDateTime.parse(String.valueOf(item[4])),LocalDateTime.parse(String.valueOf(item[5])), FilePath.BASIC_FILE_PATH+(String) item[6],"img"));
+            adminFundingListVoList.add(new AdminFundingListVo(Long.parseLong(String.valueOf(item[0])),(String)item[1],(String)item[2],Integer.parseInt(String.valueOf(item[3])), LocalDateTime.parse(String.valueOf(item[4])),LocalDateTime.parse(String.valueOf(item[5])), FilePath.BASIC_FILE_PATH+(String) item[6]));
         }
         return adminFundingListVoList;
     }
