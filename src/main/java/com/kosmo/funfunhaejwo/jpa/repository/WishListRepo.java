@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface WishListRepo extends JpaRepository<Product, Long> {
 
-    @Query("select p from Product p, Like l where l.member.id=:member_id and l.product.id=p.id")
+    @Query("select distinct p from Product p, Like l where l.member.id=:member_id and l.product.id=p.id")
     List<Product> findByWish(@Param("member_id") Long member_id);
 }

@@ -21,6 +21,6 @@ public interface FriendListTableRepo extends JpaRepository<FriendListTable, Long
             ,nativeQuery = true)
     List<Object[]> friendSearch(@Param("member_id") Long member_id, @Param("searchName") String searchName);
 
-    @Query("select distinct fi.file_info.file_src, m.nic_name, m.email, m.id from Member m, ProfileImg fi where m.nic_name like %:searchName%")
+    @Query("select distinct fi.file_info.file_src, m.nic_name, m.email, m.id, m.login_api from Member m join ProfileImg fi on fi.member=m where m.nic_name like %:searchName%")
     List<Object[]> Search(String searchName);
 }

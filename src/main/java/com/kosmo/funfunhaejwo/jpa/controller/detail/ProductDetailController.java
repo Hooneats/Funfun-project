@@ -71,7 +71,6 @@ class ProductDetailController {
                 .product_categoryId(getProduct.getCategory().getId())
                 .product_like_list(productLikeList)
                 .build();
-        log.info(returnProductInfo.toString());
         return ResponseEntity.ok().body(returnProductInfo);
 
     }

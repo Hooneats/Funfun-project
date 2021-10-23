@@ -56,12 +56,22 @@ public class MainServiceImpl implements MainService{
     @Override
     public List<Main_FriendVo> getFriendList(String searchName) {
         List<Main_FriendVo> list = new ArrayList<Main_FriendVo>();
+        StringBuffer stringBuffer = new StringBuffer(50);
 
         List<Object[]> objList =  friendListTableRepo.Search(searchName);
         for (Object[] item : objList) {
-            list.add(new Main_FriendVo(FilePath.BASIC_FILE_PATH+(String) item[0],(String) item[1],(String) item[2],Long.parseLong(String.valueOf(item[3]))));
+            if (String.valueOf(item[3]).equals("7")) {
+                continue;
+            }
+            stringBuffer.append(String.valueOf(item[4]));
+            System.out.println("stringBuffer = " + stringBuffer);
+            if (String.valueOf(stringBuffer).equals("EMAIL")) {
+                list.add(new Main_FriendVo(FilePath.BASIC_FILE_PATH + (String) item[0], (String) item[1], (String) item[2], Long.parseLong(String.valueOf(item[3]))));
+            } else {
+                list.add(new Main_FriendVo((String) item[0], (String) item[1], (String) item[2], Long.parseLong(String.valueOf(item[3]))));
+            }
+            stringBuffer.delete(0, stringBuffer.length());
         }
-
         return list;
     }
 

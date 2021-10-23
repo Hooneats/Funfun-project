@@ -12,8 +12,10 @@ import com.kosmo.funfunhaejwo.jpa.controller.login.vo.ReturnLoginMemberInfo;
 import com.kosmo.funfunhaejwo.jpa.domain.Member;
 import com.kosmo.funfunhaejwo.jpa.domain.ProfileImg;
 import com.kosmo.funfunhaejwo.jpa.domain.semi.File_info;
+import com.kosmo.funfunhaejwo.jpa.domain.semi.LoginApi;
 import com.kosmo.funfunhaejwo.jpa.domain.semi.Role;
 import com.kosmo.funfunhaejwo.jpa.exception.*;
+import com.kosmo.funfunhaejwo.jpa.fileset.FilePath;
 import com.kosmo.funfunhaejwo.jpa.service.MemberService;
 import com.kosmo.funfunhaejwo.jpa.service.ProfileService;
 import com.kosmo.funfunhaejwo.security.config.vo.JWTGenerator;
@@ -216,12 +218,19 @@ public class OauthLoginController {
         profileImg.modifyFileInfo(new File_info(file_src, login_api));
         ProfileImg savedProfileImg = profileService.saveProfile(profileImg);
 
+        String src = "";
+        if (member.getLogin_api() == LoginApi.EMAIL) {
+            src = FilePath.BASIC_FILE_PATH + profileImg.getFile_info().getFile_src();
+        } else {
+            src = profileImg.getFile_info().getFile_src();
+        }
+
         ReturnLoginMemberInfo returnMember = ReturnLoginMemberInfo.builder().id(member.getId())
                 .email(member.getEmail())
                 .nic_name(member.getNic_name())
                 .login_api(member.getLogin_api().getKey())
                 .role(member.getRole().getKey())
-                .profileImg(savedProfileImg.getFile_info().getFile_src())
+                .profileImg(src)
                 .build();
 
 

@@ -77,4 +77,6 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     @Query("select p from Product p where p.event=:event order by p.product_price asc")
     List<Product> findByEvent(Event event);
 
+    @Query("select p from Product p order by p.id asc")
+    List<Product> findAllOrderByProductId();
 }

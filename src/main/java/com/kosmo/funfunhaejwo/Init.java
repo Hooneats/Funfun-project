@@ -31,7 +31,7 @@ public class Init {
     private final FriendListTableRepo friendListTableRepo;
     private final ProductPaymentRepo productPaymentRepo;
     private final PasswordEncoder passwordEncoder;
-
+    private final DeliveryRepo deliveryRepo;
     private final FundingRepo fundingRepo;
 
     @PostConstruct
@@ -42,7 +42,7 @@ public class Init {
         insertOrder();
         insertLike();
         insertProductPayment();
-
+        insertDelivery();
     }
 
 
@@ -56,7 +56,7 @@ public class Init {
         Member member4 = Member.builder().id(4L).email("hooneats@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("hooneats").login_api(LoginApi.EMAIL).role(Role.ADMIN).phone_number("01077712027").build();
         Member member5 = Member.builder().id(5L).email("sdh@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("sdh").login_api(LoginApi.EMAIL).role(Role.USER).build();
         Member member6 = Member.builder().id(6L).email("hyelim@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("hyelim").login_api(LoginApi.EMAIL).role(Role.USER).build();
-        Member member7 = Member.builder().id(7L).email("kosmo@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("kosmo").login_api(LoginApi.EMAIL).role(Role.USER).build();
+        Member member7 = Member.builder().id(7L).email("kosmo@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("kosmo").login_api(LoginApi.EMAIL).role(Role.ADMIN).build();
         Member member8 = Member.builder().id(8L).email("kosmoJava@naver.com").password(passwordEncoder.encode("123456789asd!")).nic_name("kosmoJava").login_api(LoginApi.EMAIL).role(Role.USER).build();
 //        Member savedMember = memberRepo.save(member1);
         memberList.add(member1);
@@ -126,8 +126,8 @@ public class Init {
     }
     void insertFunding() {
         List<Funding> fundingList = new ArrayList<>();
-        List<Member> memberList = memberRepo.findAll();
-        List<Product> productList = productRepo.findAll();
+        List<Member> memberList = memberRepo.findAllOrderByMemberIdForInit();
+        List<Product> productList = productRepo.findAllOrderByProductId();
         Funding funding1 = Funding.builder().id(1L).funding_collected_money(5000L).funding_target_money(productList.get(1).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,27,00,00)).funding_title("내생일선물").funding_type(FundingType.FUNDING).funding_people_count(20).member(memberList.get(1)).product(productList.get(1)).build();productList.get(1).fundingControl(true);
         Funding funding2 = Funding.builder().id(2L).funding_collected_money(50000L).funding_target_money(productList.get(2).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,28,00,00)).funding_title("그냥 갖고싶어서").funding_type(FundingType.FUNDING).funding_people_count(16).member(memberList.get(0)).product(productList.get(2)).build();productList.get(2).fundingControl(true);
         Funding funding3 = Funding.builder().id(3L).funding_collected_money(25000L).funding_target_money(productList.get(3).getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,10,29,00,00)).funding_title("참여해주는 그대 사랑해").funding_type(FundingType.FUNDING).funding_people_count(22).member(memberList.get(3)).product(productList.get(3)).build();productList.get(3).fundingControl(true);
@@ -228,16 +228,16 @@ public class Init {
         fundingList.add(funding45);
 
         //BUY 인 펀딩
-        Funding funding46 = Funding.builder().id(46L).funding_collected_money(productList.get(300).getProduct_price()).funding_target_money(productList.get(300).getProduct_price()).funding_create_time(LocalDateTime.of(2021,8,10,00,00)).funding_expired_time(LocalDateTime.of(2021,8,10,00,00)).funding_title(productList.get(300).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(300)).build();productList.get(300).fundingControl(true);
-        Funding funding47 = Funding.builder().id(47L).funding_collected_money(productList.get(301).getProduct_price()).funding_target_money(productList.get(301).getProduct_price()).funding_create_time(LocalDateTime.of(2021,7,10,00,00)).funding_expired_time(LocalDateTime.of(2021,7,10,00,00)).funding_title(productList.get(301).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(301)).build();productList.get(301).fundingControl(true);
-        Funding funding48 = Funding.builder().id(48L).funding_collected_money(productList.get(302).getProduct_price()).funding_target_money(productList.get(302).getProduct_price()).funding_create_time(LocalDateTime.of(2021,6,10,00,00)).funding_expired_time(LocalDateTime.of(2021,6,10,00,00)).funding_title(productList.get(302).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(302)).build();productList.get(302).fundingControl(true);
-        Funding funding49 = Funding.builder().id(49L).funding_collected_money(productList.get(303).getProduct_price()).funding_target_money(productList.get(303).getProduct_price()).funding_create_time(LocalDateTime.of(2021,5,10,00,00)).funding_expired_time(LocalDateTime.of(2021,5,10,00,00)).funding_title(productList.get(303).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(303)).build();productList.get(303).fundingControl(true);
-        Funding funding50 = Funding.builder().id(50L).funding_collected_money(productList.get(304).getProduct_price()).funding_target_money(productList.get(304).getProduct_price()).funding_create_time(LocalDateTime.of(2021,4,10,00,00)).funding_expired_time(LocalDateTime.of(2021,4,10,00,00)).funding_title(productList.get(304).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(304)).build();productList.get(304).fundingControl(true);
-        Funding funding51 = Funding.builder().id(51L).funding_collected_money(productList.get(305).getProduct_price()).funding_target_money(productList.get(305).getProduct_price()).funding_create_time(LocalDateTime.of(2021,3,10,00,00)).funding_expired_time(LocalDateTime.of(2021,3,10,00,00)).funding_title(productList.get(305).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(305)).build();productList.get(305).fundingControl(true);
-        Funding funding52 = Funding.builder().id(52L).funding_collected_money(productList.get(306).getProduct_price()).funding_target_money(productList.get(306).getProduct_price()).funding_create_time(LocalDateTime.of(2021,2,10,00,00)).funding_expired_time(LocalDateTime.of(2021,2,10,00,00)).funding_title(productList.get(306).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(306)).build();productList.get(306).fundingControl(true);
-        Funding funding53 = Funding.builder().id(53L).funding_collected_money(productList.get(307).getProduct_price()).funding_target_money(productList.get(307).getProduct_price()).funding_create_time(LocalDateTime.of(2021,1,10,00,00)).funding_expired_time(LocalDateTime.of(2021,1,10,00,00)).funding_title(productList.get(307).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(307)).build();productList.get(307).fundingControl(true);
-        Funding funding54 = Funding.builder().id(54L).funding_collected_money(productList.get(308).getProduct_price()).funding_target_money(productList.get(308).getProduct_price()).funding_create_time(LocalDateTime.of(2021,9,10,00,00)).funding_expired_time(LocalDateTime.of(2021,9,10,00,00)).funding_title(productList.get(308).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(308)).build();productList.get(308).fundingControl(true);
-        Funding funding55 = Funding.builder().id(55L).funding_collected_money(productList.get(309).getProduct_price()).funding_target_money(productList.get(309).getProduct_price()).funding_create_time(LocalDateTime.of(2021,10,10,00,00)).funding_expired_time(LocalDateTime.of(2021,10,10,00,00)).funding_title(productList.get(309).getProduct_name()).funding_type(FundingType.FUNDING).funding_people_count(1).member(memberList.get(3)).product(productList.get(309)).build();productList.get(309).fundingControl(true);
+        Funding funding46 = Funding.builder().id(46L).funding_collected_money(productList.get(100).getProduct_price()).funding_target_money(productList.get(100).getProduct_price()).funding_create_time(LocalDateTime.of(2021,8,10,00,00)).funding_expired_time(LocalDateTime.of(2021,8,10,00,00)).funding_title(productList.get(100).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(100)).build();productList.get(100).fundingControl(true);
+        Funding funding47 = Funding.builder().id(47L).funding_collected_money(productList.get(101).getProduct_price()).funding_target_money(productList.get(101).getProduct_price()).funding_create_time(LocalDateTime.of(2021,7,10,00,00)).funding_expired_time(LocalDateTime.of(2021,7,10,00,00)).funding_title(productList.get(101).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(101)).build();productList.get(101).fundingControl(true);
+        Funding funding48 = Funding.builder().id(48L).funding_collected_money(productList.get(102).getProduct_price()).funding_target_money(productList.get(102).getProduct_price()).funding_create_time(LocalDateTime.of(2021,6,10,00,00)).funding_expired_time(LocalDateTime.of(2021,6,10,00,00)).funding_title(productList.get(102).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(102)).build();productList.get(102).fundingControl(true);
+        Funding funding49 = Funding.builder().id(49L).funding_collected_money(productList.get(103).getProduct_price()).funding_target_money(productList.get(103).getProduct_price()).funding_create_time(LocalDateTime.of(2021,5,10,00,00)).funding_expired_time(LocalDateTime.of(2021,5,10,00,00)).funding_title(productList.get(103).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(103)).build();productList.get(103).fundingControl(true);
+        Funding funding50 = Funding.builder().id(50L).funding_collected_money(productList.get(104).getProduct_price()).funding_target_money(productList.get(104).getProduct_price()).funding_create_time(LocalDateTime.of(2021,4,10,00,00)).funding_expired_time(LocalDateTime.of(2021,4,10,00,00)).funding_title(productList.get(104).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(104)).build();productList.get(104).fundingControl(true);
+        Funding funding51 = Funding.builder().id(51L).funding_collected_money(productList.get(205).getProduct_price()).funding_target_money(productList.get(205).getProduct_price()).funding_create_time(LocalDateTime.of(2021,3,10,00,00)).funding_expired_time(LocalDateTime.of(2021,3,10,00,00)).funding_title(productList.get(205).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(205)).build();productList.get(205).fundingControl(true);
+        Funding funding52 = Funding.builder().id(52L).funding_collected_money(productList.get(206).getProduct_price()).funding_target_money(productList.get(206).getProduct_price()).funding_create_time(LocalDateTime.of(2021,2,10,00,00)).funding_expired_time(LocalDateTime.of(2021,2,10,00,00)).funding_title(productList.get(206).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(206)).build();productList.get(206).fundingControl(true);
+        Funding funding53 = Funding.builder().id(53L).funding_collected_money(productList.get(207).getProduct_price()).funding_target_money(productList.get(207).getProduct_price()).funding_create_time(LocalDateTime.of(2021,1,10,00,00)).funding_expired_time(LocalDateTime.of(2021,1,10,00,00)).funding_title(productList.get(207).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(207)).build();productList.get(207).fundingControl(true);
+        Funding funding54 = Funding.builder().id(54L).funding_collected_money(productList.get(208).getProduct_price()).funding_target_money(productList.get(208).getProduct_price()).funding_create_time(LocalDateTime.of(2021,9,10,00,00)).funding_expired_time(LocalDateTime.of(2021,9,10,00,00)).funding_title(productList.get(208).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(208)).build();productList.get(208).fundingControl(true);
+        Funding funding55 = Funding.builder().id(55L).funding_collected_money(productList.get(209).getProduct_price()).funding_target_money(productList.get(209).getProduct_price()).funding_create_time(LocalDateTime.of(2021,10,10,00,00)).funding_expired_time(LocalDateTime.of(2021,10,10,00,00)).funding_title(productList.get(209).getProduct_name()).funding_type(FundingType.BUY).funding_people_count(1).member(memberList.get(3)).product(productList.get(209)).build();productList.get(209).fundingControl(true);
 
         fundingList.add(funding46);
         fundingList.add(funding47);
@@ -263,13 +263,19 @@ public class Init {
         fundingList.add(funding59);
         fundingList.add(funding60);
 
+        // 기부 펀딩
+        Product product = productRepo.findById(301L).orElse(null);
+        Funding funding61 = Funding.builder().id(61L).funding_collected_money(265000L).funding_target_money(product.getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,12,30,00,00)).funding_title("치킨으로, 손이에게 따뜻함을 선물해주세요.").funding_type(FundingType.FUNDING).funding_people_count(86).member(memberList.get(6)).product(product).build();product.fundingControl(true);
+        fundingList.add(funding61);
+
+
         productRepo.saveAll(productList);
         fundingRepo.saveAll(fundingList);
     }
     void insertOrder() {
-        List<Funding> allFind = fundingRepo.findAll();
-        List<Member> allMember = memberRepo.findAll();
-        List<Order> orderList = orderRepo.findAll();
+        List<Funding> allFind = fundingRepo.findAllOrderByFundingId();
+        List<Member> allMember = memberRepo.findAllOrderByMemberIdForInit();
+        List<Order> orderList = new ArrayList<>();
 
         Order order1 = Order.builder().id(1L).funding(allFind.get(0)).member(allMember.get(1)).product(allFind.get(0).getProduct()).total_payment(10000L).merchantUid(UUID.randomUUID().toString()).i_port_id(UUID.randomUUID().toString().replaceAll("-", "")).pg_id(String.valueOf((int) Math.random() * 100)).orderDate(LocalDateTime.now()).orderStatus(OrderStatus.SUCCESS).build();
         Order order2 = Order.builder().id(2L).funding(allFind.get(1)).member(allMember.get(2)).product(allFind.get(1).getProduct()).total_payment(20000L).merchantUid(UUID.randomUUID().toString()).i_port_id(UUID.randomUUID().toString().replaceAll("-", "")).pg_id(String.valueOf((int) Math.random() * 100)).orderDate(LocalDateTime.now()).orderStatus(OrderStatus.SUCCESS).build();
@@ -336,9 +342,9 @@ public class Init {
         orderRepo.saveAll(orderList);
     }
     void insertLike() {
-        List<Member> memberList = memberRepo.findAll();
+        List<Member> memberList = memberRepo.findAllOrderByMemberIdForInit();
         List<Like> likeList = new ArrayList<>();
-        List<Product> productList = productRepo.findAll();
+        List<Product> productList = productRepo.findAllOrderByProductId();
 //        Like like1 = Like.builder().member_id.(memberList.get(1).getId()).product_id(productList.get(1).getId()).build();
         Like like1 = Like.builder().id(1L).member(memberList.get(0)).product(productList.get(0)).build();
         Like like2 = Like.builder().id(2L).member(memberList.get(0)).product(productList.get(2)).build();
@@ -385,6 +391,111 @@ public class Init {
         Like like43 = Like.builder().id(43L).member(memberList.get(4)).product(productList.get(48)).build();
         Like like44 = Like.builder().id(44L).member(memberList.get(4)).product(productList.get(49)).build();
         Like like45 = Like.builder().id(45L).member(memberList.get(4)).product(productList.get(55)).build();
+        Like like46 = Like.builder().id(46L).member(memberList.get(4)).product(productList.get(67)).build();
+        Like like47 = Like.builder().id(47L).member(memberList.get(4)).product(productList.get(58)).build();
+        Like like48 = Like.builder().id(48L).member(memberList.get(4)).product(productList.get(63)).build();
+        Like like49 = Like.builder().id(49L).member(memberList.get(4)).product(productList.get(70)).build();
+        Like like50 = Like.builder().id(50L).member(memberList.get(4)).product(productList.get(76)).build();
+        Like like51 = Like.builder().id(51L).member(memberList.get(4)).product(productList.get(79)).build();
+        Like like52 = Like.builder().id(52L).member(memberList.get(4)).product(productList.get(80)).build();
+        Like like53 = Like.builder().id(53L).member(memberList.get(4)).product(productList.get(82)).build();
+        Like like54 = Like.builder().id(54L).member(memberList.get(4)).product(productList.get(85)).build();
+        Like like55 = Like.builder().id(55L).member(memberList.get(4)).product(productList.get(95)).build();
+        Like like56 = Like.builder().id(56L).member(memberList.get(4)).product(productList.get(66)).build();
+        Like like57 = Like.builder().id(57L).member(memberList.get(4)).product(productList.get(55)).build();
+        Like like58 = Like.builder().id(58L).member(memberList.get(4)).product(productList.get(65)).build();
+        Like like59 = Like.builder().id(59L).member(memberList.get(4)).product(productList.get(88)).build();
+        Like like60 = Like.builder().id(60L).member(memberList.get(4)).product(productList.get(98)).build();
+        Like like61 = Like.builder().id(61L).member(memberList.get(4)).product(productList.get(90)).build();
+        Like like62 = Like.builder().id(62L).member(memberList.get(4)).product(productList.get(99)).build();
+        Like like63 = Like.builder().id(63L).member(memberList.get(4)).product(productList.get(94)).build();
+        Like like64 = Like.builder().id(64L).member(memberList.get(4)).product(productList.get(45)).build();
+        Like like65 = Like.builder().id(65L).member(memberList.get(4)).product(productList.get(32)).build();
+        Like like66 = Like.builder().id(66L).member(memberList.get(4)).product(productList.get(25)).build();
+        Like like67 = Like.builder().id(67L).member(memberList.get(4)).product(productList.get(45)).build();
+        Like like68 = Like.builder().id(68L).member(memberList.get(4)).product(productList.get(55)).build();
+        Like like69 = Like.builder().id(69L).member(memberList.get(4)).product(productList.get(88)).build();
+        Like like70 = Like.builder().id(70L).member(memberList.get(4)).product(productList.get(33)).build();
+        Like like71 = Like.builder().id(71L).member(memberList.get(4)).product(productList.get(22)).build();
+        Like like72 = Like.builder().id(72L).member(memberList.get(4)).product(productList.get(11)).build();
+        Like like73 = Like.builder().id(73L).member(memberList.get(4)).product(productList.get(40)).build();
+        Like like74 = Like.builder().id(74L).member(memberList.get(4)).product(productList.get(60)).build();
+        Like like75 = Like.builder().id(75L).member(memberList.get(4)).product(productList.get(70)).build();
+        Like like76 = Like.builder().id(76L).member(memberList.get(4)).product(productList.get(88)).build();
+        Like like77 = Like.builder().id(77L).member(memberList.get(4)).product(productList.get(66)).build();
+        Like like78 = Like.builder().id(78L).member(memberList.get(4)).product(productList.get(77)).build();
+        Like like79 = Like.builder().id(79L).member(memberList.get(4)).product(productList.get(44)).build();
+        Like like80 = Like.builder().id(80L).member(memberList.get(4)).product(productList.get(22)).build();
+        Like like81 = Like.builder().id(81L).member(memberList.get(4)).product(productList.get(11)).build();
+        Like like82 = Like.builder().id(82L).member(memberList.get(4)).product(productList.get(46)).build();
+        Like like83 = Like.builder().id(83L).member(memberList.get(4)).product(productList.get(55)).build();
+        Like like84 = Like.builder().id(84L).member(memberList.get(4)).product(productList.get(15)).build();
+        Like like85 = Like.builder().id(85L).member(memberList.get(4)).product(productList.get(17)).build();
+        Like like86 = Like.builder().id(86L).member(memberList.get(4)).product(productList.get(82)).build();
+        Like like87 = Like.builder().id(87L).member(memberList.get(4)).product(productList.get(79)).build();
+        Like like88 = Like.builder().id(88L).member(memberList.get(4)).product(productList.get(90)).build();
+        Like like89 = Like.builder().id(89L).member(memberList.get(4)).product(productList.get(98)).build();
+        Like like90 = Like.builder().id(90L).member(memberList.get(4)).product(productList.get(44)).build();
+        Like like91 = Like.builder().id(91L).member(memberList.get(4)).product(productList.get(75)).build();
+        Like like92 = Like.builder().id(92L).member(memberList.get(4)).product(productList.get(13)).build();
+        Like like93 = Like.builder().id(93L).member(memberList.get(4)).product(productList.get(12)).build();
+        Like like94 = Like.builder().id(94L).member(memberList.get(4)).product(productList.get(22)).build();
+        Like like95 = Like.builder().id(95L).member(memberList.get(4)).product(productList.get(21)).build();
+        Like like96 = Like.builder().id(96L).member(memberList.get(4)).product(productList.get(23)).build();
+        Like like97 = Like.builder().id(97L).member(memberList.get(4)).product(productList.get(25)).build();
+        Like like98 = Like.builder().id(98L).member(memberList.get(4)).product(productList.get(88)).build();
+        Like like99 = Like.builder().id(99L).member(memberList.get(4)).product(productList.get(79)).build();
+        Like like100 = Like.builder().id(100L).member(memberList.get(4)).product(productList.get(120)).build();
+        Like like101 = Like.builder().id(101L).member(memberList.get(4)).product(productList.get(121)).build();
+        Like like102 = Like.builder().id(102L).member(memberList.get(4)).product(productList.get(132)).build();
+        Like like103 = Like.builder().id(103L).member(memberList.get(4)).product(productList.get(143)).build();
+        Like like104 = Like.builder().id(104L).member(memberList.get(4)).product(productList.get(154)).build();
+        Like like105 = Like.builder().id(105L).member(memberList.get(4)).product(productList.get(165)).build();
+        Like like106 = Like.builder().id(106L).member(memberList.get(4)).product(productList.get(146)).build();
+        Like like107 = Like.builder().id(107L).member(memberList.get(4)).product(productList.get(167)).build();
+        Like like108 = Like.builder().id(108L).member(memberList.get(4)).product(productList.get(128)).build();
+        Like like109 = Like.builder().id(109L).member(memberList.get(4)).product(productList.get(119)).build();
+        Like like110 = Like.builder().id(110L).member(memberList.get(4)).product(productList.get(110)).build();
+        Like like111 = Like.builder().id(111L).member(memberList.get(4)).product(productList.get(211)).build();
+        Like like112 = Like.builder().id(112L).member(memberList.get(4)).product(productList.get(212)).build();
+        Like like113 = Like.builder().id(113L).member(memberList.get(4)).product(productList.get(223)).build();
+        Like like114 = Like.builder().id(114L).member(memberList.get(4)).product(productList.get(224)).build();
+        Like like115 = Like.builder().id(115L).member(memberList.get(4)).product(productList.get(265)).build();
+        Like like116 = Like.builder().id(116L).member(memberList.get(4)).product(productList.get(276)).build();
+        Like like117 = Like.builder().id(117L).member(memberList.get(4)).product(productList.get(257)).build();
+        Like like118 = Like.builder().id(118L).member(memberList.get(4)).product(productList.get(168)).build();
+        Like like119 = Like.builder().id(119L).member(memberList.get(4)).product(productList.get(259)).build();
+        Like like120 = Like.builder().id(120L).member(memberList.get(4)).product(productList.get(280)).build();
+        Like like121 = Like.builder().id(121L).member(memberList.get(4)).product(productList.get(291)).build();
+        Like like122 = Like.builder().id(122L).member(memberList.get(4)).product(productList.get(192)).build();
+        Like like123 = Like.builder().id(123L).member(memberList.get(4)).product(productList.get(183)).build();
+        Like like124 = Like.builder().id(124L).member(memberList.get(4)).product(productList.get(274)).build();
+        Like like125 = Like.builder().id(125L).member(memberList.get(4)).product(productList.get(300)).build();
+        Like like126 = Like.builder().id(126L).member(memberList.get(4)).product(productList.get(200)).build();
+        Like like127 = Like.builder().id(127L).member(memberList.get(4)).product(productList.get(312)).build();
+        Like like128 = Like.builder().id(128L).member(memberList.get(4)).product(productList.get(302)).build();
+        Like like129 = Like.builder().id(129L).member(memberList.get(4)).product(productList.get(208)).build();
+        Like like130 = Like.builder().id(130L).member(memberList.get(4)).product(productList.get(311)).build();
+        Like like131 = Like.builder().id(131L).member(memberList.get(4)).product(productList.get(324)).build();
+        Like like132 = Like.builder().id(132L).member(memberList.get(4)).product(productList.get(333)).build();
+        Like like133 = Like.builder().id(133L).member(memberList.get(4)).product(productList.get(356)).build();
+        Like like134 = Like.builder().id(134L).member(memberList.get(4)).product(productList.get(324)).build();
+        Like like135 = Like.builder().id(135L).member(memberList.get(4)).product(productList.get(153)).build();
+        Like like136 = Like.builder().id(136L).member(memberList.get(4)).product(productList.get(167)).build();
+        Like like137 = Like.builder().id(137L).member(memberList.get(4)).product(productList.get(183)).build();
+        Like like138 = Like.builder().id(138L).member(memberList.get(4)).product(productList.get(194)).build();
+        Like like139 = Like.builder().id(139L).member(memberList.get(4)).product(productList.get(256)).build();
+        Like like140 = Like.builder().id(140L).member(memberList.get(4)).product(productList.get(220)).build();
+        Like like141 = Like.builder().id(141L).member(memberList.get(4)).product(productList.get(111)).build();
+        Like like142 = Like.builder().id(142L).member(memberList.get(4)).product(productList.get(100)).build();
+        Like like143 = Like.builder().id(143L).member(memberList.get(4)).product(productList.get(256)).build();
+        Like like144 = Like.builder().id(144L).member(memberList.get(4)).product(productList.get(346)).build();
+        Like like145 = Like.builder().id(145L).member(memberList.get(4)).product(productList.get(248)).build();
+        Like like146 = Like.builder().id(146L).member(memberList.get(4)).product(productList.get(263)).build();
+        Like like147 = Like.builder().id(147L).member(memberList.get(4)).product(productList.get(236)).build();
+        Like like148 = Like.builder().id(148L).member(memberList.get(4)).product(productList.get(339)).build();
+        Like like149 = Like.builder().id(149L).member(memberList.get(4)).product(productList.get(359)).build();
+        Like like150 = Like.builder().id(150L).member(memberList.get(4)).product(productList.get(350)).build();
 
 
         productList.get(0).likeControl(true);
@@ -432,6 +543,111 @@ public class Init {
         productList.get(48).likeControl(true);
         productList.get(49).likeControl(true);
         productList.get(55).likeControl(true);
+        productList.get(67).likeControl(true);
+        productList.get(58).likeControl(true);
+        productList.get(63).likeControl(true);
+        productList.get(70).likeControl(true);
+        productList.get(76).likeControl(true);
+        productList.get(79).likeControl(true);
+        productList.get(80).likeControl(true);
+        productList.get(82).likeControl(true);
+        productList.get(85).likeControl(true);
+        productList.get(95).likeControl(true);
+        productList.get(66).likeControl(true);
+        productList.get(55).likeControl(true);
+        productList.get(65).likeControl(true);
+        productList.get(88).likeControl(true);
+        productList.get(98).likeControl(true);
+        productList.get(90).likeControl(true);
+        productList.get(99).likeControl(true);
+        productList.get(94).likeControl(true);
+        productList.get(45).likeControl(true);
+        productList.get(32).likeControl(true);
+        productList.get(25).likeControl(true);
+        productList.get(45).likeControl(true);
+        productList.get(55).likeControl(true);
+        productList.get(88).likeControl(true);
+        productList.get(33).likeControl(true);
+        productList.get(22).likeControl(true);
+        productList.get(11).likeControl(true);
+        productList.get(40).likeControl(true);
+        productList.get(60).likeControl(true);
+        productList.get(70).likeControl(true);
+        productList.get(88).likeControl(true);
+        productList.get(66).likeControl(true);
+        productList.get(77).likeControl(true);
+        productList.get(44).likeControl(true);
+        productList.get(22).likeControl(true);
+        productList.get(11).likeControl(true);
+        productList.get(46).likeControl(true);
+        productList.get(55).likeControl(true);
+        productList.get(15).likeControl(true);
+        productList.get(17).likeControl(true);
+        productList.get(82).likeControl(true);
+        productList.get(79).likeControl(true);
+        productList.get(90).likeControl(true);
+        productList.get(98).likeControl(true);
+        productList.get(44).likeControl(true);
+        productList.get(75).likeControl(true);
+        productList.get(13).likeControl(true);
+        productList.get(12).likeControl(true);
+        productList.get(22).likeControl(true);
+        productList.get(21).likeControl(true);
+        productList.get(23).likeControl(true);
+        productList.get(25).likeControl(true);
+        productList.get(88).likeControl(true);
+        productList.get(79).likeControl(true);
+        productList.get(120).likeControl(true);
+        productList.get(121).likeControl(true);
+        productList.get(132).likeControl(true);
+        productList.get(143).likeControl(true);
+        productList.get(154).likeControl(true);
+        productList.get(165).likeControl(true);
+        productList.get(146).likeControl(true);
+        productList.get(167).likeControl(true);
+        productList.get(128).likeControl(true);
+        productList.get(119).likeControl(true);
+        productList.get(110).likeControl(true);
+        productList.get(211).likeControl(true);
+        productList.get(212).likeControl(true);
+        productList.get(223).likeControl(true);
+        productList.get(224).likeControl(true);
+        productList.get(265).likeControl(true);
+        productList.get(276).likeControl(true);
+        productList.get(257).likeControl(true);
+        productList.get(168).likeControl(true);
+        productList.get(259).likeControl(true);
+        productList.get(280).likeControl(true);
+        productList.get(291).likeControl(true);
+        productList.get(192).likeControl(true);
+        productList.get(183).likeControl(true);
+        productList.get(274).likeControl(true);
+        productList.get(300).likeControl(true);
+        productList.get(200).likeControl(true);
+        productList.get(312).likeControl(true);
+        productList.get(302).likeControl(true);
+        productList.get(208).likeControl(true);
+        productList.get(311).likeControl(true);
+        productList.get(324).likeControl(true);
+        productList.get(333).likeControl(true);
+        productList.get(356).likeControl(true);
+        productList.get(324).likeControl(true);
+        productList.get(153).likeControl(true);
+        productList.get(167).likeControl(true);
+        productList.get(183).likeControl(true);
+        productList.get(194).likeControl(true);
+        productList.get(256).likeControl(true);
+        productList.get(220).likeControl(true);
+        productList.get(111).likeControl(true);
+        productList.get(100).likeControl(true);
+        productList.get(256).likeControl(true);
+        productList.get(346).likeControl(true);
+        productList.get(248).likeControl(true);
+        productList.get(263).likeControl(true);
+        productList.get(236).likeControl(true);
+        productList.get(339).likeControl(true);
+        productList.get(359).likeControl(true);
+        productList.get(350).likeControl(true);
 
         productRepo.saveAll(productList);
 
@@ -480,6 +696,111 @@ public class Init {
         likeList.add(like43);
         likeList.add(like44);
         likeList.add(like45);
+        likeList.add(like46);
+        likeList.add(like47);
+        likeList.add(like48);
+        likeList.add(like49);
+        likeList.add(like50);
+        likeList.add(like51);
+        likeList.add(like52);
+        likeList.add(like53);
+        likeList.add(like54);
+        likeList.add(like55);
+        likeList.add(like56);
+        likeList.add(like57);
+        likeList.add(like58);
+        likeList.add(like59);
+        likeList.add(like60);
+        likeList.add(like61);
+        likeList.add(like62);
+        likeList.add(like63);
+        likeList.add(like64);
+        likeList.add(like65);
+        likeList.add(like66);
+        likeList.add(like67);
+        likeList.add(like68);
+        likeList.add(like69);
+        likeList.add(like70);
+        likeList.add(like71);
+        likeList.add(like72);
+        likeList.add(like73);
+        likeList.add(like74);
+        likeList.add(like75);
+        likeList.add(like76);
+        likeList.add(like77);
+        likeList.add(like78);
+        likeList.add(like79);
+        likeList.add(like80);
+        likeList.add(like81);
+        likeList.add(like82);
+        likeList.add(like83);
+        likeList.add(like84);
+        likeList.add(like85);
+        likeList.add(like86);
+        likeList.add(like87);
+        likeList.add(like88);
+        likeList.add(like89);
+        likeList.add(like90);
+        likeList.add(like91);
+        likeList.add(like92);
+        likeList.add(like93);
+        likeList.add(like94);
+        likeList.add(like95);
+        likeList.add(like96);
+        likeList.add(like97);
+        likeList.add(like98);
+        likeList.add(like99);
+        likeList.add(like100);
+        likeList.add(like101);
+        likeList.add(like102);
+        likeList.add(like103);
+        likeList.add(like104);
+        likeList.add(like105);
+        likeList.add(like106);
+        likeList.add(like107);
+        likeList.add(like108);
+        likeList.add(like109);
+        likeList.add(like110);
+        likeList.add(like111);
+        likeList.add(like112);
+        likeList.add(like113);
+        likeList.add(like114);
+        likeList.add(like115);
+        likeList.add(like116);
+        likeList.add(like117);
+        likeList.add(like118);
+        likeList.add(like119);
+        likeList.add(like120);
+        likeList.add(like121);
+        likeList.add(like122);
+        likeList.add(like123);
+        likeList.add(like124);
+        likeList.add(like125);
+        likeList.add(like126);
+        likeList.add(like127);
+        likeList.add(like128);
+        likeList.add(like129);
+        likeList.add(like130);
+        likeList.add(like131);
+        likeList.add(like132);
+        likeList.add(like133);
+        likeList.add(like134);
+        likeList.add(like135);
+        likeList.add(like136);
+        likeList.add(like137);
+        likeList.add(like138);
+        likeList.add(like139);
+        likeList.add(like140);
+        likeList.add(like141);
+        likeList.add(like142);
+        likeList.add(like143);
+        likeList.add(like144);
+        likeList.add(like145);
+        likeList.add(like146);
+        likeList.add(like147);
+        likeList.add(like148);
+        likeList.add(like149);
+        likeList.add(like150);
 
         likeRepo.saveAll(likeList);
     }
@@ -495,11 +816,33 @@ public class Init {
         Funding funding9 = fundingRepo.findFundingById(43L).orElse(null);
         Funding funding10 = fundingRepo.findFundingById(44L).orElse(null);
 
+        Funding funding11 = fundingRepo.findFundingById(46L).orElse(null);
+        Funding funding12 = fundingRepo.findFundingById(47L).orElse(null);
+        Funding funding13 = fundingRepo.findFundingById(48L).orElse(null);
+        Funding funding14 = fundingRepo.findFundingById(49L).orElse(null);
+        Funding funding15 = fundingRepo.findFundingById(50L).orElse(null);
+        Funding funding16 = fundingRepo.findFundingById(51L).orElse(null);
+        Funding funding17 = fundingRepo.findFundingById(52L).orElse(null);
+        Funding funding18 = fundingRepo.findFundingById(53L).orElse(null);
+        Funding funding19 = fundingRepo.findFundingById(54L).orElse(null);
+        Funding funding20 = fundingRepo.findFundingById(55L).orElse(null);
+
+
         ProductPayment productPayment6 = ProductPayment.builder().id(6L).funding(funding6).product(funding6.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("987654321").phone_number("01055569999").address(buildAddress).real_name("나미").build();
         ProductPayment productPayment7 = ProductPayment.builder().id(7L).funding(funding7).product(funding7.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("258369147").phone_number("01056569999").address(buildAddress).real_name("학수님").build();
         ProductPayment productPayment8 = ProductPayment.builder().id(8L).funding(funding8).product(funding8.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("159753654").phone_number("01023659878").address(buildAddress).real_name("동현님").build();
         ProductPayment productPayment9 = ProductPayment.builder().id(9L).funding(funding9).product(funding9.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("753951654").phone_number("01023654876").address(buildAddress).real_name("정구님").build();
-        ProductPayment productPayment10 = ProductPayment.builder().id(10L).funding(funding10).product(funding10.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("준석님").build();
+        ProductPayment productPayment10 = ProductPayment.builder().id(10L).funding(funding10).product(funding10.getProduct()).productPaymentStatus(ProductPaymentStatus.SHIPPING).w_product("NEED").account("259996951").phone_number("01088889999").address(buildAddress).real_name("준석님").build();
+        ProductPayment productPayment11 = ProductPayment.builder().id(11L).funding(funding11).product(funding11.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment12 = ProductPayment.builder().id(12L).funding(funding12).product(funding12.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment13 = ProductPayment.builder().id(13L).funding(funding13).product(funding13.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment14 = ProductPayment.builder().id(14L).funding(funding14).product(funding14.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment15 = ProductPayment.builder().id(15L).funding(funding15).product(funding15.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment16 = ProductPayment.builder().id(16L).funding(funding16).product(funding16.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment17 = ProductPayment.builder().id(17L).funding(funding17).product(funding17.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment18 = ProductPayment.builder().id(18L).funding(funding18).product(funding18.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment19 = ProductPayment.builder().id(19L).funding(funding19).product(funding19.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
+        ProductPayment productPayment20 = ProductPayment.builder().id(20L).funding(funding20).product(funding20.getProduct()).productPaymentStatus(ProductPaymentStatus.COMPLETED).w_product("NEED").account("258456951").phone_number("01032323232").address(buildAddress).real_name("후니츠님").build();
 
 
         Funding funding1 = fundingRepo.findFundingById(56L).orElse(null);
@@ -525,8 +868,61 @@ public class Init {
         productPaymentList.add(productPayment8);
         productPaymentList.add(productPayment9);
         productPaymentList.add(productPayment10);
+        productPaymentList.add(productPayment11);
+        productPaymentList.add(productPayment12);
+        productPaymentList.add(productPayment13);
+        productPaymentList.add(productPayment14);
+        productPaymentList.add(productPayment15);
+        productPaymentList.add(productPayment16);
+        productPaymentList.add(productPayment17);
+        productPaymentList.add(productPayment18);
+        productPaymentList.add(productPayment19);
+        productPaymentList.add(productPayment20);
 
         productPaymentRepo.saveAll(productPaymentList);
+
+    }
+
+    void insertDelivery() {
+        List<Member> memberList = memberRepo.findAllOrderByMemberIdForInit();
+        List<ProductPayment> productPayment = productPaymentRepo.findAllOrderByProductPayment();
+        Address address = Address.builder().city("서울시").street("마포구").zipcode("1234").build();
+        List<Delivery> delivery = new ArrayList<>();
+
+        Delivery buildDelivery1 = Delivery.builder().id(1L).member(memberList.get(3)).productPayment(productPayment.get(5)).delivery_number(123456798).delivery_company("대한통운").phone_number("01055569999").address(address).status(DeliveryStatus.SHIPPING).build();
+        Delivery buildDelivery2 = Delivery.builder().id(2L).member(memberList.get(3)).productPayment(productPayment.get(6)).delivery_number(132645698).delivery_company("대한통운").phone_number("01056569999").address(address).status(DeliveryStatus.SHIPPING).build();
+        Delivery buildDelivery3 = Delivery.builder().id(3L).member(memberList.get(3)).productPayment(productPayment.get(7)).delivery_number(153326594).delivery_company("대한통운").phone_number("01023659878").address(address).status(DeliveryStatus.SHIPPING).build();
+        Delivery buildDelivery4 = Delivery.builder().id(4L).member(memberList.get(3)).productPayment(productPayment.get(8)).delivery_number(234657888).delivery_company("대한통운").phone_number("01023654876").address(address).status(DeliveryStatus.SHIPPING).build();
+        Delivery buildDelivery5 = Delivery.builder().id(5L).member(memberList.get(3)).productPayment(productPayment.get(9)).delivery_number(223564658).delivery_company("대한통운").phone_number("01088889999").address(address).status(DeliveryStatus.SHIPPING).build();
+
+        Delivery buildDelivery6 = Delivery.builder().id(6L).member(memberList.get(3)).productPayment(productPayment.get(10)).delivery_number(562165487).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery7 = Delivery.builder().id(7L).member(memberList.get(3)).productPayment(productPayment.get(11)).delivery_number(959626233).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery8 = Delivery.builder().id(8L).member(memberList.get(3)).productPayment(productPayment.get(12)).delivery_number(213213565).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery9 = Delivery.builder().id(9L).member(memberList.get(3)).productPayment(productPayment.get(13)).delivery_number(546512355).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery10 = Delivery.builder().id(10L).member(memberList.get(3)).productPayment(productPayment.get(14)).delivery_number(224455665).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery11 = Delivery.builder().id(11L).member(memberList.get(3)).productPayment(productPayment.get(15)).delivery_number(665623232).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery12 = Delivery.builder().id(12L).member(memberList.get(3)).productPayment(productPayment.get(16)).delivery_number(335556444).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery13 = Delivery.builder().id(13L).member(memberList.get(3)).productPayment(productPayment.get(17)).delivery_number(559556665).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery14 = Delivery.builder().id(14L).member(memberList.get(3)).productPayment(productPayment.get(18)).delivery_number(112223265).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+        Delivery buildDelivery15 = Delivery.builder().id(15L).member(memberList.get(3)).productPayment(productPayment.get(19)).delivery_number(999898888).delivery_company("대한통운").phone_number("01032323232").address(address).status(DeliveryStatus.COMPLETED).build();
+
+        delivery.add(buildDelivery1);
+        delivery.add(buildDelivery2);
+        delivery.add(buildDelivery3);
+        delivery.add(buildDelivery4);
+        delivery.add(buildDelivery5);
+        delivery.add(buildDelivery6);
+        delivery.add(buildDelivery7);
+        delivery.add(buildDelivery8);
+        delivery.add(buildDelivery9);
+        delivery.add(buildDelivery10);
+        delivery.add(buildDelivery11);
+        delivery.add(buildDelivery12);
+        delivery.add(buildDelivery13);
+        delivery.add(buildDelivery14);
+        delivery.add(buildDelivery15);
+
+        deliveryRepo.saveAll(delivery);
 
     }
 }

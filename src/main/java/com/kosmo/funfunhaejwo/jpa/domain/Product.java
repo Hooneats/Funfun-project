@@ -60,7 +60,8 @@ public class Product extends BaseTime {
         return this;
     }
 
-    public Product fundingControl(Boolean select) {
+
+    public Product fundingControl(boolean select) {
         if (select) {
             this.funding_count++;
         } else {
@@ -68,6 +69,4 @@ public class Product extends BaseTime {
         }
         return this;
     }
-
-
 }
