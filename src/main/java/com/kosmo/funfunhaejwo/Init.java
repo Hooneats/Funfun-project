@@ -43,6 +43,9 @@ public class Init {
         insertLike();
         insertProductPayment();
         insertDelivery();
+//        deliveryRepo.deleteById(16L);
+//        deliveryRepo.deleteById(17L);
+//        deliveryRepo.deleteById(18L);
     }
 
 
@@ -257,6 +260,8 @@ public class Init {
         Funding funding59 = Funding.builder().id(59L).funding_collected_money(productList.get(199).getProduct_price()).funding_target_money(productList.get(199).getProduct_price()).funding_create_time(LocalDateTime.of(2021,9,10,00,00)).funding_expired_time(LocalDateTime.of(2021,10,19,00,00)).funding_title("사주면 천사🧡").funding_type(FundingType.FUNDING).funding_people_count(25).member(memberList.get(1)).product(productList.get(173)).build();productList.get(199).fundingControl(true);
         Funding funding60 = Funding.builder().id(60L).funding_collected_money(productList.get(155).getProduct_price()).funding_target_money(productList.get(155).getProduct_price()).funding_create_time(LocalDateTime.of(2021,9,10,00,00)).funding_expired_time(LocalDateTime.of(2021,10,19,00,00)).funding_title("사주는 통계학").funding_type(FundingType.FUNDING).funding_people_count(13).member(memberList.get(1)).product(productList.get(174)).build();productList.get(155).fundingControl(true);
 
+
+
         fundingList.add(funding56);
         fundingList.add(funding57);
         fundingList.add(funding58);
@@ -267,6 +272,9 @@ public class Init {
         Product product = productRepo.findById(301L).orElse(null);
         Funding funding61 = Funding.builder().id(61L).funding_collected_money(265000L).funding_target_money(product.getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,12,30,00,00)).funding_title("치킨으로, 손이에게 '따뜻함'을 선물해주세요.").funding_type(FundingType.FUNDING).funding_people_count(86).member(memberList.get(6)).product(product).build();product.fundingControl(true);
         fundingList.add(funding61);
+//        시연용 완료
+        Funding funding62 = Funding.builder().id(62L).funding_collected_money(productList.get(69).getProduct_price()).funding_target_money(productList.get(69).getProduct_price()).funding_create_time(LocalDateTime.of(2021,9,10,00,00)).funding_expired_time(LocalDateTime.of(2021,10,19,00,00)).funding_title("우왕 고마워 증말").funding_type(FundingType.FUNDING).funding_people_count(13).member(memberList.get(3)).product(productList.get(69)).build();productList.get(69).fundingControl(true);
+        fundingList.add(funding62);
 
 
         productRepo.saveAll(productList);
