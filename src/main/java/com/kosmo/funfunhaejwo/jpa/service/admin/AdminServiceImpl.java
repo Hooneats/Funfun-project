@@ -27,10 +27,9 @@ public class AdminServiceImpl implements AdminService{
     
     @Override
     public List<ReturnMemberByAdmin> findListOrderId() {
-        List<Member> allMember = adminrepo.findAll();
+        List<Member> allMember = adminrepo.findAllOrderById();
         List<ReturnMemberByAdmin> returnMemberByAdmins = new ArrayList<>();
         allMember.forEach(res->{
-
 
             ReturnMemberByAdmin returnMemberByAdmin = new ReturnMemberByAdmin(res.getId(), res.getNic_name(), res.getEmail(), res.getRole().getKey(), res.getFundingList().size());
 

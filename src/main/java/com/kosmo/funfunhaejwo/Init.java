@@ -265,7 +265,7 @@ public class Init {
 
         // 기부 펀딩
         Product product = productRepo.findById(301L).orElse(null);
-        Funding funding61 = Funding.builder().id(61L).funding_collected_money(265000L).funding_target_money(product.getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,12,30,00,00)).funding_title("치킨으로, 손이에게 따뜻함을 선물해주세요.").funding_type(FundingType.FUNDING).funding_people_count(86).member(memberList.get(6)).product(product).build();product.fundingControl(true);
+        Funding funding61 = Funding.builder().id(61L).funding_collected_money(265000L).funding_target_money(product.getProduct_price()).funding_create_time(LocalDateTime.now()).funding_expired_time(LocalDateTime.of(2021,12,30,00,00)).funding_title("치킨으로, 손이에게 '따뜻함'을 선물해주세요.").funding_type(FundingType.FUNDING).funding_people_count(86).member(memberList.get(6)).product(product).build();product.fundingControl(true);
         fundingList.add(funding61);
 
 
