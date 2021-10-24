@@ -307,6 +307,7 @@ public class Init {
         Order order28 = Order.builder().id(28L).funding(allFind.get(27)).member(allMember.get(2)).product(allFind.get(27).getProduct()).total_payment(55000L).merchantUid(UUID.randomUUID().toString()).i_port_id(UUID.randomUUID().toString().replaceAll("-", "")).pg_id(String.valueOf((int) Math.random() * 100)).orderDate(LocalDateTime.now()).orderStatus(OrderStatus.SUCCESS).build();
         Order order29 = Order.builder().id(29L).funding(allFind.get(28)).member(allMember.get(3)).product(allFind.get(28).getProduct()).total_payment(30000L).merchantUid(UUID.randomUUID().toString()).i_port_id(UUID.randomUUID().toString().replaceAll("-", "")).pg_id(String.valueOf((int) Math.random() * 100)).orderDate(LocalDateTime.now()).orderStatus(OrderStatus.SUCCESS).build();
         Order order30 = Order.builder().id(30L).funding(allFind.get(29)).member(allMember.get(4)).product(allFind.get(29).getProduct()).total_payment(20000L).merchantUid(UUID.randomUUID().toString()).i_port_id(UUID.randomUUID().toString().replaceAll("-", "")).pg_id(String.valueOf((int) Math.random() * 100)).orderDate(LocalDateTime.now()).orderStatus(OrderStatus.SUCCESS).build();
+        Order order31 = Order.builder().id(31L).funding(allFind.get(43)).member(allMember.get(4)).product(allFind.get(30).getProduct()).total_payment(20000L).merchantUid(UUID.randomUUID().toString()).i_port_id(UUID.randomUUID().toString().replaceAll("-", "")).pg_id(String.valueOf((int) Math.random() * 100)).orderDate(LocalDateTime.now()).orderStatus(OrderStatus.SUCCESS).build();
 
         orderList.add(order1);
         orderList.add(order2);
@@ -338,6 +339,7 @@ public class Init {
         orderList.add(order28);
         orderList.add(order29);
         orderList.add(order30);
+        orderList.add(order31);
 
         orderRepo.saveAll(orderList);
     }

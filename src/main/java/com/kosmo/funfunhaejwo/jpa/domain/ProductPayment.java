@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Entity
+@DynamicUpdate
 @SequenceGenerator(
         name = "PRODUCT_PAYMENT_SEQ_GENERATOR",
         sequenceName = "PRODUCT_PAYMENT_SEQ", // 매핑할 데이터베이스 시퀀스 이름
