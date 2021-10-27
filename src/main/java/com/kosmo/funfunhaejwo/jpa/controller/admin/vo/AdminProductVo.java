@@ -1,4 +1,4 @@
-package com.kosmo.funfunhaejwo.jpa.controller.product;
+package com.kosmo.funfunhaejwo.jpa.controller.admin.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestVo {
+public class AdminProductVo {
     private long data1;
     private String data2;
     private int data3;
